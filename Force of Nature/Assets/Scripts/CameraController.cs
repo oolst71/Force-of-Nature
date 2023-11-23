@@ -8,59 +8,40 @@ public class CameraController : MonoBehaviour
     public GameObject linkedObject; //the object that the camera is following
     public Rigidbody2D objectRb;
     public int cameraMode; //the mode of the camera - 1: following an object, 2: locked to an object (1 but without adjusting its position based on momentum), 3: locked onto a certain point (can be useful for, like, boss fights)
-    [SerializeField] private float maxOffset;
-
-    private float targetX; //targets for the camera offset - these coordinates are where the camera is currently heading towards
-    private float targetY;
-
-    private float offsetX; //current camera offset
-    private float offsetY;
-    Vector3 offset;
-    Vector3 currentOffset = Vector3.zero;
-    Vector3 targetOffset;
-
-    private float camSpeedX = 0;
-    private float camSpeedY = 0;
+   
     [SerializeField] private float camSpeed;
 
-    Vector3 camVelocity = Vector3.zero;
 
-    private float moveDirX;
-    private float moveDirY;
+    public float xOffset;
+    public float xMomentum;
+    public float xProgress;
+    public float xCurrentTarget;
+    public float xTarget;
+    public float xSource;
+    public float xDistance;
+    public float xCurrentDistance;
+    public float xMaxOffset;
 
     Vector2 boundsTopLeft; //these two variables together form a rectangle that works as the bounds of the camera - regardless of where the player goes, the camera will never move outside of these bounds
     Vector2 boundsBottomRight;
+
+
+
+
     private void Start()
     {
+        xMomentum = 2f;
         cameraMode = 1;
-        maxOffset = 2;
+        xTarget = 0;
+        xProgress = 1;
+        xCurrentTarget = 0;
+        xMaxOffset = 2.5f;
         objectRb = linkedObject.GetComponent<Rigidbody2D>();
-        moveDirX = Mathf.Sign(objectRb.velocity.x);
-        moveDirY = Mathf.Sign(objectRb.velocity.y);
-
-
     }
 
 
     private void LateUpdate() //using lateupdate so the camera's position updates after the linked object's
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            moveDirX = Mathf.Sign(Input.GetAxisRaw("Horizontal"));
-        }
-        else
-        {
-            moveDirX = 0;
-        }
-        if (Input.GetAxisRaw("Vertical") != 0)
-        {
-            moveDirY = Mathf.Sign((Input.GetAxisRaw("Vertical")));
-        }
-        else
-        {
-            moveDirY = 0;
-        }
-
         switch (cameraMode)
         {
             case 1:
@@ -85,104 +66,49 @@ public class CameraController : MonoBehaviour
 
     void LooseFollowingCamera() //camera mode 1
     {
-        targetOffset = new Vector3(moveDirX * maxOffset,moveDirY * maxOffset, transform.position.z);
+        //camera starts out on the player
+        //on the X axis, camera always wants to be in front of the player, either +3 or -3
 
-        if (currentOffset.x > targetOffset.x)
+        //when the xTarget changes, set xSource and calculate xDistance
+
+        if (objectRb.velocity.x != 0)
         {
-            camSpeedX = -camSpeed * Time.deltaTime;
-            if (Input.GetAxisRaw("Horizontal") == 0)
+            xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
+        }
+        if (xTarget != xCurrentTarget)
+        {
+            xCurrentTarget = xTarget;
+            xSource = xOffset;
+            xDistance = xCurrentTarget - xSource;
+            xProgress = 0;
+        }
+        if (xProgress < 1)
+            xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
+        {
+            if (xProgress > 0.7f)
             {
-                camSpeedX -= 3 * Time.deltaTime;
+                xMomentum = 1.5f;
+                if (xProgress > 0.85f)
+                {
+                    xMomentum = 1f;
+                    if (xProgress > 0.95f)
+                    {
+                        xMomentum = 0.7f;
+                    }
+                }
             }
-        }
-        else if (currentOffset.x < targetOffset.x)
-        {
-            camSpeedX = camSpeed * Time.deltaTime;
-            if (Input.GetAxisRaw("Horizontal") == 0)
+            else
             {
-                camSpeedX += 3 * Time.deltaTime;
+                xMomentum = 2f;
             }
+        xProgress += xMomentum * Time.deltaTime;
         }
-        else
+        xOffset = xSource + (xProgress * xDistance);
+        if (Mathf.Abs(xOffset) > 3)
         {
-            camSpeedX = 0;
+            xOffset = 3 * Mathf.Sign(xOffset);
         }
-
-        if (currentOffset.y > targetOffset.y)
-        {
-            camSpeedY = -camSpeed * Time.deltaTime;
-            if (Input.GetAxisRaw("Vertical") == 0)
-            {
-                camSpeedY -= 3 * Time.deltaTime;
-            }
-        }
-        else if (currentOffset.y < targetOffset.y)
-        {
-            camSpeedY = camSpeed * Time.deltaTime;
-            if (Input.GetAxisRaw("Vertical") == 0)
-            {
-                camSpeedY += 3 * Time.deltaTime;
-            }
-        }
-        else
-        {
-            camSpeedY = 0;
-        }
-
-        currentOffset = new Vector3(currentOffset.x + camSpeedX, currentOffset.y + camSpeedY, transform.position.z);
-
-        transform.position = linkedObject.transform.position + currentOffset;
-
-
-        //if (target.x > transform.position.x)
-        //{
-        //    camSpeedX = 2 * Time.deltaTime;
-
-        //}
-        //else if (target.x < transform.position.x)
-        //{
-        //    camSpeedX = -2 * Time.deltaTime;
-        //}
-        //else
-        //{
-        //    camSpeedX = 0;
-        //    Debug.Log("camSpeedX " + camSpeedX);
-
-        //}
-        //if (target.y > transform.position.y)
-        //{
-        //    camSpeedY = 2 * Time.deltaTime;
-
-        //}
-        //else if (target.y < transform.position.y)
-        //{
-        //    camSpeedY = -2 * Time.deltaTime;
-        //}
-        //else
-        //{
-        //    camSpeedY = 0;
-        //    Debug.Log("camSpeedY " + camSpeedY);
-        //}
-
-        //transform.position = new Vector3(transform.position.x + camSpeedX, transform.position.y + camSpeedY, transform.position.z);
-
-
-        //offsetX += Input.GetAxis("Horizontal") * 0.1f;
-        //offsetY += Input.GetAxis("Vertical") * 0.1f;
-        //transform.position = new Vector3(linkedObject.transform.position.x + offsetX, linkedObject.transform.position.y + offsetY, -10);
-
-
-
-
-        //if (transform.position.x > target.x)
-        //{
-        //    transform.position = new Vector3(target.x, transform.position.y, transform.position.z);
-        //}
-        //if (linkedObject.transform.position.y - transform.position.y > linkedObject.transform.position.y - targetY)
-        //{
-        //    transform.position = new Vector3(transform.position.x, targetY, transform.position.z);
-        //}
-
+        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y, -10);
     }
 
     void FixedCamera() //camera mode 3
