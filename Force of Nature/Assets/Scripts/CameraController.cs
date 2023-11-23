@@ -22,6 +22,17 @@ public class CameraController : MonoBehaviour
     public float xCurrentDistance;
     public float xMaxOffset;
 
+    public float yBaseOffset;
+    public float yOffset;
+    public float yMomentum;
+    public float yProgress;
+    public float yCurrentTarget;
+    public float yTarget;
+    public float ySource;
+    public float yDistance;
+    public float yCurrentDistance;
+    public float yMaxOffset;
+
     Vector2 boundsTopLeft; //these two variables together form a rectangle that works as the bounds of the camera - regardless of where the player goes, the camera will never move outside of these bounds
     Vector2 boundsBottomRight;
 
@@ -30,12 +41,18 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        xOffset = 0;
+        yOffset = 0;
         xMomentum = 2f;
+        yMomentum = 1.5f;
         cameraMode = 1;
         xTarget = 0;
         xProgress = 1;
         xCurrentTarget = 0;
+        yCurrentTarget = 0;
         xMaxOffset = 2.5f;
+        yBaseOffset = 3;
+        yMaxOffset = -5;
         objectRb = linkedObject.GetComponent<Rigidbody2D>();
     }
 
@@ -61,7 +78,7 @@ public class CameraController : MonoBehaviour
 
     void FollowingCamera() //camera mode 2, literally just follows the object with no other stuff - idk why you'd use this but it was so easy to add i figured i might as well
     {
-        transform.position = new Vector3(linkedObject.transform.position.x, linkedObject.transform.position.y, -10);
+        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y + yOffset, -10);
     }
 
     void LooseFollowingCamera() //camera mode 1
@@ -71,6 +88,8 @@ public class CameraController : MonoBehaviour
 
         //when the xTarget changes, set xSource and calculate xDistance
 
+
+        //x axis camera movement
         if (objectRb.velocity.x != 0)
         {
             xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
@@ -82,9 +101,9 @@ public class CameraController : MonoBehaviour
             xDistance = xCurrentTarget - xSource;
             xProgress = 0;
         }
-        if (xProgress < 1)
+        if (xProgress < 1) { 
             xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
-        {
+        
             if (xProgress > 0.7f)
             {
                 xMomentum = 1.5f;
@@ -108,7 +127,56 @@ public class CameraController : MonoBehaviour
         {
             xOffset = 3 * Mathf.Sign(xOffset);
         }
-        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y, -10);
+
+
+
+
+        //y axis camera movement
+        if (objectRb.velocity.y < 0f)
+        {
+            yTarget = -5;
+        }
+        else
+        {
+            yTarget = 0;
+        }
+        if (yTarget != yCurrentTarget)
+        {
+            yCurrentTarget = yTarget;
+            ySource = yOffset;
+            yDistance = yCurrentTarget - ySource;
+            yProgress = 0;
+        }
+        if (yProgress < 1) { 
+            yCurrentDistance = Mathf.Abs(yCurrentTarget - yOffset);
+        
+            if (yProgress > 0.7f)
+            {
+                yMomentum = 2f;
+                if (yProgress > 0.85f)
+                {
+                    yMomentum = 1.5f;
+                    if (yProgress > 0.95f)
+                    {
+                        yMomentum = 1f;
+                    }
+                }
+            }
+            else
+            {
+                yMomentum = 2.5f;
+            }
+            yProgress += yMomentum * Time.deltaTime;
+        }
+        yOffset = ySource + (yProgress * yDistance);
+        if (yOffset < -5)
+        {
+            yOffset = -5;
+        } else if (yOffset > 0)
+        {
+            yOffset = 0;
+        }
+        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y + yOffset + yBaseOffset, -10);
     }
 
     void FixedCamera() //camera mode 3
