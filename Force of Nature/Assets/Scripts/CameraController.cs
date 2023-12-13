@@ -45,7 +45,6 @@ public class CameraController : MonoBehaviour
         yOffset = 0;
         xMomentum = 2f;
         yMomentum = 1.5f;
-        cameraMode = 1;
         xTarget = 0;
         xProgress = 1;
         xCurrentTarget = 0;

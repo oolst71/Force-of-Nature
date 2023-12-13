@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]float moveSpeed = 5f;
-    [SerializeField] float jumpSpeed = 13f;
+    [SerializeField] float jumpSpeed = 3f;
     private Rigidbody2D rb;
-    private float movementInput;
+    private float movementInput; //the horizontal axis input of the player
+    private Vector2 aim; //the stick input of the player
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(movementInput * moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(aim.x * moveSpeed, rb.velocity.y);
     }
 
     void OnJump()
@@ -25,7 +26,12 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
     }
 
-    void OnMovement(InputValue value)
+    void OnStickInput(InputValue value)
+    {
+        aim = value.Get<Vector2>();
+    }
+
+    void OnTestAxis(InputValue value)
     {
         movementInput = value.Get<float>();
     }
