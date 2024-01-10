@@ -8,12 +8,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]float moveSpeed = 5f;
     [SerializeField] float jumpSpeed = 3f;
     private Rigidbody2D rb;
+    private CapsuleCollider2D coll;
     private float movementInput; //the horizontal axis input of the player
     private Vector2 aim; //the stick input of the player
+    private LayerMask ground;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>(); 
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<CapsuleCollider2D>();
+        ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
     }
 
     void Update()
@@ -23,7 +27,10 @@ public class PlayerController : MonoBehaviour
 
     void OnJump()
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        if (GroundCheck())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+        }
     }
 
     void OnStickInput(InputValue value)
@@ -36,4 +43,17 @@ public class PlayerController : MonoBehaviour
         movementInput = value.Get<float>();
     }
 
+    bool GroundCheck()
+    {
+        //boxcast directly downwards
+        //if it hits the "ground" layermask (which contains anything the player can stand on), it counts as being grounded
+        if (Physics2D.BoxCast(gameObject.transform.position, 0.95f * coll.bounds.size, 0f, Vector2.down, 0.1f, ground))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
