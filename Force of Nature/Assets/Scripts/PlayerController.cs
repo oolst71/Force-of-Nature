@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private float movementInput; //the horizontal axis input of the player
     private Vector2 aim; //the stick input of the player
     private LayerMask ground;
+    private bool grounded;
 
     void Start()
     {
@@ -23,11 +24,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(aim.x * moveSpeed, rb.velocity.y);
+        grounded = GroundCheck();
     }
 
     void OnJump()
     {
-        if (GroundCheck())
+        if (grounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
