@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 533367703}
   - component: {fileID: 533367702}
   - component: {fileID: 533367701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlatform1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 601868097}
   - component: {fileID: 601868096}
   - component: {fileID: 601868095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TestPlatform1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -522,6 +522,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: dashTime
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: dashPower
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 3182657333758623950, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_Name
       value: Player
