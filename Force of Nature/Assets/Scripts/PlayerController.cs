@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashPower = 50f;
     [SerializeField] float dashTime = 0.2f;
     [SerializeField] float dashCooldown = 1.5f;
+    [SerializeField] float coyoteTime = 0.1f;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D coll;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private bool grounded;
     private bool dashCd;
     private bool dashing;
+    private float coyoteTimer;
 
     //ok so these will need to be reworked whenever i figure out a better way to do this, because there's gotta be a better way to do this
     private bool canMove; //set this to false to make the player completely unable to move by themselves (for cutscenes, for example)
@@ -40,20 +42,29 @@ public class PlayerController : MonoBehaviour
         canDash = true;
         dashCd = true;
         dashing = false;
+        coyoteTimer = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (canMove)
         {
             rb.velocity = new Vector2(aim.x * moveSpeed, rb.velocity.y);
         }
         grounded = GroundCheck();
+        if (!grounded)
+        {
+            coyoteTimer += Time.deltaTime;
+        }
+        else
+        {
+            coyoteTimer = 0;
+        }
     }
 
     private void OnJump()
     {
-        if (grounded && canMove && canJump)
+        if (canMove && canJump && (grounded || coyoteTimer <= coyoteTime))
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
         }
