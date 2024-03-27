@@ -1,36 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]float moveSpeed = 5f;
-    [SerializeField] float jumpSpeed = 3f;
-    [SerializeField] float dashPower = 50f;
-    [SerializeField] float dashDuration = 0.2f;
-    [SerializeField] float dashCooldown = 0.5f;
-    [SerializeField] float coyoteTime = 0.1f;
+    [SerializeField]private PlayerDataScrObj playerData;
 
     private Rigidbody2D rb;
     private CapsuleCollider2D coll;
 
-    private float baseGravity;
-    private float movementInput; //the horizontal axis input of the player
     private Vector2 aim; //the stick input of the player
-    private Vector2 dashDir;
-    private float faceDir; //the direction the player is facing
+    private Vector2 dashDir; 
+    private float faceDir; 
 
     private LayerMask ground;
     [SerializeField]private bool grounded;
-    private bool dashCd;
     private bool dashing;
 
     private float coyoteTimer;
     private float dashCooldownTimer;
     private float dashDurationTimer;
 
-    //ok so these will need to be reworked whenever i figure out a better way to do this, because there's gotta be a better way to do this
     private bool canMove; //set this to false to make the player completely unable to move by themselves (for cutscenes, for example)
     private bool canWalk; //set this to false to make the player unable to walk/run
     private bool canJump; //set this to false to make the player unable to jump, even if they're grounded
@@ -45,9 +37,8 @@ public class PlayerController : MonoBehaviour
         canWalk = true;
         canJump = true;
         canDash = true;
-        dashCd = true;
         dashing = false;
-        baseGravity = rb.gravityScale;
+        rb.gravityScale = playerData.baseGravity;
         coyoteTimer = 0f;
         dashCooldownTimer = 100f;
     }
@@ -56,7 +47,27 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
         {
-            rb.velocity = new Vector2(aim.x * moveSpeed, rb.velocity.y);
+
+            if (playerData.accelBasedMovement == false)
+            {
+                rb.velocity = new Vector2(Mathf.Sign(aim.x) * playerData.moveSpeed, rb.velocity.y);
+            }
+            else
+            {
+                if (Mathf.Abs(aim.x) > playerData.deadzoneX)
+                {
+                    playerData.currAccel += playerData.accel;
+                    if (playerData.currAccel > playerData.maxWalkSpeed)
+                    {
+                        playerData.currAccel = playerData.maxWalkSpeed;
+                    }
+                } else
+                {
+                    playerData.currAccel = 0f;
+                }
+               
+                rb.velocity = new Vector2(Mathf.Sign(aim.x) * playerData.currAccel, rb.velocity.y);
+            }
         }
 
         grounded = GroundCheck();
@@ -81,11 +92,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    
+
     private void OnJump()
     {
-        if (canMove && canJump && (grounded || coyoteTimer <= coyoteTime))
+        if (canMove && canJump && (grounded || coyoteTimer <= playerData.coyoteTime))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, playerData.jumpSpeed);
         }
     }
 
@@ -98,14 +111,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   private void OnTestAxis(InputValue value)
-    {
-        movementInput = value.Get<float>();
-    }
-
     private void OnDash()
     {
-        if (canDash && canMove && dashCooldownTimer > dashCooldown)
+        if (canDash && canMove && dashCooldownTimer > playerData.dashCooldown)
         {
             dashDir = aim;
             Debug.Log("aiming " + dashDir.x + " " + dashDir.y);
@@ -137,22 +145,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void StartDash()
+    private void StartDash() //REWORK THIS INTO A COROUTINE
     {
         canMove = false;
         rb.gravityScale = 0f;
-        rb.velocity = new Vector2(dashDir.x * dashPower, dashDir.y * dashPower);
+        rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
         dashing = true;
         dashDurationTimer = 0f;
     }
 
     private void ProcessDash()
     {
-        if (dashDurationTimer > dashDuration) //end dash
+        if (dashDurationTimer > playerData.dashDuration) //end dash
         {
             dashCooldownTimer = 0f;
             rb.velocity = Vector2.zero;
-            rb.gravityScale = baseGravity;
+            rb.gravityScale = playerData.baseGravity;
             canMove = true;
             dashing = false;
             rb.velocity = Vector2.zero;

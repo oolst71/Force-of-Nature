@@ -667,6 +667,19 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 5218573957063137656, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
   m_PrefabInstance: {fileID: 8917472348862672176}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1823291923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823291916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee3244098e30a941807aa288827c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
 --- !u!1001 &2005100733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -749,6 +762,10 @@ PrefabInstance:
       value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+    - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: dashCooldown
       value: 0.5
       objectReference: {fileID: 0}
@@ -799,7 +816,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3182657333758623950, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1823291923}
   m_SourcePrefab: {fileID: 100100000, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
