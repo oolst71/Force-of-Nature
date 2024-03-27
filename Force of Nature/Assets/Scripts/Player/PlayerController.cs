@@ -81,14 +81,7 @@ public class PlayerController : MonoBehaviour
             coyoteTimer = 0;
         }
 
-        if (dashing)
-        {
-            ProcessDash();
-        }
-        else
-        {
-            dashCooldownTimer += Time.deltaTime;
-        }
+      
 
     }
 
@@ -113,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash()
     {
-        if (canDash && canMove && dashCooldownTimer > playerData.dashCooldown)
+        if (canDash && canMove)
         {
             dashDir = aim;
             Debug.Log("aiming " + dashDir.x + " " + dashDir.y);
@@ -127,7 +120,7 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("dashing " + dashDir.x + " " + dashDir.y);
             dashDir.Normalize();
-            StartDash();
+            StartCoroutine("PlayerDash");
         }
     }
 
@@ -145,6 +138,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator PlayerDash()
+    {
+        canMove = false;
+        rb.gravityScale = 0f;
+        rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
+        dashing = true;
+
+        yield return new WaitForSeconds(playerData.dashDuration);
+
+        dashCooldownTimer = 0f;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = playerData.baseGravity;
+        canMove = true;
+        dashing = false;
+    }
+
     private void StartDash() //REWORK THIS INTO A COROUTINE
     {
         canMove = false;
@@ -152,6 +161,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
         dashing = true;
         dashDurationTimer = 0f;
+
     }
 
     private void ProcessDash()
@@ -164,7 +174,6 @@ public class PlayerController : MonoBehaviour
             canMove = true;
             dashing = false;
             rb.velocity = Vector2.zero;
-            dashCooldownTimer = 0f;
         } else
         {
             dashDurationTimer += Time.deltaTime;
