@@ -17,11 +17,7 @@ public class PlayerController : MonoBehaviour
 
     private LayerMask ground;
     [SerializeField]private bool grounded;
-    private bool dashing;
-
     private float coyoteTimer;
-    private float dashCooldownTimer;
-    private float dashDurationTimer;
 
     private bool canMove; //set this to false to make the player completely unable to move by themselves (for cutscenes, for example)
     private bool canWalk; //set this to false to make the player unable to walk/run
@@ -37,10 +33,8 @@ public class PlayerController : MonoBehaviour
         canWalk = true;
         canJump = true;
         canDash = true;
-        dashing = false;
         rb.gravityScale = playerData.baseGravity;
         coyoteTimer = 0f;
-        dashCooldownTimer = 100f;
     }
 
     void FixedUpdate()
@@ -143,40 +137,11 @@ public class PlayerController : MonoBehaviour
         canMove = false;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
-        dashing = true;
 
         yield return new WaitForSeconds(playerData.dashDuration);
 
-        dashCooldownTimer = 0f;
         rb.velocity = Vector2.zero;
         rb.gravityScale = playerData.baseGravity;
         canMove = true;
-        dashing = false;
-    }
-
-    private void StartDash() //REWORK THIS INTO A COROUTINE
-    {
-        canMove = false;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
-        dashing = true;
-        dashDurationTimer = 0f;
-
-    }
-
-    private void ProcessDash()
-    {
-        if (dashDurationTimer > playerData.dashDuration) //end dash
-        {
-            dashCooldownTimer = 0f;
-            rb.velocity = Vector2.zero;
-            rb.gravityScale = playerData.baseGravity;
-            canMove = true;
-            dashing = false;
-            rb.velocity = Vector2.zero;
-        } else
-        {
-            dashDurationTimer += Time.deltaTime;
-        }
     }
 }
