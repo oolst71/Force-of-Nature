@@ -12,7 +12,8 @@ public class PlayerAbilities : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spr = GetComponent<SpriteRenderer>(); 
+        spr = GetComponent<SpriteRenderer>();
+        spr.color = Color.white;
     }
      private void OnSwapAbilityLeft()
         {
@@ -24,21 +25,10 @@ public class PlayerAbilities : MonoBehaviour
                 playerData.equipped = playerData.loadout.Length - 1;
             }
 
-            if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.BLIZZARD)
-            {
-                spr.color = Color.cyan;
-            }
-            else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.WILDFIRE)
-            {
-                spr.color = Color.red;
+            SetColor();
 
-            }
-            else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.TSUNAMI)
-            {
-                spr.color = Color.blue;
-            }
         }
-            
+
     }
     private void OnSwapAbilityRight()
         {
@@ -50,24 +40,27 @@ public class PlayerAbilities : MonoBehaviour
                 {
                     playerData.equipped = 0;
                 }
-
-
-            if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.BLIZZARD)
-            {
-                spr.color = Color.cyan;
-            }
-            else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.WILDFIRE)
-            {
-                spr.color = Color.red;
-
-            }
-            else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.TSUNAMI)
-            {
-                spr.color = Color.blue;
-            }
+            SetColor();
         }
     }
 
+
+    public void SetColor()
+    {
+        if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.BLIZZARD)
+        {
+            spr.color = Color.cyan;
+        }
+        else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.WILDFIRE)
+        {
+            spr.color = Color.red;
+
+        }
+        else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.TSUNAMI)
+        {
+            spr.color = Color.blue;
+        }
+    }
    
 
     // Update is called once per frame

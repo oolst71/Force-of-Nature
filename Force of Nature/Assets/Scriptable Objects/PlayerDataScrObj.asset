@@ -18,14 +18,17 @@ MonoBehaviour:
   health: 100
   abilitiesUnlocked: 0
   accelBasedMovement: 1
+  freeDirectionDash: 0
   accel: 2
   currAccel: 0
   deadzoneX: 0.4
+  deadzoneY: 0.4
   maxWalkSpeed: 20
   baseGravity: 7
   moveSpeed: 20
   jumpSpeed: 25
-  dashPower: 60
+  dashPower: 80
   dashDuration: 0.2
   dashCooldown: 0.5
   coyoteTime: 0.1
+  jumpBufferTime: 0.15

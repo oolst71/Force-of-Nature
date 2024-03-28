@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 9205560251211249669}
   - component: {fileID: 8887326360630158328}
   - component: {fileID: 2922896065540602061}
+  - component: {fileID: 4451885283002250243}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,5 +193,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d298d54f322b1cd499e4019404aac19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
-  jumpSpeed: 20
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+  grounded: 0
+--- !u!114 &4451885283002250243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3182657333758623950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eee3244098e30a941807aa288827c83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
