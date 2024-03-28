@@ -13,6 +13,7 @@ public class PlayerDataScrObj : ScriptableObject
     public bool accelBasedMovement = false; //use this for testing the acceleration system vs the flat movement
     public bool freeDirectionDash = true; //if this is on, the player can dash in all directions, if this is off, 8-directional dash
     public float accel = 0.25f; //acceleration
+    public float decel = 0.25f; //deceleration
     public float currAccel; //current speed
     public float deadzoneX; //X axis stick deadzone
     public float deadzoneY; //Y axis stick deadzone
@@ -23,7 +24,8 @@ public class PlayerDataScrObj : ScriptableObject
     public float dashPower = 50f; //dash power
     public float dashDuration = 0.2f; //time that the dash takes
     public float dashCooldown = 0.5f; //dash cooldown - currently unused
-    public float coyoteTime = 0.1f; //coyote time
-    public float jumpBufferTime = 0.15f;
+    public float coyoteTime = 0.1f;
+    public float jumpBufferTime = 0.15f; 
     
 }
+

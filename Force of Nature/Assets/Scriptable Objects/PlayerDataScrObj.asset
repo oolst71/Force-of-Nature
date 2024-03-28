@@ -20,6 +20,7 @@ MonoBehaviour:
   accelBasedMovement: 1
   freeDirectionDash: 0
   accel: 2
+  decel: 4
   currAccel: 0
   deadzoneX: 0.4
   deadzoneY: 0.4

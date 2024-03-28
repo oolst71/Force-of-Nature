@@ -54,17 +54,30 @@ public class PlayerController : MonoBehaviour
             {
                 if (Mathf.Abs(aim.x) > playerData.deadzoneX)
                 {
-                    playerData.currAccel += playerData.accel;
-                    if (playerData.currAccel > playerData.maxWalkSpeed)
+                    if (faceDir == Mathf.Sign(playerData.currAccel)){
+                        playerData.currAccel += playerData.accel * faceDir;
+                        if (Mathf.Abs(playerData.currAccel) > playerData.maxWalkSpeed)
+                        {
+                            playerData.currAccel = faceDir * playerData.maxWalkSpeed;
+                        }
+                    } else
                     {
-                        playerData.currAccel = playerData.maxWalkSpeed;
+                        playerData.currAccel += (playerData.accel + playerData.decel) * faceDir;
                     }
+                   
                 } else
                 {
-                    playerData.currAccel = 0f;
+                    if (playerData.currAccel != 0f)
+                    {
+                        playerData.currAccel = (Mathf.Abs(playerData.currAccel) - playerData.decel) * faceDir;
+                        if (Mathf.Sign(playerData.currAccel) != faceDir)
+                        {
+                            playerData.currAccel = 0f;
+                        }
+                    }
                 }
                
-                rb.velocity = new Vector2(Mathf.Sign(aim.x) * playerData.currAccel, rb.velocity.y);
+                rb.velocity = new Vector2(playerData.currAccel, rb.velocity.y);
             }
             CheckMovementBuffers();
         }
@@ -113,7 +126,7 @@ public class PlayerController : MonoBehaviour
     private void OnStickInput(InputValue value)
     {
         aim = value.Get<Vector2>();
-        if (aim.x != 0)
+        if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
         {
             faceDir = Mathf.Sign(aim.x);
         }
