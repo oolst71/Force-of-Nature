@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerDataScrObj
   m_EditorClassIdentifier: 
   loadout: 000000000100000002000000
-  equipped: 0
+  equipped: 2
   maxHealth: 100
   health: 100
   abilitiesUnlocked: 1
@@ -33,3 +33,12 @@ MonoBehaviour:
   dashCooldown: 0.5
   coyoteTime: 0.1
   jumpBufferTime: 0.15
+  playerStates:
+  - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
+  - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}
+  - {fileID: 11400000, guid: fd10fbd1374124c46b4f52f691153522, type: 2}
+  - {fileID: 11400000, guid: 1e44b9fe658d1fe459fdd77110a53f4d, type: 2}
+  - {fileID: 11400000, guid: 2a26547c00dcf184d82cae6b11e80bf1, type: 2}
+  - {fileID: 11400000, guid: eae484f61237a7847a9024d405fbff59, type: 2}
+  - {fileID: 11400000, guid: b4c26c7d7ebc37648a182a6a064b017b, type: 2}
+  currentState: 3

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2c46664c96b64c46a2780ac921196ad, type: 3}
   m_Name: Attacking
   m_EditorClassIdentifier: 
-  state: 
+  state: Attacking
   canMove: 0
   canWalk: 0
   canJump: 0
   canDash: 0
   canAttack: 0
-  canSpell: 0
-  canTakeDamage: 0
+  canQueueAttacks: 1
+  canAbility: 0
+  canQueueAbilities: 1
+  canTakeDamage: 1
