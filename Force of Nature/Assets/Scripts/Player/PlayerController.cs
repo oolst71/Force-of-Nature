@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,11 +22,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]private bool jumpBuffer;
 
-    private bool canMove; //set this to false to make the player completely unable to move by themselves (for cutscenes, for example)
-    private bool canWalk; //set this to false to make the player unable to walk/run
-    private bool canJump; //set this to false to make the player unable to jump, even if they're grounded
-    private bool canDash; //set this to false to make the player unable to dash, even if the dash cooldown is up
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,25 +29,17 @@ public class PlayerController : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
-        canMove = true;
-        canWalk = true;
-        canJump = true;
-        canDash = true;
+        playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         rb.gravityScale = playerData.baseGravity;
         coyoteTimer = 0f;
     }
 
     void FixedUpdate()
     {
-        if (canMove)
-        {
+        grounded = GroundCheck();
 
-            if (playerData.accelBasedMovement == false)
-            {
-                rb.velocity = new Vector2(Mathf.Sign(aim.x) * playerData.moveSpeed, rb.velocity.y);
-            }
-            else
-            {
+        if (playerData.playerStates[(int)playerData.currentState].canMove)
+        {
                 if (Mathf.Abs(aim.x) > playerData.deadzoneX)
                 {
                     if (faceDir == Mathf.Sign(playerData.currAccel)){
@@ -73,16 +61,21 @@ public class PlayerController : MonoBehaviour
                         if (Mathf.Sign(playerData.currAccel) != faceDir)
                         {
                             playerData.currAccel = 0f;
-                        }
                     }
                 }
-               
+            }
                 rb.velocity = new Vector2(playerData.currAccel, rb.velocity.y);
+            if (grounded && rb.velocity.x != 0)
+            {
+                playerData.currentState = PlayerDataScrObj.playerState.RUNNING;
+
+            }
+            else if (rb.velocity == Vector2.zero)
+            {
+                playerData.currentState = PlayerDataScrObj.playerState.IDLE;
             }
             CheckMovementBuffers();
         }
-
-        grounded = GroundCheck();
 
         if (!grounded)
         {
@@ -101,10 +94,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnJump()
     {
-        if (canMove && canJump)
+        if (playerData.playerStates[(int)playerData.currentState].canJump)
         {
             if (grounded || coyoteTimer <= playerData.coyoteTime)
             {
+                playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
                 rb.velocity = new Vector2(rb.velocity.x, playerData.jumpSpeed);
             }
             else
@@ -118,6 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpBuffer && grounded)
         {
+            playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
             rb.velocity = new Vector2(rb.velocity.x, playerData.jumpSpeed);
             jumpBuffer = false;
         }
@@ -134,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDash()
     {
-        if (canDash && canMove)
+        if (playerData.playerStates[(int)playerData.currentState].canDash)
         {
             if (playerData.freeDirectionDash)
             {
@@ -153,7 +148,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 eightDirAim = aim;
                 if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
                 {
-                    eightDirAim.x = 1 * Mathf.Sign(aim.x);
+                    eightDirAim.x = Mathf.Sign(aim.x);
                 }
                 else
                 {
@@ -161,7 +156,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (Mathf.Abs(aim.y) >= playerData.deadzoneY)
                 {
-                    eightDirAim.y = 1 * Mathf.Sign(aim.y);
+                    eightDirAim.y = Mathf.Sign(aim.y);
                 }
                 else
                 {
@@ -191,7 +186,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PlayerDash()
     {
         trail.emitting = true;
-        canMove = false;
+        playerData.currentState = PlayerDataScrObj.playerState.DASHING;
         rb.gravityScale = 0f;
         rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
 
@@ -199,10 +194,22 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = Vector2.zero;
         rb.gravityScale = playerData.baseGravity;
-        canMove = true;
+        ResetState();
         trail.emitting = false;
     }
 
+    private void ResetState()
+    {
+        if (grounded)
+        {
+            playerData.currentState = PlayerDataScrObj.playerState.IDLE;
+
+        }
+        else
+        {
+            playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
+        }
+    }
     IEnumerator BufferJump()
     {
         jumpBuffer = true;

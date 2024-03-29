@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerDataScrObj
   m_EditorClassIdentifier: 
   loadout: 000000000100000002000000
-  equipped: 2
+  equipped: 0
   maxHealth: 100
   health: 100
-  abilitiesUnlocked: 0
+  abilitiesUnlocked: 1
   accelBasedMovement: 1
   freeDirectionDash: 0
   accel: 2

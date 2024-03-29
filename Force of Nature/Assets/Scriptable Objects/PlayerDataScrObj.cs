@@ -25,7 +25,21 @@ public class PlayerDataScrObj : ScriptableObject
     public float dashDuration = 0.2f; //time that the dash takes
     public float dashCooldown = 0.5f; //dash cooldown - currently unused
     public float coyoteTime = 0.1f;
-    public float jumpBufferTime = 0.15f; 
+    public float jumpBufferTime = 0.15f;
+
+    public EntityStateScrObj[] playerStates = new EntityStateScrObj[7]; //add to this list whenever a new state is created
+
+    //0 - Ability
+    //1 - Attacking
+    //2 - Dashing
+    //3 - Idle
+    //4 - Running
+    //5 - Ulting
+
+    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING
+    }
+
+    public playerState currentState;
     
 }
 
