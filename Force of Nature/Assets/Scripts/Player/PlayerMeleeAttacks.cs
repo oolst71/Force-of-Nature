@@ -16,6 +16,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void Start()
     {
         pC = GetComponent<PlayerController>();
+        
     }
     private void OnAttack()
     {
@@ -39,13 +40,14 @@ public class PlayerMeleeAttacks : MonoBehaviour
         switch (eightDirAim.y)
         {
             case 0: //attack forward
-                if (pC.faceDir == 1)
+                if (playerData.sideAttackBoosted)
                 {
-                    Debug.Log("attack right");
+                    Debug.Log("attack " + pC.faceDir);
                 }
                 else
                 {
-                    Debug.Log("attack left");
+                    Debug.Log("attack boosted " + pC.faceDir);
+                    playerData.sideAttackBoosted = true;
                 }
                 break;
             case -1: //attack down
@@ -66,6 +68,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 else
                 {
                     eightDirAim.x = 0;
+                }
+                if (!playerData.upAttackBoosted)
+                {
+                    Debug.Log("boosted: ");
+                    playerData.upAttackBoosted = true;
                 }
                 switch (eightDirAim.x)
                 {

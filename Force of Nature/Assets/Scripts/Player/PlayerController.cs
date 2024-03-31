@@ -186,6 +186,8 @@ public class PlayerController : MonoBehaviour
                 playerData.airDashed = false;
                 playerData.dashCd = true;
             }
+            playerData.sideAttackBoosted = false;
+            playerData.upAttackBoosted = false;
             return true;
         }
         else

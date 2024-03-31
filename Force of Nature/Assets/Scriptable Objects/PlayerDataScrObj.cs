@@ -28,6 +28,8 @@ public class PlayerDataScrObj : ScriptableObject
     public float jumpBufferTime = 0.15f;
     public bool airDashed = false;
     public bool dashCd;
+    public bool sideAttackBoosted;
+    public bool upAttackBoosted;
 
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[7]; //add to this list whenever a new state is created
 
