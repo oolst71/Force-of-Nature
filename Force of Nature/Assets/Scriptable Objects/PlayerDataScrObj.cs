@@ -23,9 +23,11 @@ public class PlayerDataScrObj : ScriptableObject
     public float jumpSpeed = 3f; //jump power
     public float dashPower = 50f; //dash power
     public float dashDuration = 0.2f; //time that the dash takes
-    public float dashCooldown = 0.5f; //dash cooldown - currently unused
+    public float dashCooldown = 0.25f; //dash cooldown - currently unused
     public float coyoteTime = 0.1f;
     public float jumpBufferTime = 0.15f;
+    public bool airDashed = false;
+    public bool dashCd;
 
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[7]; //add to this list whenever a new state is created
 

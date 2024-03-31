@@ -15,6 +15,13 @@ public class PlayerAbilities : MonoBehaviour
         spr = GetComponent<SpriteRenderer>();
         spr.color = Color.white;
     }
+
+    private void OnAbility()
+    {
+
+    }
+
+
      private void OnSwapAbilityLeft()
         {
         if (playerData.abilitiesUnlocked)
