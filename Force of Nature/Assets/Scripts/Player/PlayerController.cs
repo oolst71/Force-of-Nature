@@ -226,7 +226,6 @@ public class PlayerController : MonoBehaviour
 
     public void ResetState()
     {
-        Debug.Log("Reset");
         if (grounded)
         {
             playerData.currentState = PlayerDataScrObj.playerState.IDLE;

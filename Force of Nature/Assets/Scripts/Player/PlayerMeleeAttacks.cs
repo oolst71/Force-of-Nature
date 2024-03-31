@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +10,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
 {
     [SerializeField]private PlayerController pC;
     [SerializeField] private PlayerDataScrObj playerData;
+    private bool boostedUp;
+    private bool boostedSide;
 
     private void Start()
     {
@@ -64,7 +67,20 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 {
                     eightDirAim.x = 0;
                 }
-
+                switch (eightDirAim.x)
+                {
+                    case -1:
+                        Debug.Log("attack up left");
+                        break;
+                    case 0:
+                        Debug.Log("attack up straight");
+                        break;
+                    case 1:
+                        Debug.Log("attack up right");
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
