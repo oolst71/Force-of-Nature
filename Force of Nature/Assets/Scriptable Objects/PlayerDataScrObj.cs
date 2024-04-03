@@ -30,8 +30,10 @@ public class PlayerDataScrObj : ScriptableObject
     public bool dashCd;
     public bool sideAttackBoosted;
     public bool upAttackBoosted;
+    public float sideAttackPower = 60f;
+    public float upAttackPower = 60f;
 
-    public EntityStateScrObj[] playerStates = new EntityStateScrObj[7]; //add to this list whenever a new state is created
+    public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created
 
     //0 - Ability
     //1 - Attacking
@@ -40,7 +42,7 @@ public class PlayerDataScrObj : ScriptableObject
     //4 - Running
     //5 - Ulting
 
-    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING
+    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING, ATTACKINGUNLOCKED
     }
 
     public playerState currentState;
