@@ -32,6 +32,7 @@ public class PlayerDataScrObj : ScriptableObject
     public bool upAttackBoosted;
     public float sideAttackPower = 60f;
     public float upAttackPower = 60f;
+    public float airAttackBoost = 20f;
 
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created
 

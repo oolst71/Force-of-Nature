@@ -38,7 +38,8 @@ MonoBehaviour:
   sideAttackBoosted: 0
   upAttackBoosted: 0
   sideAttackPower: 60
-  upAttackPower: 80
+  upAttackPower: 90
+  airAttackBoost: 20
   playerStates:
   - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
   - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}
@@ -47,4 +48,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a26547c00dcf184d82cae6b11e80bf1, type: 2}
   - {fileID: 11400000, guid: eae484f61237a7847a9024d405fbff59, type: 2}
   - {fileID: 11400000, guid: b4c26c7d7ebc37648a182a6a064b017b, type: 2}
+  - {fileID: 11400000, guid: 8123055fab8326f47abe6d7be9e17919, type: 2}
   currentState: 3
