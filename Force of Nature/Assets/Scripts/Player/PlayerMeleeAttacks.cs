@@ -96,7 +96,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     }
                     else
                     {
-                        yield return new WaitForSeconds(0.05f);
+                        yield return new WaitForSeconds(0.05f); //TODO: Replace all of these with timers adjustable from playerData
                     }
 
                 }
