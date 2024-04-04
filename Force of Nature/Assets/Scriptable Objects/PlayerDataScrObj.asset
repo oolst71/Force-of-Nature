@@ -40,6 +40,9 @@ MonoBehaviour:
   sideAttackPower: 60
   upAttackPower: 90
   airAttackBoost: 20
+  atkSizeForward: 1
+  atkRangeForward: 1
+  atkSizeForwardBoost: {x: 0, y: 0}
   playerStates:
   - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
   - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}

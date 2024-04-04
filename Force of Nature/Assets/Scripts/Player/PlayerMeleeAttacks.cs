@@ -26,6 +26,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
     public GameObject upright;
     private GameObject selected;
 
+    private RaycastHit2D[] hits;
+    LayerMask hittable;
 
     private void Start()
 
@@ -34,6 +36,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
         pC = GetComponent<PlayerController>();
         velReset = false;
         attackActive = false;
+        hittable = LayerMask.GetMask("Enemies");
     }
 
     private void Update()
@@ -101,6 +104,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
                         yield return new WaitForSeconds(0.08f);
                     }
+                    hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
+                    foreach (RaycastHit2D hit in hits)
+                    {
+                        hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_NOBOOST);
+                    }
                 }
                 else
                 {
@@ -112,14 +120,33 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     {
                         rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
                         yield return new WaitForSeconds(0.05f);
+                        hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
+
                     }
                     else
                     {
                         rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
                         yield return new WaitForSeconds(0.08f); //TODO: Replace all of these with timers adjustable from playerData
+                        hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
+
+                    }
+                    if (pC.faceDir > 0)
+                    {
+                        foreach (RaycastHit2D hit in hits)
+                        {
+                            hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST);
+                        }
+                    }
+                    else
+                    {
+                        foreach (RaycastHit2D hit in hits)
+                        {
+                            hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST);
+                        }
                     }
 
                 }
+               
 
                 break;
             case -1: //attack down
@@ -225,5 +252,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
             yield return null;
         }
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(new Vector2(transform.position.x + pC.faceDir, transform.position.y),playerData.atkSizeForward);
     }
 }
