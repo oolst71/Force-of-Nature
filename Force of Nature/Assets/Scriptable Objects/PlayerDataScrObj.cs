@@ -36,6 +36,17 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkSizeForward;
     public float atkRangeForward;
     public Vector2 atkSizeForwardBoost;
+    public float atkForwardKnockback;
+
+
+    public float atkRecoveryTime;
+    public float atkTimeForwardAir;
+    public float atkTimeForwardGround;
+    public float atkTimeForwardUnmoving;
+    public float atkTimeUp;
+    public float atkTimeUpUnmoving;
+    public float atkTimeDownAir;
+    public float atkTimeDownGround;
 
 
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created

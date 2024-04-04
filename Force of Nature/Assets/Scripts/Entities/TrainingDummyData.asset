@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmgType: 0
   maxHealth: 10000000
-  knockUp: 1
+  knockUp: 2

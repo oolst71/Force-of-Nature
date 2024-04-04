@@ -15,8 +15,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private bool attackActive;
     private bool attackQueued;
     private Vector2 atkQueueDir;
-    private Vector2 retainedMomentum;
     private float timer;
+    private float logTimer;
 
     public GameObject up;
     public GameObject down;
@@ -28,6 +28,10 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     private RaycastHit2D[] hits;
     LayerMask hittable;
+
+    //delete this garbage later
+    private bool testing;
+    private float logPos;
 
     private void Start()
 
@@ -59,7 +63,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     IEnumerator MeleeAttack()
     {
-        retainedMomentum = rb.velocity;
+        logTimer = timer;
+        logPos = transform.position.x;
         attackActive = true;
         Vector2 eightDirAim;
         if (attackQueued)
@@ -94,54 +99,82 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 selected.GetComponent<SpriteRenderer>().enabled = true;
                 if (playerData.sideAttackBoosted)
                 {
-                    Debug.Log("attack " + pC.faceDir);
                     if (pC.grounded)
                     {
-                        yield return new WaitForSeconds(0.05f);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
+                        Debug.Log("halfway velocity: " + rb.velocity.x);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
                     }
                     else
                     {
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
-                        yield return new WaitForSeconds(0.08f);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
+                        Debug.Log("halfway velocity: " + rb.velocity.x);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
                     }
                     hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
                     foreach (RaycastHit2D hit in hits)
                     {
-                        hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_NOBOOST);
+                        hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_NOBOOST, playerData.atkTimeForwardUnmoving);
                     }
                 }
                 else
                 {
-                    Debug.Log("attack boosted " + pC.faceDir);
                     playerData.sideAttackBoosted = true;
                     velReset = true;
-                    rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
                     if (pC.grounded)
                     {
+                        hits = Physics2D.CircleCastAll(new Vector2(transform.position.x + pC.faceDir, transform.position.y), playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
                         rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
-                        yield return new WaitForSeconds(0.05f);
-                        hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
-
+                        Debug.Log("ground atk");
+                        Debug.Log("velocity at start of attack is " + rb.velocity.x);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardGround / 2);
+                        Debug.Log("halfway velocity " + rb.velocity.x);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardGround / 2);
                     }
                     else
                     {
+                        hits = Physics2D.CircleCastAll(new Vector2(transform.position.x + pC.faceDir, transform.position.y), playerData.atkSizeForward, Vector2.right * pC.faceDir, 2f, hittable);
                         rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
-                        yield return new WaitForSeconds(0.08f); //TODO: Replace all of these with timers adjustable from playerData
-                        hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
+                        Debug.Log("velocity at start of attack is " + rb.velocity.x);
+                        yield return new WaitForSeconds(playerData.atkTimeForwardAir); //TODO: Replace all of these with timers adjustable from playerData
 
                     }
                     if (pC.faceDir > 0)
                     {
-                        foreach (RaycastHit2D hit in hits)
+                        if (pC.grounded)
                         {
-                            hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST);
+                            foreach (RaycastHit2D hit in hits)
+                            {
+                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST, playerData.atkTimeForwardGround);
+                            }
                         }
+                        else
+                        {
+                            foreach (RaycastHit2D hit in hits)
+                            {
+                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST, playerData.atkTimeForwardAir);
+                            }
+
+                        }
+
                     }
                     else
                     {
-                        foreach (RaycastHit2D hit in hits)
+                        if (pC.grounded)
                         {
-                            hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST);
+                            foreach (RaycastHit2D hit in hits)
+                            {
+                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST, playerData.atkTimeForwardGround);
+                            }
+                        }
+                        else
+                        {
+                            foreach (RaycastHit2D hit in hits)
+                            {
+                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST, playerData.atkTimeForwardAir);
+                            }
+
                         }
                     }
 
@@ -155,14 +188,12 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
                 if (pC.grounded)
                 {
-                    Debug.Log("attack down");
-                    yield return new WaitForSeconds(0.08f);
+                    yield return new WaitForSeconds(playerData.atkTimeDownAir);
                 }
                 else
                 {
-                    Debug.Log("attack down air");
                     playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
-                    yield return new WaitForSeconds(0.08f);
+                    yield return new WaitForSeconds(playerData.atkTimeDownAir);
                 }
                 break;
             case 1: //attack up
@@ -176,43 +207,42 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 }
                 if (!playerData.upAttackBoosted)
                 {
-                    Debug.Log("boosted: ");
                     playerData.upAttackBoosted = true;
                     velReset = true;
                     rb.velocity = new Vector2(0f,playerData.upAttackPower);
                 switch (eightDirAim.x)
                     {
                         case -1:
-                            Debug.Log("attack up left");
                             selected = upleft;
                             rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
                             break;
                         case 0:
-                            Debug.Log("attack up straight");
                             selected = up;
                             rb.velocity = new Vector2(0f, playerData.upAttackPower);
                             break;
                         case 1:
                             selected = upright;
-                            Debug.Log("attack up right");
                             rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
                             break;
                         default:
                             break;
                     }
                 }
-                
                 selected.GetComponent<SpriteRenderer>().enabled = true;
 
-                yield return new WaitForSeconds(0.08f);
+                yield return new WaitForSeconds(playerData.atkTimeUp);
                 break;
             default:
                 break;
 
         }
 
+        Debug.Log("switch passed at: " + (timer - logTimer));
+
         if (velReset)
         {
+            Debug.Log("velocity reset at: " + (timer - logTimer));
+            Debug.Log("velocity pre-reset is" + rb.velocity.x);
             rb.velocity = Vector2.zero;
             velReset = false;
         } else if (pC.grounded)
@@ -222,17 +252,16 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 playerData.currAccel = playerData.maxWalkSpeed * pC.faceDir;
             };
         }
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(playerData.atkRecoveryTime);
         selected.GetComponent<SpriteRenderer>().enabled = false;
+        Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
         if (!attackQueued)
         {
-            Debug.Log("exiting attack " + timer);
             attackActive = false;
             pC.ResetState();
         }
         else
         {
-            Debug.Log("starting queued attack! " + timer);
             StartCoroutine("MeleeAttack");
         }
 
@@ -242,7 +271,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
     {
         if (attackQueued == false)
         {
-            Debug.Log("queuing attack!");
             yield return new WaitForSeconds(0.03f);
             attackQueued = true;
             atkQueueDir = pC.aim;

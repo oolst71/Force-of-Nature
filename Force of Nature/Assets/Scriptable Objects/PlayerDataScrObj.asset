@@ -43,6 +43,15 @@ MonoBehaviour:
   atkSizeForward: 1
   atkRangeForward: 1
   atkSizeForwardBoost: {x: 0, y: 0}
+  atkForwardKnockback: 15
+  atkRecoveryTime: 0.15
+  atkTimeForwardAir: 0.08
+  atkTimeForwardGround: 0.1
+  atkTimeForwardUnmoving: 0.1
+  atkTimeUp: 0.08
+  atkTimeUpUnmoving: 0.08
+  atkTimeDownAir: 0.08
+  atkTimeDownGround: 0.08
   playerStates:
   - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
   - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}

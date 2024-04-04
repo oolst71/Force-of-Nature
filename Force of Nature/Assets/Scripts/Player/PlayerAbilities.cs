@@ -18,7 +18,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnAbility()
     {
-
+        Debug.Log("break");
     }
 
 
