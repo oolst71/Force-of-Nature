@@ -17,6 +17,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private Vector2 atkQueueDir;
     private float timer;
     private float logTimer;
+    private float atkDashTime;
+    private float atkDashTimer;
+
+
+    public bool attackDash;
 
     public GameObject up;
     public GameObject down;
@@ -41,12 +46,22 @@ public class PlayerMeleeAttacks : MonoBehaviour
         velReset = false;
         attackActive = false;
         hittable = LayerMask.GetMask("Enemies");
+        attackDash = false;
     }
 
     private void Update()
     {
         timer += Time.deltaTime;
     }
+
+    private void FixedUpdate()
+    {
+        if (attackDash)
+        {
+            atkDashTimer += Time.deltaTime;
+        }
+    }
+
     private void OnAttack()
     {
         if (playerData.playerStates[(int)playerData.currentState].canAttack)

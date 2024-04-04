@@ -46,8 +46,8 @@ MonoBehaviour:
   atkForwardKnockback: 15
   atkRecoveryTime: 0.15
   atkTimeForwardAir: 0.08
-  atkTimeForwardGround: 0.1
-  atkTimeForwardUnmoving: 0.1
+  atkTimeForwardGround: 0.05
+  atkTimeForwardUnmoving: 0.08
   atkTimeUp: 0.08
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
