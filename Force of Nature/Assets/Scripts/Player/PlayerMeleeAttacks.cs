@@ -56,10 +56,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (attackDash)
-        {
-            atkDashTimer += Time.deltaTime;
-        }
+
     }
 
     private void OnAttack()
@@ -78,6 +75,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     IEnumerator MeleeAttack()
     {
+        atkDashTimer = 0f;
         logTimer = timer;
         logPos = transform.position.x;
         attackActive = true;
@@ -116,16 +114,20 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 {
                     if (pC.grounded)
                     {
-                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
-                        Debug.Log("halfway velocity: " + rb.velocity.x);
-                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
+                        while (atkDashTimer < playerData.atkTimeForwardUnmoving)
+                        {
+                            yield return new WaitForFixedUpdate();
+                            atkDashTimer += Time.deltaTime;
+                        }
                     }
                     else
                     {
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
-                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
-                        Debug.Log("halfway velocity: " + rb.velocity.x);
-                        yield return new WaitForSeconds(playerData.atkTimeForwardUnmoving / 2);
+                        while (atkDashTimer < playerData.atkTimeForwardUnmoving)
+                        {
+                            yield return new WaitForFixedUpdate();
+                            atkDashTimer += Time.deltaTime;
+                        }
                     }
                     hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
                     foreach (RaycastHit2D hit in hits)
@@ -143,16 +145,25 @@ public class PlayerMeleeAttacks : MonoBehaviour
                         rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
                         Debug.Log("ground atk");
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
-                        yield return new WaitForSeconds(playerData.atkTimeForwardGround / 2);
-                        Debug.Log("halfway velocity " + rb.velocity.x);
-                        yield return new WaitForSeconds(playerData.atkTimeForwardGround / 2);
+                        while (atkDashTimer < playerData.atkTimeForwardGround)
+                        {
+                            yield return new WaitForFixedUpdate();
+                            rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
+                            atkDashTimer += Time.deltaTime;
+                        }
+
                     }
                     else
                     {
                         hits = Physics2D.CircleCastAll(new Vector2(transform.position.x + pC.faceDir, transform.position.y), playerData.atkSizeForward, Vector2.right * pC.faceDir, 2f, hittable);
                         rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
-                        yield return new WaitForSeconds(playerData.atkTimeForwardAir); //TODO: Replace all of these with timers adjustable from playerData
+                        while (atkDashTimer < playerData.atkTimeForwardAir)
+                        {
+                            yield return new WaitForFixedUpdate();
+                            rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
+                            atkDashTimer += Time.deltaTime;
+                        }
 
                     }
                     if (pC.faceDir > 0)
@@ -203,15 +214,24 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
                 if (pC.grounded)
                 {
-                    yield return new WaitForSeconds(playerData.atkTimeDownAir);
+                    while (atkDashTimer < playerData.atkTimeDownGround)
+                    {
+                        yield return new WaitForFixedUpdate();
+                        atkDashTimer += Time.deltaTime;
+                    }
                 }
                 else
                 {
                     playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
                     yield return new WaitForSeconds(playerData.atkTimeDownAir);
+                    while (atkDashTimer < playerData.atkTimeDownAir)
+                    {
+                        yield return new WaitForFixedUpdate();
+                        atkDashTimer += Time.deltaTime;
+                    }
                 }
                 break;
-            case 1: //attack up
+            case 1: //attack up - MAY NEED TO ADD GRAVITY HERE IN THE FUTURE
                 if (Mathf.Abs(pC.aim.x) >= playerData.deadzoneX)
                 {
                     eightDirAim.x = Mathf.Sign(pC.aim.x);
@@ -229,21 +249,44 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     {
                         case -1:
                             selected = upleft;
+                            selected.GetComponent<SpriteRenderer>().enabled = true;
+
                             rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                            while (atkDashTimer < playerData.atkTimeUp)
+                            {
+                                yield return new WaitForFixedUpdate();
+                                rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                                atkDashTimer += Time.deltaTime;
+                            }
                             break;
                         case 0:
                             selected = up;
+                            selected.GetComponent<SpriteRenderer>().enabled = true;
+
                             rb.velocity = new Vector2(0f, playerData.upAttackPower);
+                            while (atkDashTimer < playerData.atkTimeUp)
+                            {
+                                yield return new WaitForFixedUpdate();
+                                rb.velocity = new Vector2(0f, playerData.upAttackPower);
+                                atkDashTimer += Time.deltaTime;
+                            }
                             break;
                         case 1:
                             selected = upright;
+                            selected.GetComponent<SpriteRenderer>().enabled = true;
+
                             rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                            while (atkDashTimer < playerData.atkTimeUp)
+                            {
+                                yield return new WaitForFixedUpdate();
+                                rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                                atkDashTimer += Time.deltaTime;
+                            }
                             break;
                         default:
                             break;
                     }
                 }
-                selected.GetComponent<SpriteRenderer>().enabled = true;
 
                 yield return new WaitForSeconds(playerData.atkTimeUp);
                 break;
