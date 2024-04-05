@@ -42,13 +42,13 @@ MonoBehaviour:
   airAttackBoost: 20
   atkSizeForward: 1
   atkRangeForward: 1
-  atkSizeForwardBoost: {x: 0, y: 0}
+  atkSizeForwardBoost: {x: 20, y: 2}
   atkForwardKnockback: 15
   atkRecoveryTime: 0.15
   atkTimeForwardAir: 0.08
   atkTimeForwardGround: 0.05
   atkTimeForwardUnmoving: 0.08
-  atkTimeUp: 0.04
+  atkTimeUp: 0.08
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1

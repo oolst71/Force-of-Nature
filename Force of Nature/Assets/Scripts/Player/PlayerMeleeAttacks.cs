@@ -141,7 +141,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     velReset = true;
                     if (pC.grounded)
                     {
-                        hits = Physics2D.CircleCastAll(new Vector2(transform.position.x + pC.faceDir, transform.position.y), playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
+                        hits = Physics2D.BoxCastAll(new Vector2(transform.position.x + (pC.faceDir * 2.5f), transform.position.y), playerData.atkSizeForwardBoost, 0f, Vector2.right * pC.faceDir, 0.01f, hittable);
                         rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
                         Debug.Log("ground atk");
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
@@ -155,7 +155,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     }
                     else
                     {
-                        hits = Physics2D.CircleCastAll(new Vector2(transform.position.x + pC.faceDir, transform.position.y), playerData.atkSizeForward, Vector2.right * pC.faceDir, 2f, hittable);
+                        hits = Physics2D.BoxCastAll(new Vector2(transform.position.x + (pC.faceDir * 2.5f), transform.position.y), playerData.atkSizeForwardBoost, 0f, Vector2.right * pC.faceDir, 0.01f, hittable);
+
                         rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
                         while (atkDashTimer < playerData.atkTimeForwardAir)
@@ -287,8 +288,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             break;
                     }
                 }
-
-                yield return new WaitForSeconds(playerData.atkTimeUp);
                 break;
             default:
                 break;
