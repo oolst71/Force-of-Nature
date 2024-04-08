@@ -5,6 +5,7 @@ using UnityEngine;
 public class MeleeHitreg : MonoBehaviour
 {
     [SerializeField]PlayerController playerController;
+    [SerializeField]PlayerMeleeAttacks attacks;
     private BoxCollider2D coll;
     private float baseOffset;
     [SerializeField]private PlayerDataScrObj playerData;
@@ -29,7 +30,7 @@ public class MeleeHitreg : MonoBehaviour
             if (etd != null)
             {
                 Debug.Log("got script");
-                etd.TakeDamage(playerData.atkDamage, playerController.faceDir);
+                etd.TakeDamage(playerData.atkDamage, playerController.faceDir, attacks.atkDashTimer);
             }
             else
             {

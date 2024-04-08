@@ -40,6 +40,12 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkForwardKnockback;
     public int atkDamage;
 
+    public Vector2 atkPower_ForwardGround;
+    public Vector2 atkPower_ForwardAir;
+    public Vector2 atkPower_Up;
+    public Vector2 atkPower_UpLeft;
+    public Vector2 atkPower_UpRight;
+
     public float atkRecoveryTime;
     public float atkTimeForwardAir;
     public float atkTimeForwardGround;
@@ -63,7 +69,7 @@ public class PlayerDataScrObj : ScriptableObject
 
     public playerState currentState;
 
-    public enum AttackType { MELEE_NOBOOST, MELEE_FORWARDBOOST, MELEE_FORWARDAIRBOOST, MELEE_UPBOOST, MELEE_UPLEFTBOOST, MELEE_UPRIGHTBOOST }
+    public enum AttackType { MELEE_NOBOOST, MELEE_FORWARDBOOST, MELEE_FORWARDAIRBOOST, MELEE_UPBOOST, MELEE_UPLEFTBOOST, MELEE_UPRIGHTBOOST, MELEE_NOBOOSTAIR }
     public AttackType atkType;
 
 }

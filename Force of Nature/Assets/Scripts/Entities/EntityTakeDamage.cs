@@ -9,6 +9,8 @@ public class EntityTakeDamage : MonoBehaviour
     public PlayerDataScrObj playerData;
     private Rigidbody2D rb;
     private float kbDir;
+    private Vector2 kbPower;
+    private float kbTime;
     float attackTime = 0.2f;
     void Start()
     {
@@ -17,11 +19,14 @@ public class EntityTakeDamage : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void TakeDamage(int dmg, float dir)
+    public void TakeDamage(int dmg, float dir, float atkTime)
     {
         Debug.Log("hit!");
         health -= dmg;
         kbDir = dir;
+        kbTime = atkTime;
+        Debug.Log("time at collision: " + kbTime);
+        Debug.Log("start pos" + transform.position.x);
         Debug.Log("remaining hp" + health);
         if (health <= 0)
         {
@@ -43,28 +48,38 @@ public class EntityTakeDamage : MonoBehaviour
         {
             case PlayerDataScrObj.AttackType.MELEE_NOBOOST:
                 Debug.Log("hit no boost");
+                kbTime = 0.001f;
                 rb.velocity = new Vector2(0, enemyData.knockUp);
+                transform.position = new Vector2(transform.position.x, transform.position.y + 0.2f);
+                break;
+            case PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR:
+                kbTime = 0.001f;
+                Debug.Log("hit no boost air");
                 break;
             case PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST:
                 Debug.Log("hit fwd boost");
-                rb.velocity = new Vector2(playerData.atkForwardKnockback * kbDir , enemyData.knockUp);
+                kbTime = playerData.atkTimeForwardGround;
+               kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardGround;
                 break;
             case PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST:
                 Debug.Log("hit fwd air boost");
-                rb.velocity = new Vector2(playerData.atkForwardKnockback * 5 * kbDir, enemyData.knockUp);
+                kbTime = playerData.atkTimeForwardAir;
+                kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardAir;
                 break;
             case PlayerDataScrObj.AttackType.MELEE_UPBOOST:
                 Debug.Log("hit up");
-                rb.velocity = new Vector2(0, 100);
+                //kbTime = playerData.atkTimeUp - kbTime;
+                kbPower = playerData.atkPower_Up;
                 break;
             case PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST:
                 Debug.Log("hit up left");
-                rb.velocity = new Vector2(-20, 20);
+                //kbTime = playerData.atkTimeUp - kbTime;
+                kbPower = playerData.atkPower_UpLeft;
                 break;
             case PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST:
                 Debug.Log("hit up right");
-
-                rb.velocity = new Vector2(20, 20);
+                //kbTime = playerData.atkTimeUp - kbTime;
+                kbPower = playerData.atkPower_UpRight;
                 break;
             default:
                 break;
@@ -100,8 +115,17 @@ public class EntityTakeDamage : MonoBehaviour
         //    default:
         //        break;
         //}
-        yield return new WaitForSeconds(playerData.atkRecoveryTime);
-
+        Debug.Log("time remaining: " + kbTime);
+        rb.velocity = kbPower;
+        float kbTimer = 0f;
+        while(kbTimer < kbTime)
+        {
+            yield return new WaitForFixedUpdate();
+            Debug.Log(rb.velocity.x);
+            rb.velocity = kbPower;
+            Debug.Log(rb.velocity.x);
+            kbTimer += Time.deltaTime;
+        }
         rb.velocity = Vector2.zero;
         Debug.Log(transform.position.x + " end pos");
 

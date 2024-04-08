@@ -45,6 +45,12 @@ MonoBehaviour:
   atkSizeForwardBoost: {x: 6, y: 2}
   atkSizeForwardBoostAir: {x: 9, y: 2}
   atkForwardKnockback: 15
+  atkDamage: 0
+  atkPower_ForwardGround: {x: 60, y: 0}
+  atkPower_ForwardAir: {x: 80, y: 0}
+  atkPower_Up: {x: 0, y: 90}
+  atkPower_UpLeft: {x: -30, y: 72}
+  atkPower_UpRight: {x: 30, y: 72}
   atkRecoveryTime: 0.15
   atkTimeForwardAir: 0.08
   atkTimeForwardGround: 0.05
@@ -63,3 +69,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4c26c7d7ebc37648a182a6a064b017b, type: 2}
   - {fileID: 11400000, guid: 8123055fab8326f47abe6d7be9e17919, type: 2}
   currentState: 3
+  atkType: 1

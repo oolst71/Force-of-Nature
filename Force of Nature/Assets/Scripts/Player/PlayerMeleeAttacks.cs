@@ -18,7 +18,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private float timer;
     private float logTimer;
     private float atkDashTime;
-    private float atkDashTimer;
+    public float atkDashTimer;
 
 
     public bool attackDash;
@@ -135,6 +135,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     }
                     else
                     {
+                        playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR;
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
                         while (atkDashTimer < playerData.atkTimeForwardUnmoving)
                         {
@@ -151,13 +152,14 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     if (pC.grounded)
                     {
                         playerData.atkType = PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST;
-                        rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
+                        rb.velocity = new Vector2(pC.faceDir, 1) * playerData.atkPower_ForwardGround;
                         Debug.Log("ground atk");
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
                         while (atkDashTimer < playerData.atkTimeForwardGround)
                         {
                             yield return new WaitForFixedUpdate();
-                            rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
+                            Debug.Log("player: " + rb.velocity.x);
+                            rb.velocity = new Vector2(pC.faceDir, 1) * playerData.atkPower_ForwardGround;
                             atkDashTimer += Time.deltaTime;
                         }
 
@@ -165,12 +167,13 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     else
                     {
                         playerData.atkType = PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST;
-                        rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
+                        rb.velocity = new Vector2(pC.faceDir, 1) * playerData.atkPower_ForwardAir;
+
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
                         while (atkDashTimer < playerData.atkTimeForwardAir)
                         {
                             yield return new WaitForFixedUpdate();
-                            rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
+                        rb.velocity = new Vector2(pC.faceDir, 1) * playerData.atkPower_ForwardAir;
                             atkDashTimer += Time.deltaTime;
                         }
 
@@ -182,9 +185,10 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case -1: //attack down
                 selected = down;
                 selected.GetComponent<SpriteRenderer>().enabled = true;
-                playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
                 if (pC.grounded)
                 {
+                    rb.velocity = Vector2.zero;
+                    playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
                     activeBox = downBox;
                     activeBox.SetActive(true);
                     while (atkDashTimer < playerData.atkTimeDownGround)
@@ -195,6 +199,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 }
                 else
                 {
+                    playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR;
                     activeBox = downAirBox;
                     activeBox.SetActive(true);
                     playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
@@ -221,7 +226,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 {
                     playerData.upAttackBoosted = true;
                     velReset = true;
-                    rb.velocity = new Vector2(0f,playerData.upAttackPower);
                 switch (eightDirAim.x)
                     {
                         case -1:
@@ -229,11 +233,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
-                            rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                            rb.velocity = playerData.atkPower_UpLeft;
                             while (atkDashTimer < playerData.atkTimeUp)
                             {
                                 yield return new WaitForFixedUpdate();
-                                rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                                rb.velocity = playerData.atkPower_UpLeft;
                                 atkDashTimer += Time.deltaTime;
                             }
                             break;
@@ -242,11 +246,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
-                            rb.velocity = new Vector2(0f, playerData.upAttackPower);
+                            rb.velocity = playerData.atkPower_Up;
                             while (atkDashTimer < playerData.atkTimeUp)
                             {
                                 yield return new WaitForFixedUpdate();
-                                rb.velocity = new Vector2(0f, playerData.upAttackPower);
+                                rb.velocity = playerData.atkPower_Up;
                                 atkDashTimer += Time.deltaTime;
                             }
                             break;
@@ -255,11 +259,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
-                            rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                            rb.velocity = playerData.atkPower_UpRight;
                             while (atkDashTimer < playerData.atkTimeUp)
                             {
                                 yield return new WaitForFixedUpdate();
-                                rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
+                                rb.velocity = playerData.atkPower_UpRight;
                                 atkDashTimer += Time.deltaTime;
                             }
                             break;
