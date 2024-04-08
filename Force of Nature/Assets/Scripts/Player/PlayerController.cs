@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        faceDir = 1;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         trail = GetComponent<TrailRenderer>();

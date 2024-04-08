@@ -36,8 +36,9 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkSizeForward;
     public float atkRangeForward;
     public Vector2 atkSizeForwardBoost;
+    public Vector2 atkSizeForwardBoostAir;
     public float atkForwardKnockback;
-
+    public int atkDamage;
 
     public float atkRecoveryTime;
     public float atkTimeForwardAir;
@@ -47,7 +48,6 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkTimeUpUnmoving;
     public float atkTimeDownAir;
     public float atkTimeDownGround;
-
 
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created
 
@@ -62,6 +62,9 @@ public class PlayerDataScrObj : ScriptableObject
     }
 
     public playerState currentState;
-    
+
+    public enum AttackType { MELEE_NOBOOST, MELEE_FORWARDBOOST, MELEE_FORWARDAIRBOOST, MELEE_UPBOOST, MELEE_UPLEFTBOOST, MELEE_UPRIGHTBOOST }
+    public AttackType atkType;
+
 }
 

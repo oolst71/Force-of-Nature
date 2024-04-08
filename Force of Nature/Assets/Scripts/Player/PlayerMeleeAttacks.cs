@@ -31,6 +31,12 @@ public class PlayerMeleeAttacks : MonoBehaviour
     public GameObject upright;
     private GameObject selected;
 
+    [SerializeField]private GameObject fwdBox;
+    [SerializeField] private GameObject upBox;
+    [SerializeField] private GameObject downBox;
+    [SerializeField] private GameObject downAirBox;
+    private GameObject activeBox;
+
     private RaycastHit2D[] hits;
     LayerMask hittable;
 
@@ -41,6 +47,10 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void Start()
 
     {
+        fwdBox.SetActive(false);
+        upBox.SetActive(false);
+        downBox.SetActive(false);
+        downAirBox.SetActive(false);
         timer = 0;
         pC = GetComponent<PlayerController>();
         velReset = false;
@@ -101,6 +111,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
         switch (eightDirAim.y)
         {
             case 0: //attack forward
+                activeBox = fwdBox;
+                activeBox.SetActive(true);
                 if (pC.faceDir < 0)
                 {
                     selected = left;
@@ -112,6 +124,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 selected.GetComponent<SpriteRenderer>().enabled = true;
                 if (playerData.sideAttackBoosted)
                 {
+                    playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
                     if (pC.grounded)
                     {
                         while (atkDashTimer < playerData.atkTimeForwardUnmoving)
@@ -129,11 +142,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             atkDashTimer += Time.deltaTime;
                         }
                     }
-                    hits = Physics2D.CircleCastAll(transform.position, playerData.atkSizeForward, Vector2.right * pC.faceDir, 1f, hittable);
-                    foreach (RaycastHit2D hit in hits)
-                    {
-                        hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_NOBOOST, playerData.atkTimeForwardUnmoving);
-                    }
+
                 }
                 else
                 {
@@ -141,7 +150,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     velReset = true;
                     if (pC.grounded)
                     {
-                        hits = Physics2D.BoxCastAll(new Vector2(transform.position.x + (pC.faceDir * 2.5f), transform.position.y), playerData.atkSizeForwardBoost, 0f, Vector2.right * pC.faceDir, 0.01f, hittable);
+                        playerData.atkType = PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST;
                         rb.velocity = new Vector2(playerData.sideAttackPower * pC.faceDir, 0f);
                         Debug.Log("ground atk");
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
@@ -155,8 +164,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     }
                     else
                     {
-                        hits = Physics2D.BoxCastAll(new Vector2(transform.position.x + (pC.faceDir * 2.5f), transform.position.y), playerData.atkSizeForwardBoost, 0f, Vector2.right * pC.faceDir, 0.01f, hittable);
-
+                        playerData.atkType = PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST;
                         rb.velocity = new Vector2((playerData.sideAttackPower + playerData.airAttackBoost) * pC.faceDir, 0f);
                         Debug.Log("velocity at start of attack is " + rb.velocity.x);
                         while (atkDashTimer < playerData.atkTimeForwardAir)
@@ -167,44 +175,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
                         }
 
                     }
-                    if (pC.faceDir > 0)
-                    {
-                        if (pC.grounded)
-                        {
-                            foreach (RaycastHit2D hit in hits)
-                            {
-                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST, playerData.atkTimeForwardGround);
-                            }
-                        }
-                        else
-                        {
-                            foreach (RaycastHit2D hit in hits)
-                            {
-                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_FORWARDBOOST, playerData.atkTimeForwardAir);
-                            }
-
-                        }
-
-                    }
-                    else
-                    {
-                        if (pC.grounded)
-                        {
-                            foreach (RaycastHit2D hit in hits)
-                            {
-                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST, playerData.atkTimeForwardGround);
-                            }
-                        }
-                        else
-                        {
-                            foreach (RaycastHit2D hit in hits)
-                            {
-                                hit.transform.gameObject.GetComponent<EntityTakeDamage>().TakeDamage(1, EnemyDataScrObj.DamageType.MELEE_BACKBOOST, playerData.atkTimeForwardAir);
-                            }
-
-                        }
-                    }
-
                 }
                
 
@@ -212,9 +182,11 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case -1: //attack down
                 selected = down;
                 selected.GetComponent<SpriteRenderer>().enabled = true;
-
+                playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
                 if (pC.grounded)
                 {
+                    activeBox = downBox;
+                    activeBox.SetActive(true);
                     while (atkDashTimer < playerData.atkTimeDownGround)
                     {
                         yield return new WaitForFixedUpdate();
@@ -223,6 +195,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 }
                 else
                 {
+                    activeBox = downAirBox;
+                    activeBox.SetActive(true);
                     playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
                     yield return new WaitForSeconds(playerData.atkTimeDownAir);
                     while (atkDashTimer < playerData.atkTimeDownAir)
@@ -233,6 +207,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 }
                 break;
             case 1: //attack up - MAY NEED TO ADD GRAVITY HERE IN THE FUTURE
+                activeBox = upBox;
+                activeBox.SetActive(true);
                 if (Mathf.Abs(pC.aim.x) >= playerData.deadzoneX)
                 {
                     eightDirAim.x = Mathf.Sign(pC.aim.x);
@@ -250,6 +226,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     {
                         case -1:
                             selected = upleft;
+                            playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = new Vector2(-playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
@@ -262,6 +239,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             break;
                         case 0:
                             selected = up;
+                            playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = new Vector2(0f, playerData.upAttackPower);
@@ -274,6 +252,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             break;
                         case 1:
                             selected = upright;
+                            playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST;
                             selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = new Vector2(playerData.sideAttackPower / 2, playerData.upAttackPower * 0.8f);
@@ -309,6 +288,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 playerData.currAccel = playerData.maxWalkSpeed * pC.faceDir;
             };
         }
+        activeBox.SetActive(false);
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
         selected.GetComponent<SpriteRenderer>().enabled = false;
         Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
@@ -342,6 +322,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(new Vector2(transform.position.x + pC.faceDir, transform.position.y),playerData.atkSizeForward);
+        Gizmos.DrawWireSphere(new Vector2(transform.position.x + pC.faceDir, transform.position.y),playerData.atkSizeForward);
     }
 }

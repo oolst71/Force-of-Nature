@@ -42,7 +42,8 @@ MonoBehaviour:
   airAttackBoost: 20
   atkSizeForward: 1
   atkRangeForward: 1
-  atkSizeForwardBoost: {x: 20, y: 2}
+  atkSizeForwardBoost: {x: 6, y: 2}
+  atkSizeForwardBoostAir: {x: 9, y: 2}
   atkForwardKnockback: 15
   atkRecoveryTime: 0.15
   atkTimeForwardAir: 0.08
