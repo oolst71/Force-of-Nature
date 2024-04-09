@@ -2906,6 +2906,14 @@ PrefabInstance:
       propertyPath: attacks
       value: 
       objectReference: {fileID: 1823291926}
+    - target: {fileID: 4207757647545613346, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8292198
+      objectReference: {fileID: 0}
+    - target: {fileID: 4207757647545613346, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.38536263
+      objectReference: {fileID: 0}
     - target: {fileID: 5218573957063137656, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_AngularDrag
       value: 0

@@ -153,7 +153,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
-
+        gameObject.SetActive(false);
     }
     // Start is called before the first frame update
 

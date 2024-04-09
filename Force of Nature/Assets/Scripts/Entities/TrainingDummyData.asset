@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TrainingDummyData
   m_EditorClassIdentifier: 
   dmgType: 0
-  maxHealth: 500
+  maxHealth: 3
   knockUp: 2
