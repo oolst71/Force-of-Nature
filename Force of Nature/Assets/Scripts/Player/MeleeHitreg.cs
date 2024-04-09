@@ -30,7 +30,7 @@ public class MeleeHitreg : MonoBehaviour
             if (etd != null)
             {
                 Debug.Log("got script");
-                etd.TakeDamage(playerData.atkDamage, playerController.faceDir, attacks.atkDashTimer);
+                etd.TakeDamage(playerData.atkDamage, playerController.faceDir, attacks.atkDashTimer, transform.parent.gameObject);
             }
             else
             {
