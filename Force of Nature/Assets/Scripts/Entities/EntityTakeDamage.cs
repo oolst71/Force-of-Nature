@@ -22,7 +22,7 @@ public class EntityTakeDamage : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp)
+    public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
     {
         Debug.Log("hit!");
         health -= dmg;
@@ -47,7 +47,6 @@ public class EntityTakeDamage : MonoBehaviour
 
     IEnumerator Knockback()
     {
-
         switch (playerData.atkType)
         {
             case PlayerDataScrObj.AttackType.MELEE_NOBOOST:
