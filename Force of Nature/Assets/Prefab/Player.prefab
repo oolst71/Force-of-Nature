@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2922896065540602061}
+  attacks: {fileID: 7910046653048851086}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   damageType: 0
 --- !u!1 &3182657333758623950
@@ -528,6 +529,7 @@ MonoBehaviour:
   pC: {fileID: 2922896065540602061}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   rb: {fileID: 5218573957063137656}
+  atkDashTimer: 0
   attackDash: 0
   up: {fileID: 5698516720224029655}
   down: {fileID: 4493594564066090578}
@@ -714,6 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2922896065540602061}
+  attacks: {fileID: 7910046653048851086}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   damageType: 0
 --- !u!1 &4493594564066090578
@@ -891,6 +894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2922896065540602061}
+  attacks: {fileID: 7910046653048851086}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   damageType: 0
 --- !u!1 &5274503209142876462
@@ -958,7 +962,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.20473719, y: 0.5520588}
+  m_Offset: {x: 0.38536263, y: 0.5520588}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -969,7 +973,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.467969, y: 3.0839317}
+  m_Size: {x: 1.8292198, y: 3.0839317}
   m_EdgeRadius: 0
 --- !u!114 &3934175408951801160
 MonoBehaviour:
@@ -984,6 +988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2922896065540602061}
+  attacks: {fileID: 7910046653048851086}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   damageType: 0
 --- !u!1 &5698516720224029655
