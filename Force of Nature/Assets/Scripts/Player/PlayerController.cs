@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask ground;
     [SerializeField]public bool grounded;
     private float coyoteTimer;
+    private float hurtTimer;
 
     [SerializeField]private bool jumpBuffer;
 
@@ -43,7 +44,12 @@ public class PlayerController : MonoBehaviour
 
         if (playerData.currentState == PlayerDataScrObj.playerState.HURT)
         {
-
+            hurtTimer += Time.deltaTime;
+            if (hurtTimer > playerData.hurtTime)
+            {
+                hurtTimer = 0f;
+                ResetState();
+            }
         }
         if (playerData.playerStates[(int)playerData.currentState].canMove)
         {

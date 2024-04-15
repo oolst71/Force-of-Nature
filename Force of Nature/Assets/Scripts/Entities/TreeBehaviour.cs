@@ -127,6 +127,8 @@ public class TreeBehaviour : MonoBehaviour
         {
             playerData.currentState = PlayerDataScrObj.playerState.HURT;
             playerData.hurtTime = hurtTime;
+            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.3f);
         }
         Debug.Log("recovery start");
         yield return new WaitForSeconds(treeData.attackRecoveryTime);

@@ -2361,6 +2361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   player: {fileID: 1823291916}
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   treeData: {fileID: 11400000, guid: 33a68122c55820743bfaf15e1397f506, type: 2}
   treeStates: []
   waypoints:
@@ -2368,7 +2369,8 @@ MonoBehaviour:
   - {fileID: 916489911}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
+  hurtTime: 0.3
   atkSize: {x: 4, y: 1.8}
 --- !u!1 &1823291916 stripped
 GameObject:
