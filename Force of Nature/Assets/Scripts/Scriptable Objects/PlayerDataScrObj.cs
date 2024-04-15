@@ -55,7 +55,8 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkTimeDownAir;
     public float atkTimeDownGround;
 
-    public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created
+    public float hurtTime;
+    public EntityStateScrObj[] playerStates = new EntityStateScrObj[9]; //add to this list whenever a new state is created
 
     //0 - Ability
     //1 - Attacking
@@ -64,7 +65,7 @@ public class PlayerDataScrObj : ScriptableObject
     //4 - Running
     //5 - Ulting
 
-    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING, ATTACKINGUNLOCKED
+    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING, ATTACKINGUNLOCKED, HURT
     }
 
     public playerState currentState;

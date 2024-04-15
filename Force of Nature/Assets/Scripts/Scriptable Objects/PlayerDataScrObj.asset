@@ -68,5 +68,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eae484f61237a7847a9024d405fbff59, type: 2}
   - {fileID: 11400000, guid: b4c26c7d7ebc37648a182a6a064b017b, type: 2}
   - {fileID: 11400000, guid: 8123055fab8326f47abe6d7be9e17919, type: 2}
+  - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
   currentState: 3
-  atkType: 1
+  atkType: 6

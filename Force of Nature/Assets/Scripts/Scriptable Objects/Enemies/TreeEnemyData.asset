@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714324422dbe7824b8d3d90f8508182f, type: 3}
+  m_Name: TreeEnemyData
+  m_EditorClassIdentifier: 
+  dmgType: 0
+  entityStates:
+  - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}
+  - {fileID: 11400000, guid: ddf71542c5688734cba4151ee0f6cbe1, type: 2}
+  - {fileID: 11400000, guid: 1e44b9fe658d1fe459fdd77110a53f4d, type: 2}
+  - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
+  speed: 5
+  maxHealth: 5
+  knockUp: 0
+  attackCd: 1
+  attackWindupTime: 0.5
+  attackRecoveryTime: 0.5

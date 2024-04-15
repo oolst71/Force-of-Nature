@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
     {
         grounded = GroundCheck();
 
+        if (playerData.currentState == PlayerDataScrObj.playerState.HURT)
+        {
+
+        }
         if (playerData.playerStates[(int)playerData.currentState].canMove)
         {
                 if (Mathf.Abs(aim.x) > playerData.deadzoneX)
