@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private float hurtTimer;
     [SerializeField] private GameObject respawnPoint;
     [SerializeField]private bool jumpBuffer;
+    [SerializeField] private GameObject hpBar;
 
     void Start()
     {
@@ -107,6 +109,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         playerData.health -= damage;
+        hpBar.GetComponent<Slider>().value = playerData.health;
         if (playerData.health <= 0)
         {
             Respawn();
@@ -124,7 +127,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Vector2.zero;
         ResetState();
         playerData.health = playerData.maxHealth;
-
+        hpBar.GetComponent<Slider>().value = playerData.health;
     }
 
 

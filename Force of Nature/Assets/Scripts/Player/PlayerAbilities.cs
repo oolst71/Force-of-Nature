@@ -8,6 +8,7 @@ public class PlayerAbilities : MonoBehaviour
 
     [SerializeField] private PlayerDataScrObj playerData;
     private SpriteRenderer spr;
+    private PlayerDataScrObj.eqElement eq;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,27 @@ public class PlayerAbilities : MonoBehaviour
     private void OnAbility()
     {
         Debug.Log("break");
+        if (playerData.abilitiesUnlocked)
+        {
+            switch (eq)
+            {
+                case PlayerDataScrObj.eqElement.BLIZZARD:
+                    //ice ability
+                    Debug.Log("ice ability");
+                    break;
+                case PlayerDataScrObj.eqElement.WILDFIRE:
+                    Debug.Log("fire ability");
+                    //fire ability
+                    break;
+                case PlayerDataScrObj.eqElement.TSUNAMI:
+                    Debug.Log("water ability");
+                    //water ability
+                    break;
+                default:
+                    break;
+            }
+        }
+        
     }
 
 
@@ -31,7 +53,7 @@ public class PlayerAbilities : MonoBehaviour
             {
                 playerData.equipped = playerData.loadout.Length - 1;
             }
-
+            eq = playerData.loadout[playerData.equipped];
             SetColor();
 
         }
@@ -47,6 +69,8 @@ public class PlayerAbilities : MonoBehaviour
                 {
                     playerData.equipped = 0;
                 }
+            eq = playerData.loadout[playerData.equipped];
+
             SetColor();
         }
     }
@@ -54,18 +78,22 @@ public class PlayerAbilities : MonoBehaviour
 
     public void SetColor()
     {
-        if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.BLIZZARD)
+        switch (eq)
         {
-            spr.color = Color.cyan;
-        }
-        else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.WILDFIRE)
-        {
-            spr.color = Color.red;
+            case PlayerDataScrObj.eqElement.BLIZZARD:
+                spr.color = Color.cyan;
 
-        }
-        else if (playerData.loadout[playerData.equipped] == PlayerDataScrObj.eqElement.TSUNAMI)
-        {
-            spr.color = Color.blue;
+                break;
+            case PlayerDataScrObj.eqElement.WILDFIRE:
+                spr.color = Color.red;
+
+                break;
+            case PlayerDataScrObj.eqElement.TSUNAMI:
+                spr.color = Color.blue;
+
+                break;
+            default:
+                break;
         }
     }
    

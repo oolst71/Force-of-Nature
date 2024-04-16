@@ -62,9 +62,12 @@ public class TreeBehaviour : MonoBehaviour
                         {
                             dir = 1;
                         }
-                        //walk towards player
+                        //walk towards player if not in range
+                        if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2)
+                        {
+                            rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
 
-                        rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
+                        }
 
                     }
                 }
@@ -125,7 +128,6 @@ public class TreeBehaviour : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x + (dir * atkSize.x * 0.5f), transform.position.y), atkSize, 0, Vector2.right * dir, 0.01f, playerLayer);
         if (hit.collider != null)
         {
-            playerData.currentState = PlayerDataScrObj.playerState.HURT;
             playerData.hurtTime = hurtTime;
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             player.transform.position = new Vector2(player.transform.position.x, player.transform.position.y + 0.3f);
