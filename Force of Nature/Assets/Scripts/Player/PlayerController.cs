@@ -20,11 +20,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]public bool grounded;
     private float coyoteTimer;
     private float hurtTimer;
-
+    [SerializeField] private GameObject respawnPoint;
     [SerializeField]private bool jumpBuffer;
 
     void Start()
     {
+        playerData.health = playerData.maxHealth;
         faceDir = 1;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
@@ -47,7 +48,6 @@ public class PlayerController : MonoBehaviour
             hurtTimer += Time.deltaTime;
             if (hurtTimer > playerData.hurtTime)
             {
-                hurtTimer = 0f;
                 ResetState();
             }
         }
@@ -104,6 +104,29 @@ public class PlayerController : MonoBehaviour
     }
 
     
+    public void TakeDamage(int damage)
+    {
+        playerData.health -= damage;
+        if (playerData.health <= 0)
+        {
+            Respawn();
+        }
+        playerData.currentState = PlayerDataScrObj.playerState.HURT;
+        hurtTimer = 0f;
+        rb.velocity = Vector2.zero;
+        transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
+
+    }
+
+    public void Respawn()
+    {
+        transform.position = respawnPoint.transform.position;
+        rb.velocity = Vector2.zero;
+        ResetState();
+        playerData.health = playerData.maxHealth;
+
+    }
+
 
     private void OnJump()
     {

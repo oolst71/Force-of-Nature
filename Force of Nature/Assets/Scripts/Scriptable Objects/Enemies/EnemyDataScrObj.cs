@@ -17,4 +17,5 @@ public class EnemyDataScrObj : ScriptableObject
     public float attackCd;
     public float attackWindupTime;
     public float attackRecoveryTime;
+    public int attackDamage;
 }
