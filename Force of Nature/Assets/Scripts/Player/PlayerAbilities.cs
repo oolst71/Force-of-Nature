@@ -9,24 +9,29 @@ public class PlayerAbilities : MonoBehaviour
     [SerializeField] private PlayerDataScrObj playerData;
     private SpriteRenderer spr;
     private PlayerDataScrObj.eqElement eq;
+    public GameObject iciclePrefab;
+    public Transform iciclePoint;
+    public bool abCooldown;
 
     // Start is called before the first frame update
     void Start()
     {
         spr = GetComponent<SpriteRenderer>();
         spr.color = Color.white;
+        abCooldown = true;
     }
 
     private void OnAbility()
     {
         Debug.Log("break");
-        if (playerData.abilitiesUnlocked)
+        if (playerData.abilitiesUnlocked && abCooldown)
         {
             switch (eq)
             {
                 case PlayerDataScrObj.eqElement.BLIZZARD:
                     //ice ability
                     Debug.Log("ice ability");
+                    StartCoroutine("IceAbility");
                     break;
                 case PlayerDataScrObj.eqElement.WILDFIRE:
                     Debug.Log("fire ability");
@@ -75,6 +80,18 @@ public class PlayerAbilities : MonoBehaviour
         }
     }
 
+
+    private IEnumerator IceAbility()
+    {
+        abCooldown = false;
+        playerData.currentState = PlayerDataScrObj.playerState.CASTING;
+        yield return new WaitForSeconds(0.1f); //windup
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(0.2f); //recovery
+        playerData.currentState = PlayerDataScrObj.playerState.IDLE;
+        yield return new WaitForSeconds(playerData.abilityCd);
+        abCooldown = true;
+    }
 
     public void SetColor()
     {

@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         playerData.health = playerData.maxHealth;
         faceDir = 1;
+        playerData.faceDir = 1;
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<CapsuleCollider2D>();
         trail = GetComponent<TrailRenderer>();
@@ -163,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
         {
             faceDir = Mathf.Sign(aim.x);
+            playerData.faceDir = faceDir;
         }
     }
 

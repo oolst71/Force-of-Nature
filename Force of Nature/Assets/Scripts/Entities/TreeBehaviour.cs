@@ -110,7 +110,8 @@ public class TreeBehaviour : MonoBehaviour
                 }
                 break;
             case TreeState.HURT:
-                //do nothing
+                StopCoroutine("AttackingTree");
+                attackCooldown = true;
                 break;
             default:
                 break;
