@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private PlayerDataScrObj playerData;
 
     private Rigidbody2D rb;
-    private CapsuleCollider2D coll;
+    private BoxCollider2D coll;
     private TrailRenderer trail;
 
     public Vector2 aim; //the stick input of the player
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         faceDir = 1;
         playerData.faceDir = 1;
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<CapsuleCollider2D>();
+        coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
