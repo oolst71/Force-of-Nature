@@ -225,6 +225,7 @@ Transform:
   - {fileID: 1056746844122298969}
   - {fileID: 3248479372375459416}
   - {fileID: 1046437820417017501}
+  - {fileID: 805856245886998919}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6138765768337048425
@@ -387,7 +388,9 @@ MonoBehaviour:
   aim: {x: 0, y: 0}
   faceDir: 0
   grounded: 0
+  respawnPoint: {fileID: 0}
   jumpBuffer: 0
+  hpBar: {fileID: 0}
 --- !u!114 &4451885283002250243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +404,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+  iciclePrefab: {fileID: 6214453459344134514, guid: a9528ebff3900804fac02ad9f600d868, type: 3}
+  iciclePoint: {fileID: 805856245886998919}
+  abCooldown: 0
 --- !u!96 &8416432544454703970
 TrailRenderer:
   serializedVersion: 3
@@ -1243,3 +1249,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &8320262414744451156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 805856245886998919}
+  m_Layer: 8
+  m_Name: IciclePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &805856245886998919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8320262414744451156}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.017, y: 0.111, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9116542877783109631}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
