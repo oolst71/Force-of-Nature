@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: TrainingDummyData
   m_EditorClassIdentifier: 
   dmgType: 0
-  maxHealth: 3
+  entityStates:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speed: 0
+  maxHealth: 4
   knockUp: 2
+  attackCd: 0
+  attackWindupTime: 0
+  attackRecoveryTime: 0
+  attackDamage: 0
