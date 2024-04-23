@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
   speed: 5
   maxHealth: 5
-  knockUp: 2
+  knockUp: 4
   attackCd: 1
   attackWindupTime: 0.5
   attackRecoveryTime: 0.5

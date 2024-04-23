@@ -15,7 +15,7 @@ MonoBehaviour:
   loadout: 000000000100000002000000
   equipped: 0
   maxHealth: 100
-  health: 99
+  health: 98
   abilitiesUnlocked: 0
   accelBasedMovement: 1
   freeDirectionDash: 0
