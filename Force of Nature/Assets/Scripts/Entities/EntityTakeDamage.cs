@@ -44,6 +44,16 @@ public class EntityTakeDamage : MonoBehaviour
         }
     }
 
+    public void TakeAbilityDamage(int dmg, int id)
+    {
+        health -= dmg;
+        if (health <= 0)
+        {
+            Debug.Log("die");
+            Die();
+        }
+    }
+
 
     IEnumerator Knockback()
     {

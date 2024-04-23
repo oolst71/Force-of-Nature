@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]private PlayerDataScrObj playerData;
 
     private Rigidbody2D rb;
-    private CapsuleCollider2D coll;
+    private BoxCollider2D coll;
     private TrailRenderer trail;
 
     public Vector2 aim; //the stick input of the player
@@ -19,14 +20,18 @@ public class PlayerController : MonoBehaviour
     private LayerMask ground;
     [SerializeField]public bool grounded;
     private float coyoteTimer;
-
+    private float hurtTimer;
+    [SerializeField] private GameObject respawnPoint;
     [SerializeField]private bool jumpBuffer;
+    [SerializeField] private GameObject hpBar;
 
     void Start()
     {
+        playerData.health = playerData.maxHealth;
         faceDir = 1;
+        playerData.faceDir = 1;
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<CapsuleCollider2D>();
+        coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
@@ -41,6 +46,14 @@ public class PlayerController : MonoBehaviour
     {
         grounded = GroundCheck();
 
+        if (playerData.currentState == PlayerDataScrObj.playerState.HURT)
+        {
+            hurtTimer += Time.deltaTime;
+            if (hurtTimer > playerData.hurtTime)
+            {
+                ResetState();
+            }
+        }
         if (playerData.playerStates[(int)playerData.currentState].canMove)
         {
                 if (Mathf.Abs(aim.x) > playerData.deadzoneX)
@@ -94,6 +107,30 @@ public class PlayerController : MonoBehaviour
     }
 
     
+    public void TakeDamage(int damage)
+    {
+        playerData.health -= damage;
+        hpBar.GetComponent<Slider>().value = playerData.health;
+        if (playerData.health <= 0)
+        {
+            Respawn();
+        }
+        playerData.currentState = PlayerDataScrObj.playerState.HURT;
+        hurtTimer = 0f;
+        rb.velocity = Vector2.zero;
+        transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
+
+    }
+
+    public void Respawn()
+    {
+        transform.position = respawnPoint.transform.position;
+        rb.velocity = Vector2.zero;
+        ResetState();
+        playerData.health = playerData.maxHealth;
+        hpBar.GetComponent<Slider>().value = playerData.health;
+    }
+
 
     private void OnJump()
     {
@@ -127,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
         {
             faceDir = Mathf.Sign(aim.x);
+            playerData.faceDir = faceDir;
         }
     }
 
