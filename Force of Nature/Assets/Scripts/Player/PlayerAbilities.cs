@@ -81,6 +81,18 @@ public class PlayerAbilities : MonoBehaviour
     }
 
 
+    private IEnumerator WaterAbility()
+    {
+        abCooldown = false;
+        playerData.currentState = PlayerDataScrObj.playerState.CASTING;
+        yield return new WaitForSeconds(0.1f); //windup
+        //execute ability here
+        yield return new WaitForSeconds(0.1f); //recovery
+        playerData.currentState = PlayerDataScrObj.playerState.IDLE;
+        yield return new WaitForSeconds(playerData.abilityCd);
+        abCooldown = true;
+    }
+
     private IEnumerator IceAbility()
     {
         abCooldown = false;
