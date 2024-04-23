@@ -9,9 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714324422dbe7824b8d3d90f8508182f, type: 3}
-  m_Name: TrainingDummyData
+  m_Script: {fileID: 11500000, guid: b2c46664c96b64c46a2780ac921196ad, type: 3}
+  m_Name: Casting
   m_EditorClassIdentifier: 
-  dmgType: 0
-  maxHealth: 3
-  knockUp: 2
+  state: Casting
+  canMove: 0
+  canWalk: 0
+  canJump: 0
+  canDash: 0
+  canAttack: 0
+  canQueueAttacks: 0
+  canAbility: 0
+  canQueueAbilities: 0
+  canTakeDamage: 1

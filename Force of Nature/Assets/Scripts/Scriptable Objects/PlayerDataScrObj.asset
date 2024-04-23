@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerDataScrObj
   m_EditorClassIdentifier: 
   loadout: 000000000100000002000000
-  equipped: 1
+  equipped: 0
   maxHealth: 100
-  health: 100
+  health: 98
   abilitiesUnlocked: 0
   accelBasedMovement: 1
   freeDirectionDash: 0
@@ -45,7 +45,7 @@ MonoBehaviour:
   atkSizeForwardBoost: {x: 6, y: 2}
   atkSizeForwardBoostAir: {x: 9, y: 2}
   atkForwardKnockback: 15
-  atkDamage: 0
+  atkDamage: 2
   atkPower_ForwardGround: {x: 60, y: 0}
   atkPower_ForwardAir: {x: 80, y: 0}
   atkPower_Up: {x: 0, y: 90}
@@ -59,6 +59,10 @@ MonoBehaviour:
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
+  faceDir: 1
+  abilityCd: 1
+  icicleDmg: 2
+  hurtTime: 0.3
   playerStates:
   - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
   - {fileID: 11400000, guid: 13e329d5de4d6d441b6af02394dc972d, type: 2}
@@ -68,5 +72,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eae484f61237a7847a9024d405fbff59, type: 2}
   - {fileID: 11400000, guid: b4c26c7d7ebc37648a182a6a064b017b, type: 2}
   - {fileID: 11400000, guid: 8123055fab8326f47abe6d7be9e17919, type: 2}
-  currentState: 3
+  - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
+  - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
+  currentState: 4
   atkType: 1

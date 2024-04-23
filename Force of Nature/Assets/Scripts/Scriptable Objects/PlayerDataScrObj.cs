@@ -7,6 +7,7 @@ public class PlayerDataScrObj : ScriptableObject
 
     public eqElement[] loadout = new eqElement[3]; //the player's current loadout
     public int equipped; //keeps track of which element the player currently has equipped
+
     public int maxHealth = 100; //max health of player
     public int health = 100; //current health of player
     public bool abilitiesUnlocked = false; //set to true after getting the artifact
@@ -55,7 +56,15 @@ public class PlayerDataScrObj : ScriptableObject
     public float atkTimeDownAir;
     public float atkTimeDownGround;
 
-    public EntityStateScrObj[] playerStates = new EntityStateScrObj[8]; //add to this list whenever a new state is created
+    public float faceDir;
+
+    public float abilityCd;
+
+    public int icicleDmg;
+
+
+    public float hurtTime;
+    public EntityStateScrObj[] playerStates = new EntityStateScrObj[10]; //add to this list whenever a new state is created
 
     //0 - Ability
     //1 - Attacking
@@ -64,7 +73,7 @@ public class PlayerDataScrObj : ScriptableObject
     //4 - Running
     //5 - Ulting
 
-    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING, ATTACKINGUNLOCKED
+    public enum playerState { ABILITY, ATTACKING, DASHING, IDLE, RUNNING, ULTING, JUMPING, ATTACKINGUNLOCKED, HURT, CASTING
     }
 
     public playerState currentState;
