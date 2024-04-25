@@ -10,13 +10,16 @@ public class PlayerAbilities : MonoBehaviour
     private SpriteRenderer spr;
     private PlayerDataScrObj.eqElement eq;
     public GameObject iciclePrefab;
+    public GameObject waveHeadPrefab;
     public Transform iciclePoint;
     public bool abCooldown;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         spr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
         abCooldown = true;
     }
@@ -39,6 +42,7 @@ public class PlayerAbilities : MonoBehaviour
                     break;
                 case PlayerDataScrObj.eqElement.TSUNAMI:
                     Debug.Log("water ability");
+                    StartCoroutine("WaterAbility");
                     //water ability
                     break;
                 default:
@@ -84,9 +88,12 @@ public class PlayerAbilities : MonoBehaviour
     private IEnumerator WaterAbility()
     {
         abCooldown = false;
+        rb.velocity = Vector2.zero;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         yield return new WaitForSeconds(0.1f); //windup
         //execute ability here
+        //instantiate wave
+        Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir, transform.position.y - 0.5f), Quaternion.identity);
         yield return new WaitForSeconds(0.1f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
@@ -97,9 +104,9 @@ public class PlayerAbilities : MonoBehaviour
     {
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
-        yield return new WaitForSeconds(0.1f); //windup
+        yield return new WaitForSeconds(0.3f); //windup
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
-        yield return new WaitForSeconds(0.2f); //recovery
+        yield return new WaitForSeconds(0.3f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
