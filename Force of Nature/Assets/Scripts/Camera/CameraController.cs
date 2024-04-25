@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
         yBaseOffset = 3;
         yMaxOffset = -5;
         objectRb = linkedObject.GetComponent<Rigidbody2D>();
-        baseY = -46;
+        baseY = linkedObject.transform.position.y;
     }
 
 
