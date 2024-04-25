@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public class WaveHeadBehaviour : MonoBehaviour
@@ -18,7 +19,7 @@ public class WaveHeadBehaviour : MonoBehaviour
     private float xTime;
     private float xTimer;
     List<GameObject> waveSegments = new List<GameObject>();
-
+    LayerMask ground;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +32,19 @@ public class WaveHeadBehaviour : MonoBehaviour
         travelTimer = 0f;
         xTimer = 100f;
         moving = true;
+        ground = LayerMask.GetMask("Platform");
+
     }
 
     private void Update()
     {
+        if (moving)
+        {
+            if (BarrierCheck())
+            {
+                moving = false;
+            }
+        }
         travelTimer += Time.deltaTime;
         xTimer += Time.deltaTime;
         if (xTimer >= xTime)
@@ -58,6 +68,20 @@ public class WaveHeadBehaviour : MonoBehaviour
         }
     }
 
+    private bool BarrierCheck()
+    {
+        if (Physics2D.BoxCast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.01f), 0.95f * coll.bounds.size, 0f, Vector2.right * dirX, 0.25f, ground))
+        {
+            return true;
+
+        }
+        else
+        {
+            return false;
+
+        }
+    }
+
     private void DissapearWave()
     {
         for (int i = 0; i < waveSegments.Count; i++)
@@ -72,6 +96,10 @@ public class WaveHeadBehaviour : MonoBehaviour
         if (moving)
         {
             rb.velocity = new Vector2(speed * dirX, 0);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 }

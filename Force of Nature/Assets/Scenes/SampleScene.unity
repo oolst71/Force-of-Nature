@@ -3435,10 +3435,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4451885283002250243, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
-      propertyPath: waveHeadPrefab
-      value: 
-      objectReference: {fileID: 6936455846967601252, guid: 9ac1d463d6daf5043b88815050ee94bf, type: 3}
     - target: {fileID: 9116542877783109631, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.04

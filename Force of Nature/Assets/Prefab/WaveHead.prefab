@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e05ab359a7b3249a63049ea77509f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 17
   dirX: 0
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   waveBodyPrefab: {fileID: 5087073030465277355, guid: 8833c00e79d090e4d9c6030822d267a2, type: 3}
-  travelTime: 1
+  travelTime: 0.8
 --- !u!50 &3135792186659406568
 Rigidbody2D:
   serializedVersion: 4

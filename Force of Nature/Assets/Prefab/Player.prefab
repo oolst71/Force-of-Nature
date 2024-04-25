@@ -370,6 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   iciclePrefab: {fileID: 6214453459344134514, guid: a9528ebff3900804fac02ad9f600d868, type: 3}
+  waveHeadPrefab: {fileID: 6936455846967601252, guid: 9ac1d463d6daf5043b88815050ee94bf, type: 3}
   iciclePoint: {fileID: 805856245886998919}
   abCooldown: 0
 --- !u!96 &8416432544454703970
