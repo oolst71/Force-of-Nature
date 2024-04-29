@@ -54,7 +54,7 @@ public class CameraController : MonoBehaviour
         yBaseOffset = 3;
         yMaxOffset = -5;
         objectRb = linkedObject.GetComponent<Rigidbody2D>();
-        baseY = -46;
+        baseY = linkedObject.transform.position.y;
     }
 
 
@@ -79,7 +79,24 @@ public class CameraController : MonoBehaviour
 
     void FollowingCamera() //camera mode 2, literally just follows the object with no other stuff - idk why you'd use this but it was so easy to add i figured i might as well
     {
-        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+        if (linkedObject.transform.position.y > baseY + yOffset)
+        {
+            if (linkedObject.transform.position.y > -33)
+            {
+                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -33, -10);
+
+            }
+            else
+            {
+                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y, -10);
+
+            }
+        }
+        else
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+
+        }
     }
 
     void LooseFollowingCamera() //camera mode 1

@@ -59,3 +59,9 @@ TagManager:
   - name: Ground
     uniqueID: 2129243703
     locked: 0
+  - name: New Layer 8
+    uniqueID: 2908366669
+    locked: 0
+  - name: New Layer 7
+    uniqueID: 393993107
+    locked: 0
