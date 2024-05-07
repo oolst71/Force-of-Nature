@@ -11,7 +11,9 @@ public class PlayerAbilities : MonoBehaviour
     private PlayerDataScrObj.eqElement eq;
     public GameObject iciclePrefab;
     public GameObject waveHeadPrefab;
+    public GameObject firePrefab;
     public Transform iciclePoint;
+    public Transform flamePoint;
     public bool abCooldown;
     private Rigidbody2D rb;
 
@@ -29,6 +31,7 @@ public class PlayerAbilities : MonoBehaviour
         Debug.Log("break");
         if (playerData.abilitiesUnlocked && abCooldown)
         {
+            rb.velocity = Vector3.zero;
             switch (eq)
             {
                 case PlayerDataScrObj.eqElement.BLIZZARD:
@@ -38,6 +41,7 @@ public class PlayerAbilities : MonoBehaviour
                     break;
                 case PlayerDataScrObj.eqElement.WILDFIRE:
                     Debug.Log("fire ability");
+                    StartCoroutine("FireAbility");
                     //fire ability
                     break;
                 case PlayerDataScrObj.eqElement.TSUNAMI:
@@ -107,6 +111,18 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(0.3f); //windup
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
         yield return new WaitForSeconds(0.3f); //recovery
+        playerData.currentState = PlayerDataScrObj.playerState.IDLE;
+        yield return new WaitForSeconds(playerData.abilityCd);
+        abCooldown = true;
+    }
+
+    private IEnumerator FireAbility()
+    {
+        abCooldown = false;
+        playerData.currentState = PlayerDataScrObj.playerState.CASTING;
+        yield return new WaitForSeconds(0.15f); //windup 
+        Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 1.5f, flamePoint.position.y), Quaternion.identity);
+        yield return new WaitForSeconds(0.6f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
