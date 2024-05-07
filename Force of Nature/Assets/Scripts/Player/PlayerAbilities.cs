@@ -29,7 +29,7 @@ public class PlayerAbilities : MonoBehaviour
     private void OnAbility()
     {
         Debug.Log("break");
-        if (playerData.abilitiesUnlocked && abCooldown)
+        if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
         {
             rb.velocity = Vector3.zero;
             switch (eq)
@@ -97,7 +97,7 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(0.1f); //windup
         //execute ability here
         //instantiate wave
-        Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir, transform.position.y - 0.5f), Quaternion.identity);
+        Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir, transform.position.y - 1.8f), Quaternion.identity);
         yield return new WaitForSeconds(0.1f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
