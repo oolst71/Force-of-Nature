@@ -121,7 +121,7 @@ public class PlayerAbilities : MonoBehaviour
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         yield return new WaitForSeconds(0.15f); //windup 
-        Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 1.5f, flamePoint.position.y), Quaternion.identity);
+        Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 4f, flamePoint.position.y), Quaternion.identity);
         yield return new WaitForSeconds(0.6f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
