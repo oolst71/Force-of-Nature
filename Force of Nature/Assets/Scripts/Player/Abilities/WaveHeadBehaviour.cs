@@ -64,7 +64,7 @@ public class WaveHeadBehaviour : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.waveDmg, 2);
+            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.waveDmg, 1);
         }
     }
 
