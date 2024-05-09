@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private TrailRenderer trail;
-    private SpriteRenderer sprite;
 
     public Vector2 aim; //the stick input of the player
     private Vector2 dashDir;
@@ -34,7 +33,6 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
-        sprite = GetComponent<SpriteRenderer>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
@@ -167,7 +165,6 @@ public class PlayerController : MonoBehaviour
         {
             faceDir = Mathf.Sign(aim.x);
             playerData.faceDir = faceDir;
-            sprite.transform.localScale = new Vector3(-faceDir, 1, 1);
         }
     }
 
