@@ -14,6 +14,7 @@ public class EntityTakeDamage : MonoBehaviour
     private GameObject player;
     private float kbTime;
     private bool teleport;
+    private int ability;
     float attackTime = 0.2f;
     void Start()
     {
@@ -52,8 +53,28 @@ public class EntityTakeDamage : MonoBehaviour
             Debug.Log("die");
             Die();
         }
+        else
+        {
+            ability = id;
+            StartCoroutine("EffectAbility");
+        }
     }
 
+    IEnumerator EffectAbility()
+    {
+        switch (ability)
+        {
+            case 1: //icicle
+                break;
+            case 2: //wave
+                break;
+            case 3: //fire
+                break;
+            default:
+                break;
+        }
+        yield return new WaitForSeconds(0.01f);
+    }
 
     IEnumerator Knockback()
     {

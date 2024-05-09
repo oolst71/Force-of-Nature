@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
     {
         //boxcast directly downwards
         //if it hits the "ground" layermask (which contains anything the player can stand on), it counts as being grounded
-        if (Physics2D.BoxCast(gameObject.transform.position, 0.95f * coll.bounds.size, 0f, Vector2.down, 0.2f, ground))
+        if (Physics2D.BoxCast(gameObject.transform.position, coll.bounds.size, 0f, Vector2.down, 0.2f, ground))
         {
             if (playerData.airDashed)
             {
@@ -227,36 +227,39 @@ public class PlayerController : MonoBehaviour
             }
             playerData.sideAttackBoosted = false;
             playerData.upAttackBoosted = false;
+            playerData.gd = true;
             return true;
         }
         else
         {
+            playerData.gd = false;
             return false;
         }
     }
 
     IEnumerator PlayerDash()
     {
-        if (grounded == false)
-        {
-            playerData.airDashed = true;
-        }
-        else
+        if (playerData.airDashed == false || GroundCheck())
         {
             StartCoroutine("DashCooldown");
+            trail.emitting = true;
+            playerData.currentState = PlayerDataScrObj.playerState.DASHING;
+            playerData.dashCd = false;
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
+
+            yield return new WaitForSeconds(playerData.dashDuration);
+
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = playerData.baseGravity;
+            if (GroundCheck() == false)
+            {
+                playerData.airDashed = true;
+            }
+            ResetState();
+            trail.emitting = false;
         }
-        trail.emitting = true;
-        playerData.currentState = PlayerDataScrObj.playerState.DASHING;
-        playerData.dashCd = false;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(dashDir.x * playerData.dashPower, dashDir.y * playerData.dashPower);
-
-        yield return new WaitForSeconds(playerData.dashDuration);
-
-        rb.velocity = Vector2.zero;
-        rb.gravityScale = playerData.baseGravity;
-        ResetState();
-        trail.emitting = false;
+        
     }
 
     IEnumerator DashCooldown()
