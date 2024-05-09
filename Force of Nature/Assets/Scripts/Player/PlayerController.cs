@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D coll;
     private TrailRenderer trail;
     private SpriteRenderer sprite;
+    private PlayerAnimations playerAnim;
 
     public Vector2 aim; //the stick input of the player
     private Vector2 dashDir;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
         sprite = GetComponent<SpriteRenderer>();
+        playerAnim = GetComponent<PlayerAnimations>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
@@ -103,12 +105,11 @@ public class PlayerController : MonoBehaviour
         {
             coyoteTimer = 0;
         }
-
-      
+        playerAnim.ChangeAnimState((int)playerData.currentState);
 
     }
 
-    
+
     public void TakeDamage(int damage)
     {
         playerData.health -= damage;
@@ -282,6 +283,7 @@ public class PlayerController : MonoBehaviour
         {
             playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
         }
+        playerAnim.ChangeAnimState((int)playerData.currentState);
     }
     IEnumerator BufferJump()
     {
