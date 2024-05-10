@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UIElements;
 
 public class PlayerMeleeAttacks : MonoBehaviour
 {
@@ -23,6 +23,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private float atkDashTime;
     public float atkDashTimer;
 
+    public bool atkCycle;
 
     public bool attackDash;
 
@@ -51,7 +52,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     {
         playerAnim = GetComponent<PlayerAnimations>();
-
+        atkCycle = false;
         fwdBox.SetActive(false);
         upBox.SetActive(false);
         downBox.SetActive(false);
@@ -80,11 +81,22 @@ public class PlayerMeleeAttacks : MonoBehaviour
         {
             playerData.currentState = PlayerDataScrObj.playerState.ATTACKING;
             playerAnim.ChangeAnimState((int)playerData.currentState);
+            atkCycle = false;
+
             StartCoroutine("MeleeAttack");
         }
         
         else if (playerData.playerStates[(int)playerData.currentState].canQueueAttacks)
         {
+            if (!atkCycle)
+            {
+                atkCycle = true;
+            }
+            else
+            {
+                atkCycle = false;
+            }
+
             StartCoroutine("QueueAttack");
         }
     }
@@ -119,7 +131,17 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case 0: //attack forward
                 activeBox = fwdBox;
                 activeBox.SetActive(true);
-                playerAnim.AnimateAttack(false);
+                if (atkCycle)
+                {
+
+                    playerAnim.AnimateAttack(2);
+
+                }
+                else
+                {
+                    playerAnim.AnimateAttack(1);
+
+                }
 
                 if (pC.faceDir < 0)
                 {
@@ -309,6 +331,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
         {
             attackActive = false;
             pC.ResetState();
+            playerAnim.AnimateAttack(3);
+
         }
         else
         {

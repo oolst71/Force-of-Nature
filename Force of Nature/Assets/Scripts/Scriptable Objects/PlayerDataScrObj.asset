@@ -15,8 +15,8 @@ MonoBehaviour:
   loadout: 000000000100000002000000
   equipped: 1
   maxHealth: 100
-  health: 62
-  abilitiesUnlocked: 1
+  health: 100
+  abilitiesUnlocked: 0
   accelBasedMovement: 1
   freeDirectionDash: 0
   accel: 2
@@ -51,7 +51,7 @@ MonoBehaviour:
   atkPower_Up: {x: 0, y: 90}
   atkPower_UpLeft: {x: -30, y: 72}
   atkPower_UpRight: {x: 30, y: 72}
-  atkRecoveryTime: 0.15
+  atkRecoveryTime: 0.25
   atkTimeForwardAir: 0.08
   atkTimeForwardGround: 0.05
   atkTimeForwardUnmoving: 0.08
@@ -59,11 +59,12 @@ MonoBehaviour:
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
-  faceDir: 1
+  faceDir: -1
   abilityCd: 1
   icicleDmg: 2
   waveDmg: 4
   fireDmg: 3
+  gd: 1
   hurtTime: 0.3
   playerStates:
   - {fileID: 11400000, guid: 64d66a73928386547936073ecc370cb4, type: 2}
