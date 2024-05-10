@@ -88,14 +88,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
         
         else if (playerData.playerStates[(int)playerData.currentState].canQueueAttacks)
         {
-            if (!atkCycle)
-            {
-                atkCycle = true;
-            }
-            else
-            {
-                atkCycle = false;
-            }
+
 
             StartCoroutine("QueueAttack");
         }
@@ -345,7 +338,15 @@ public class PlayerMeleeAttacks : MonoBehaviour
     {
         if (attackQueued == false)
         {
-            yield return new WaitForSeconds(0.03f);
+            if (!atkCycle)
+            {
+                atkCycle = true;
+            }
+            else
+            {
+                atkCycle = false;
+            }
+            yield return new WaitForSeconds(0.01f);
             attackQueued = true;
             atkQueueDir = pC.aim;
         }

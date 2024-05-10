@@ -36,16 +36,16 @@ public class PlayerAnimations : MonoBehaviour
         {
             case 1:
                 anim.SetTrigger("Attack1");
-                anim.ResetTrigger("Attack1");
+                //anim.ResetTrigger("Attack1");
                 break;
             case 2:
                 anim.SetTrigger("Attack2");
-                anim.ResetTrigger("Attack2");
+                //anim.ResetTrigger("Attack2");
 
                 break;
             case 3:
                 anim.SetTrigger("EndAtk");
-                anim.ResetTrigger("EndAtk");
+                //anim.ResetTrigger("EndAtk");
 
                 break;
             default:
