@@ -14,9 +14,16 @@ public class PlayerAnimations : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        anim.SetBool("grounded", playerData.gd);
     }
+
+    // Update is called once per frame
+
+    public void ChangeAnimState(int st)
+    {
+
+    }
+
 }
