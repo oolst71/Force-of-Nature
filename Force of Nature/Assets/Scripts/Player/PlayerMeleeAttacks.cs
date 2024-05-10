@@ -11,6 +11,9 @@ public class PlayerMeleeAttacks : MonoBehaviour
     [SerializeField]private PlayerController pC;
     [SerializeField] private PlayerDataScrObj playerData;
     [SerializeField] private Rigidbody2D rb;
+
+    private PlayerAnimations playerAnim;
+
     private bool velReset;
     private bool attackActive;
     private bool attackQueued;
@@ -47,6 +50,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void Start()
 
     {
+        playerAnim = GetComponent<PlayerAnimations>();
+
         fwdBox.SetActive(false);
         upBox.SetActive(false);
         downBox.SetActive(false);
@@ -74,6 +79,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
         if (playerData.playerStates[(int)playerData.currentState].canAttack)
         {
             playerData.currentState = PlayerDataScrObj.playerState.ATTACKING;
+            playerAnim.ChangeAnimState((int)playerData.currentState);
             StartCoroutine("MeleeAttack");
         }
         
@@ -113,6 +119,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case 0: //attack forward
                 activeBox = fwdBox;
                 activeBox.SetActive(true);
+                playerAnim.AnimateAttack(false);
+
                 if (pC.faceDir < 0)
                 {
                     selected = left;
@@ -137,6 +145,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     {
                         playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR;
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
+                        playerAnim.ChangeAnimState((int)playerData.currentState);
+
                         while (atkDashTimer < playerData.atkTimeForwardUnmoving)
                         {
                             yield return new WaitForFixedUpdate();
@@ -276,7 +286,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 break;
 
         }
-
         Debug.Log("switch passed at: " + (timer - logTimer));
 
         if (velReset)

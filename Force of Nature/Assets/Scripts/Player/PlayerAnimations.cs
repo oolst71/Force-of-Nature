@@ -29,4 +29,16 @@ public class PlayerAnimations : MonoBehaviour
         Debug.Log("setting state" + count);
         count++;
     }
+
+    public void AnimateAttack(bool sec)
+    {
+        if (!sec)
+        {
+            anim.SetTrigger("Attack1");
+        }
+        else
+        {
+            anim.SetTrigger("Attack2");
+        }
+    }
 }
