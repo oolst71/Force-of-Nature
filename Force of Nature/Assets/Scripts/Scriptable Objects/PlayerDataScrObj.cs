@@ -61,7 +61,10 @@ public class PlayerDataScrObj : ScriptableObject
     public float abilityCd;
 
     public int icicleDmg;
+    public int waveDmg;
+    public int fireDmg;
 
+    public bool gd;
 
     public float hurtTime;
     public EntityStateScrObj[] playerStates = new EntityStateScrObj[10]; //add to this list whenever a new state is created

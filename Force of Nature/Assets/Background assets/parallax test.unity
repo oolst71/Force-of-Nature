@@ -2413,7 +2413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462b88b0f5429224f903b169ae0828a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parallaxEffectMultiplier: 0.9
+  parallaxEffectMultiplier: 1
   minInterval: 0
   maxInterval: 0
   hasRightTile: 0
