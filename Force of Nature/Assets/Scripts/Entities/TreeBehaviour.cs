@@ -64,12 +64,14 @@ public class TreeBehaviour : MonoBehaviour
                         {
                             dir = 1;
                         }
+
                         //walk towards player if not in range
                         if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2)
                         {
                             rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
 
                         }
+                        transform.localScale = new Vector2(-dir, transform.localScale.y);
 
                     }
                 }
@@ -100,6 +102,7 @@ public class TreeBehaviour : MonoBehaviour
                     dir = 1;
                 }
                 rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
+                transform.localScale = new Vector2(-dir, transform.localScale.y);
 
 
                 break;
