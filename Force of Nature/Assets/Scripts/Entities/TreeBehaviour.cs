@@ -20,10 +20,12 @@ public class TreeBehaviour : MonoBehaviour
     private bool attackActive;
     private bool attackCooldown;
     [SerializeField] private Vector2 atkSize;
+    private TreeAnimations anim;
 
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<TreeAnimations>();
         treeStates = treeData.entityStates;
         currentState = TreeState.IDLE;
         currentTarget = 0;
@@ -121,11 +123,13 @@ public class TreeBehaviour : MonoBehaviour
     private IEnumerator AttackingTree()
     {
         Debug.Log("starting atk");
+        anim.AnimateAttack(1);
         attackCooldown = false;
         Debug.Log("windup start");
         yield return new WaitForSeconds(treeData.attackWindupTime);
         //attack here
         Debug.Log("windup end, attacking");
+        anim.AnimateAttack(2);
         RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x + (dir * atkSize.x * 0.5f), transform.position.y), atkSize, 0, Vector2.right * dir, 0.01f, playerLayer);
         if (hit.collider != null)
         {
@@ -137,6 +141,7 @@ public class TreeBehaviour : MonoBehaviour
         Debug.Log("recovery start");
         yield return new WaitForSeconds(treeData.attackRecoveryTime);
         Debug.Log("recovery end");
+        anim.AnimateAttack(3);
         attackActive = false;
         currentState = TreeState.AIPATROLLING;
         Debug.Log("cooldown start");
