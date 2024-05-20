@@ -16,11 +16,17 @@ public class EntityTakeDamage : MonoBehaviour
     private bool teleport;
     private int ability;
     float attackTime = 0.2f;
+    bool ice;
+    bool fire;
+    bool water;
     void Start()
     {
         health = enemyData.maxHealth;
         Debug.Log(health + "dummy hp");
         rb = GetComponent<Rigidbody2D>();
+        ice = false;
+        fire = false;
+        water = false;
     }
 
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
