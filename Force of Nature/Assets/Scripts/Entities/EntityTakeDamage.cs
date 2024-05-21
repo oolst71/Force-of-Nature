@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EntityTakeDamage : MonoBehaviour
@@ -161,10 +162,12 @@ public class EntityTakeDamage : MonoBehaviour
             case 1: //cold
                 if (act == activeEffect.WATER)
                 {
+                    ApplyFreeze();
                     //ice on water
                 } else if (act == activeEffect.FIRE)
                 {
                     //ice on fire
+                    ApplyIceFire();
                 }
                 else
                 {
@@ -175,10 +178,12 @@ public class EntityTakeDamage : MonoBehaviour
             case 2: //water
                 if (act == activeEffect.ICE)
                 {
+                    ApplyStun();
                     //water on ice
                 } else if (act == activeEffect.FIRE)
                 {
                     //water on fire
+                    ApplyExtinguish();
                 }
                 else
                 {
@@ -189,10 +194,10 @@ public class EntityTakeDamage : MonoBehaviour
             case 3: //fire
                 if (act == activeEffect.WATER)
                 {
-
+                    ApplySteam();
                 } else if (act == activeEffect.ICE)
                 {
-
+                    ApplyMelt();
                 }
                 else
                 {
@@ -225,6 +230,36 @@ public class EntityTakeDamage : MonoBehaviour
         spr.color = Color.cyan;
         elementTime = 4f;
         moveSpeedMulti = 0.4f; 
+    }
+
+    private void ApplyStun()
+    {
+        //water on ice
+    }
+
+    private void ApplyIceFire()
+    {
+        //damage and water
+    }
+
+    private void ApplyFreeze()
+    {
+        
+    }
+
+    private void ApplySteam()
+    {
+
+    }
+
+    private void ApplyExtinguish()
+    {
+        //extinguishes fire
+    }
+
+    private void ApplyMelt()
+    {
+        //makes enemy take extra damage
     }
 
     IEnumerator Knockback()
