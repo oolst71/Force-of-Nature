@@ -14,6 +14,7 @@ public class TreeBehaviour : MonoBehaviour
     [SerializeField] private GameObject[] waypoints;
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private float hurtTime;
+    private EntityTakeDamage dmgScript;
     private float dir;
     private Rigidbody2D rb;
     private int currentTarget;
@@ -25,6 +26,7 @@ public class TreeBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dmgScript = GetComponent<EntityTakeDamage>();
         anim = GetComponent<TreeAnimations>();
         treeStates = treeData.entityStates;
         currentState = TreeState.IDLE;
@@ -68,7 +70,7 @@ public class TreeBehaviour : MonoBehaviour
                         //walk towards player if not in range
                         if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2)
                         {
-                            rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
+                            rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
 
                         }
                         transform.localScale = new Vector2(-dir, transform.localScale.y);
@@ -101,7 +103,7 @@ public class TreeBehaviour : MonoBehaviour
                 {
                     dir = 1;
                 }
-                rb.velocity = new Vector2(treeData.speed * dir, rb.velocity.y);
+                rb.velocity = new Vector2(treeData.speed * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
                 transform.localScale = new Vector2(-dir, transform.localScale.y);
 
 
