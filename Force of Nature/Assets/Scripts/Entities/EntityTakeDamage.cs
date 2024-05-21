@@ -24,6 +24,7 @@ public class EntityTakeDamage : MonoBehaviour
     private bool teleport;
     private int ability;
     float attackTime = 0.2f;
+    float burnTimer;
     float elementTimer;
     float elementTime;
     public float moveSpeedMulti;
@@ -33,6 +34,7 @@ public class EntityTakeDamage : MonoBehaviour
     bool water;
     void Start()
     {
+        burnTimer = 0f;
         moveSpeedMulti = 1f;
         elementTimer = 0f;
         health = enemyData.maxHealth;
@@ -96,6 +98,7 @@ public class EntityTakeDamage : MonoBehaviour
                         moveSpeedMulti = 1f;
                         break;
                     case activeEffect.FIRE:
+                        Debug.Log("stop burning");
                         break;
                     case activeEffect.WATER:
                         break;
@@ -109,6 +112,23 @@ public class EntityTakeDamage : MonoBehaviour
             }
             else
             {
+                if (act == activeEffect.FIRE)
+                {
+                    burnTimer += Time.deltaTime;
+                    if (burnTimer >= 0.7f)
+                    {
+                        health -= 2;
+                        Debug.Log("burning, " + health);
+                        if (health <= 0)
+                        {
+                            Debug.Log("die");
+                            Die();
+                        }
+                        burnTimer = 0;
+
+                    }
+
+                }
                 //only for certain effects, like fire, do the damage ticks here
             }
         }
@@ -189,14 +209,14 @@ public class EntityTakeDamage : MonoBehaviour
     {
         act = activeEffect.WATER;
         spr.color = Color.blue;
-        elementTime = 2f;
+        elementTime = 4f;
     }
 
     private void ApplyBurning()
     {
         act = activeEffect.FIRE;
         spr.color = Color.red;
-        elementTime = 2f;
+        elementTime = 4f;
     }
 
     private void ApplyCold()
