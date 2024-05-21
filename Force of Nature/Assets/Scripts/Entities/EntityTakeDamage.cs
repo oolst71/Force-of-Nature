@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EntityTakeDamage : MonoBehaviour
@@ -24,6 +25,7 @@ public class EntityTakeDamage : MonoBehaviour
     private bool teleport;
     private int ability;
     float attackTime = 0.2f;
+    float burnTimer;
     float elementTimer;
     float elementTime;
     public float moveSpeedMulti;
@@ -33,6 +35,7 @@ public class EntityTakeDamage : MonoBehaviour
     bool water;
     void Start()
     {
+        burnTimer = 0f;
         moveSpeedMulti = 1f;
         elementTimer = 0f;
         health = enemyData.maxHealth;
@@ -96,6 +99,7 @@ public class EntityTakeDamage : MonoBehaviour
                         moveSpeedMulti = 1f;
                         break;
                     case activeEffect.FIRE:
+                        Debug.Log("stop burning");
                         break;
                     case activeEffect.WATER:
                         break;
@@ -109,6 +113,23 @@ public class EntityTakeDamage : MonoBehaviour
             }
             else
             {
+                if (act == activeEffect.FIRE)
+                {
+                    burnTimer += Time.deltaTime;
+                    if (burnTimer >= 0.7f)
+                    {
+                        health -= 2;
+                        Debug.Log("burning, " + health);
+                        if (health <= 0)
+                        {
+                            Debug.Log("die");
+                            Die();
+                        }
+                        burnTimer = 0;
+
+                    }
+
+                }
                 //only for certain effects, like fire, do the damage ticks here
             }
         }
@@ -141,10 +162,12 @@ public class EntityTakeDamage : MonoBehaviour
             case 1: //cold
                 if (act == activeEffect.WATER)
                 {
+                    ApplyFreeze();
                     //ice on water
                 } else if (act == activeEffect.FIRE)
                 {
                     //ice on fire
+                    ApplyIceFire();
                 }
                 else
                 {
@@ -155,10 +178,12 @@ public class EntityTakeDamage : MonoBehaviour
             case 2: //water
                 if (act == activeEffect.ICE)
                 {
+                    ApplyStun();
                     //water on ice
                 } else if (act == activeEffect.FIRE)
                 {
                     //water on fire
+                    ApplyExtinguish();
                 }
                 else
                 {
@@ -169,10 +194,10 @@ public class EntityTakeDamage : MonoBehaviour
             case 3: //fire
                 if (act == activeEffect.WATER)
                 {
-
+                    ApplySteam();
                 } else if (act == activeEffect.ICE)
                 {
-
+                    ApplyMelt();
                 }
                 else
                 {
@@ -189,14 +214,14 @@ public class EntityTakeDamage : MonoBehaviour
     {
         act = activeEffect.WATER;
         spr.color = Color.blue;
-        elementTime = 2f;
+        elementTime = 4f;
     }
 
     private void ApplyBurning()
     {
         act = activeEffect.FIRE;
         spr.color = Color.red;
-        elementTime = 2f;
+        elementTime = 4f;
     }
 
     private void ApplyCold()
@@ -205,6 +230,36 @@ public class EntityTakeDamage : MonoBehaviour
         spr.color = Color.cyan;
         elementTime = 4f;
         moveSpeedMulti = 0.4f; 
+    }
+
+    private void ApplyStun()
+    {
+        //water on ice
+    }
+
+    private void ApplyIceFire()
+    {
+        //damage and water
+    }
+
+    private void ApplyFreeze()
+    {
+        
+    }
+
+    private void ApplySteam()
+    {
+
+    }
+
+    private void ApplyExtinguish()
+    {
+        //extinguishes fire
+    }
+
+    private void ApplyMelt()
+    {
+        //makes enemy take extra damage
     }
 
     IEnumerator Knockback()
