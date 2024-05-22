@@ -29,7 +29,7 @@ MonoBehaviour:
   moveSpeed: 20
   jumpSpeed: 25
   dashPower: 80
-  dashDuration: 0.2
+  dashDuration: 0.15
   dashCooldown: 0.2
   coyoteTime: 0.1
   jumpBufferTime: 0.15
@@ -59,7 +59,7 @@ MonoBehaviour:
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
-  faceDir: -1
+  faceDir: 1
   abilityCd: 1
   icicleDmg: 2
   waveDmg: 4
@@ -78,4 +78,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
   - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
   currentState: 3
-  atkType: 1
+  atkType: 5
