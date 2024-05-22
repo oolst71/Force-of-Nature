@@ -26,7 +26,7 @@ public class PlayerAnimations : MonoBehaviour
     public void ChangeAnimState(int st)
     {
         anim.SetInteger("currState", st);
-        Debug.Log("setting state" + count);
+        //Debug.Log("setting state" + count);
         count++;
     }
 
