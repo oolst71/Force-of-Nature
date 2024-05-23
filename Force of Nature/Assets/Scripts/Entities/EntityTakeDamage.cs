@@ -235,11 +235,15 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyStun()
     {
         //water on ice
+        //create stun state
+        //apply it here
+        //set element effect to none
     }
 
     private void ApplyIceFire()
     {
-        //damage and water
+        //deal extra damage
+        //set 
     }
 
     private void ApplyFreeze()
