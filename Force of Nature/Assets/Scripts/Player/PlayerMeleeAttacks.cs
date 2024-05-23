@@ -4,13 +4,16 @@ using System.Runtime.CompilerServices;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using UnityEngine.UIElements;
 
 public class PlayerMeleeAttacks : MonoBehaviour
 {
     [SerializeField]private PlayerController pC;
     [SerializeField] private PlayerDataScrObj playerData;
     [SerializeField] private Rigidbody2D rb;
+
+    private PlayerAnimations playerAnim;
+
     private bool velReset;
     private bool attackActive;
     private bool attackQueued;
@@ -20,6 +23,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private float atkDashTime;
     public float atkDashTimer;
 
+    public bool atkCycle;
 
     public bool attackDash;
 
@@ -47,6 +51,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void Start()
 
     {
+        playerAnim = GetComponent<PlayerAnimations>();
+        atkCycle = false;
         fwdBox.SetActive(false);
         upBox.SetActive(false);
         downBox.SetActive(false);
@@ -74,11 +80,16 @@ public class PlayerMeleeAttacks : MonoBehaviour
         if (playerData.playerStates[(int)playerData.currentState].canAttack)
         {
             playerData.currentState = PlayerDataScrObj.playerState.ATTACKING;
+            playerAnim.ChangeAnimState((int)playerData.currentState);
+            atkCycle = false;
+
             StartCoroutine("MeleeAttack");
         }
         
         else if (playerData.playerStates[(int)playerData.currentState].canQueueAttacks)
         {
+
+
             StartCoroutine("QueueAttack");
         }
     }
@@ -113,6 +124,18 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case 0: //attack forward
                 activeBox = fwdBox;
                 activeBox.SetActive(true);
+                if (atkCycle)
+                {
+
+                    playerAnim.AnimateAttack(2);
+
+                }
+                else
+                {
+                    playerAnim.AnimateAttack(1);
+
+                }
+
                 if (pC.faceDir < 0)
                 {
                     selected = left;
@@ -137,6 +160,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     {
                         playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR;
                         playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
+                        playerAnim.ChangeAnimState((int)playerData.currentState);
+
                         while (atkDashTimer < playerData.atkTimeForwardUnmoving)
                         {
                             yield return new WaitForFixedUpdate();
@@ -276,7 +301,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 break;
 
         }
-
         Debug.Log("switch passed at: " + (timer - logTimer));
 
         if (velReset)
@@ -300,6 +324,8 @@ public class PlayerMeleeAttacks : MonoBehaviour
         {
             attackActive = false;
             pC.ResetState();
+            playerAnim.AnimateAttack(3);
+
         }
         else
         {
@@ -312,7 +338,15 @@ public class PlayerMeleeAttacks : MonoBehaviour
     {
         if (attackQueued == false)
         {
-            yield return new WaitForSeconds(0.03f);
+            if (!atkCycle)
+            {
+                atkCycle = true;
+            }
+            else
+            {
+                atkCycle = false;
+            }
+            yield return new WaitForSeconds(0.01f);
             attackQueued = true;
             atkQueueDir = pC.aim;
         }

@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EntityTakeDamage : MonoBehaviour
 {
+    public enum activeEffect
+    {
+        NONE, ICE, FIRE, WATER
+    }
+
+    private activeEffect act;
+
     private int health;
+    private SpriteRenderer spr;
     public EnemyDataScrObj enemyData;
     public PlayerDataScrObj playerData;
     private Rigidbody2D rb;
@@ -16,11 +25,26 @@ public class EntityTakeDamage : MonoBehaviour
     private bool teleport;
     private int ability;
     float attackTime = 0.2f;
+    float burnTimer;
+    float elementTimer;
+    float elementTime;
+    public float moveSpeedMulti;
+    
+    bool ice;
+    bool fire;
+    bool water;
     void Start()
     {
+        burnTimer = 0f;
+        moveSpeedMulti = 1f;
+        elementTimer = 0f;
         health = enemyData.maxHealth;
         Debug.Log(health + "dummy hp");
         rb = GetComponent<Rigidbody2D>();
+        spr = GetComponent<SpriteRenderer>();
+        ice = false;
+        fire = false;
+        water = false;
     }
 
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
@@ -59,21 +83,183 @@ public class EntityTakeDamage : MonoBehaviour
             StartCoroutine("EffectAbility");
         }
     }
+    void Update()
+    {
+        if ((int)act > 0) //checks if an effect is active
+        {
+            elementTimer += Time.deltaTime;
+            if (elementTimer > elementTime )
+            {
+                switch (act)
+                {
+                    case activeEffect.NONE:
+                        break;
+                    case activeEffect.ICE:
+                        //reset movement speed
+                        moveSpeedMulti = 1f;
+                        break;
+                    case activeEffect.FIRE:
+                        Debug.Log("stop burning");
+                        break;
+                    case activeEffect.WATER:
+                        break;
+                    default:
+                        break;
+                }
+                act = activeEffect.NONE;
+                spr.color = Color.white;
+                //check for active effect
+                //if there is one, set it to NONE
+            }
+            else
+            {
+                if (act == activeEffect.FIRE)
+                {
+                    burnTimer += Time.deltaTime;
+                    if (burnTimer >= 0.7f)
+                    {
+                        health -= 2;
+                        Debug.Log("burning, " + health);
+                        if (health <= 0)
+                        {
+                            Debug.Log("die");
+                            Die();
+                        }
+                        burnTimer = 0;
 
+                    }
+
+                }
+                //only for certain effects, like fire, do the damage ticks here
+            }
+        }
+        
+    }
     IEnumerator EffectAbility()
     {
         switch (ability)
         {
             case 1: //icicle
+                ElementEffects(1);
                 break;
             case 2: //wave
+                ElementEffects(2);
                 break;
             case 3: //fire
+                ElementEffects(3);
                 break;
             default:
                 break;
         }
         yield return new WaitForSeconds(0.01f);
+    }
+
+    private void ElementEffects(int element)
+    {
+        elementTimer = 0f;
+        switch (element)
+        {
+            case 1: //cold
+                if (act == activeEffect.WATER)
+                {
+                    ApplyFreeze();
+                    //ice on water
+                } else if (act == activeEffect.FIRE)
+                {
+                    //ice on fire
+                    ApplyIceFire();
+                }
+                else
+                {
+                    ApplyCold();
+                    //ice normal effect
+                }
+                break;
+            case 2: //water
+                if (act == activeEffect.ICE)
+                {
+                    ApplyStun();
+                    //water on ice
+                } else if (act == activeEffect.FIRE)
+                {
+                    //water on fire
+                    ApplyExtinguish();
+                }
+                else
+                {
+                    ApplyWet();
+                    //water
+                }
+                break;
+            case 3: //fire
+                if (act == activeEffect.WATER)
+                {
+                    ApplySteam();
+                } else if (act == activeEffect.ICE)
+                {
+                    ApplyMelt();
+                }
+                else
+                {
+                    ApplyBurning();
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void ApplyWet()
+    {
+        act = activeEffect.WATER;
+        spr.color = Color.blue;
+        elementTime = 4f;
+    }
+
+    private void ApplyBurning()
+    {
+        act = activeEffect.FIRE;
+        spr.color = Color.red;
+        elementTime = 4f;
+    }
+
+    private void ApplyCold()
+    {
+        act = activeEffect.ICE;
+        spr.color = Color.cyan;
+        elementTime = 4f;
+        moveSpeedMulti = 0.4f; 
+    }
+
+    private void ApplyStun()
+    {
+        //water on ice
+    }
+
+    private void ApplyIceFire()
+    {
+        //damage and water
+    }
+
+    private void ApplyFreeze()
+    {
+        
+    }
+
+    private void ApplySteam()
+    {
+
+    }
+
+    private void ApplyExtinguish()
+    {
+        //extinguishes fire
+    }
+
+    private void ApplyMelt()
+    {
+        //makes enemy take extra damage
     }
 
     IEnumerator Knockback()
@@ -189,8 +375,5 @@ public class EntityTakeDamage : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

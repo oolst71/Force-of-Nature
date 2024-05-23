@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6119866567198495877}
   - component: {fileID: 4899003722844561361}
   - component: {fileID: 2931064709853135294}
+  - component: {fileID: 6287987352924797657}
+  - component: {fileID: 57185576862344668}
   m_Layer: 7
   m_Name: TreeEnemy
   m_TagString: Untagged
@@ -77,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 393993107
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: eaa1084765defb34da3eada54593ed12, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,8 +122,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: 0.47626495, y: -0.28087234}
+  m_Size: {x: 1.6594391, y: 6.371826}
   m_Direction: 0
 --- !u!114 &6119866567198495877
 MonoBehaviour:
@@ -189,3 +191,36 @@ MonoBehaviour:
     m_Bits: 256
   hurtTime: 0.3
   atkSize: {x: 4, y: 1.8}
+--- !u!95 &6287987352924797657
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181812214048461553}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 80ab9181a01848b49be1698f2a870c0c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &57185576862344668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181812214048461553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b52ce4bd52897148a63b2ac3231a583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

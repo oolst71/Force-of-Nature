@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D coll;
     private TrailRenderer trail;
     private SpriteRenderer sprite;
+    private PlayerAnimations playerAnim;
 
     public Vector2 aim; //the stick input of the player
     private Vector2 dashDir;
@@ -26,6 +27,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private bool jumpBuffer;
     [SerializeField] private GameObject hpBar;
 
+    //For AfterImageEffect
+    [Space]
+    [Header("After Image FX")]
+    [SerializeField] Vector3 _afterImageOffset;
+    [SerializeField] private float _distanceBetweenImages;
+    private bool _isDashing;
+    private float _dashTime;
+    private float _dashSpeed;
+    private float _dashCooldown;
+    private float _dashTimeLeft;
+    private float _lastImageXPosition;
+    private float _lastDash=-1000f;
+    private float _afterImageTimer;
+    [SerializeField]
+    private float _afterDuration;
+    public Transform AfterImageTranform;
+    public Vector2 StartDashPosition { get; private set; }
+
     void Start()
     {
         playerData.health = playerData.maxHealth;
@@ -35,6 +54,7 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
         sprite = GetComponent<SpriteRenderer>();
+        playerAnim = GetComponent<PlayerAnimations>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
@@ -103,12 +123,15 @@ public class PlayerController : MonoBehaviour
         {
             coyoteTimer = 0;
         }
+        playerAnim.ChangeAnimState((int)playerData.currentState);
 
-      
-
+        if (!grounded)
+        {
+            AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
+        }
     }
 
-    
+
     public void TakeDamage(int damage)
     {
         playerData.health -= damage;
@@ -245,7 +268,10 @@ public class PlayerController : MonoBehaviour
         if (playerData.airDashed == false || GroundCheck())
         {
             StartCoroutine("DashCooldown");
-            trail.emitting = true;
+            //trail.emitting = true;
+            StartDashPosition = transform.position;
+
+            
             playerData.currentState = PlayerDataScrObj.playerState.DASHING;
             playerData.dashCd = false;
             rb.gravityScale = 0f;
@@ -260,7 +286,7 @@ public class PlayerController : MonoBehaviour
                 playerData.airDashed = true;
             }
             ResetState();
-            trail.emitting = false;
+            //trail.emitting = false;
         }
         
     }
@@ -282,6 +308,7 @@ public class PlayerController : MonoBehaviour
         {
             playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
         }
+        playerAnim.ChangeAnimState((int)playerData.currentState);
     }
     IEnumerator BufferJump()
     {
