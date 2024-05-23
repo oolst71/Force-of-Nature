@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 569905fd1dfc51548b06f325253fa420
+guid: dc64603420b49cd4ab36cf05b20d16c6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_1581_0
+      name: Highlighted_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1849
-        width: 4476
-        height: 942
+        x: 1145
+        y: 285
+        width: 415
+        height: 209
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,50 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bc4e1e02b156b74597bf84fd74e7716
-      internalID: 2030603646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_1581_1
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 4476
-        height: 994
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3066400159b5c99418f375ba31c7aa8a
-      internalID: -1844873700
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_1581_2
-      rect:
-        serializedVersion: 2
-        x: 3882
-        y: 977
-        width: 50
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 976f80807f65c2841b7f645a67c8bb0e
-      internalID: 1891061033
+      spriteID: 6035f9d2eb1d68c4b8fc514e8d816216
+      internalID: -223166681
       vertices: []
       indices: 
       edges: []
@@ -183,9 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      IMG_1581_0: 2030603646
-      IMG_1581_1: -1844873700
-      IMG_1581_2: 1891061033
+      Highlighted_0: -223166681
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

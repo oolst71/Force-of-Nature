@@ -27,6 +27,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField]private bool jumpBuffer;
     [SerializeField] private GameObject hpBar;
 
+    //For AfterImageEffect
+    [Space]
+    [Header("After Image FX")]
+    [SerializeField] Vector3 _afterImageOffset;
+    [SerializeField] private float _distanceBetweenImages;
+    private bool _isDashing;
+    private float _dashTime;
+    private float _dashSpeed;
+    private float _dashCooldown;
+    private float _dashTimeLeft;
+    private float _lastImageXPosition;
+    private float _lastDash=-1000f;
+    private float _afterImageTimer;
+    [SerializeField]
+    private float _afterDuration;
+    public Transform AfterImageTranform;
+    public Vector2 StartDashPosition { get; private set; }
+
     void Start()
     {
         playerData.health = playerData.maxHealth;
@@ -107,6 +125,10 @@ public class PlayerController : MonoBehaviour
         }
         playerAnim.ChangeAnimState((int)playerData.currentState);
 
+        if (!grounded)
+        {
+            AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
+        }
     }
 
 
@@ -246,7 +268,10 @@ public class PlayerController : MonoBehaviour
         if (playerData.airDashed == false || GroundCheck())
         {
             StartCoroutine("DashCooldown");
-            trail.emitting = true;
+            //trail.emitting = true;
+            StartDashPosition = transform.position;
+
+            
             playerData.currentState = PlayerDataScrObj.playerState.DASHING;
             playerData.dashCd = false;
             rb.gravityScale = 0f;
@@ -261,7 +286,7 @@ public class PlayerController : MonoBehaviour
                 playerData.airDashed = true;
             }
             ResetState();
-            trail.emitting = false;
+            //trail.emitting = false;
         }
         
     }
