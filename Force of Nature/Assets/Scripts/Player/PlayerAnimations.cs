@@ -30,6 +30,25 @@ public class PlayerAnimations : MonoBehaviour
         count++;
     }
 
+    public void AnimGround(bool st, float yvel)
+    {
+        anim.SetBool("Grounded", st);
+        anim.SetFloat("yVel", yvel);
+    }
+
+    public void AnimJump(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                anim.SetTrigger("Jump");
+                Debug.Log("jump trigger");
+                break;
+            default:
+                break;
+        }
+    }
+
     public void AnimateAttack(int i)
     {
         switch (i)

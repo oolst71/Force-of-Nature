@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         grounded = GroundCheck();
-
+        playerAnim.AnimGround(grounded, rb.velocity.y);
         if (playerData.currentState == PlayerDataScrObj.playerState.HURT)
         {
             hurtTimer += Time.deltaTime;
@@ -125,10 +125,10 @@ public class PlayerController : MonoBehaviour
         }
         playerAnim.ChangeAnimState((int)playerData.currentState);
 
-        if (!grounded)
-        {
-            AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
-        }
+        //if (!grounded)
+        //{
+        //    AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
+        //}
     }
 
 
@@ -163,6 +163,7 @@ public class PlayerController : MonoBehaviour
         {
             if (grounded || coyoteTimer <= playerData.coyoteTime)
             {
+                playerAnim.AnimJump(1);
                 playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
                 rb.velocity = new Vector2(rb.velocity.x, playerData.jumpSpeed);
             }
@@ -177,6 +178,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpBuffer && grounded)
         {
+            playerAnim.AnimJump(1);
             playerData.currentState = PlayerDataScrObj.playerState.JUMPING;
             rb.velocity = new Vector2(rb.velocity.x, playerData.jumpSpeed);
             jumpBuffer = false;
