@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerData.playerStates[(int)playerData.currentState].canDash && playerData.dashCd)
         {
-            if (playerData.freeDirectionDash)
+            if (playerData.freeDirectionDash) //UNUSED CODE FOR UNLOCKED DIRECTION AIMING WITH THE STICK
             {
                 dashDir = aim;
                 if (aim.y < 0.35f && aim.y > -0.35f)
@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
                         dashDir.x = faceDir;
                     }
                 }
-            }
+            } //END OF CURRENTLY UNUSED CODE
             else
             {
                 Vector2 eightDirAim = aim;
@@ -269,6 +269,18 @@ public class PlayerController : MonoBehaviour
     {
         if (playerData.airDashed == false || GroundCheck())
         {
+            if (dashDir.y > 0)
+            {
+                playerAnim.AnimDash(1);
+            } else if (dashDir.y < 0)
+            {
+                playerAnim.AnimDash(3);
+            }
+            else
+            {
+                playerAnim.AnimDash(2);
+            }
+
             StartCoroutine("DashCooldown");
             //trail.emitting = true;
             StartDashPosition = transform.position;
@@ -287,6 +299,7 @@ public class PlayerController : MonoBehaviour
             {
                 playerData.airDashed = true;
             }
+            playerAnim.AnimDash(4);
             ResetState();
             //trail.emitting = false;
         }

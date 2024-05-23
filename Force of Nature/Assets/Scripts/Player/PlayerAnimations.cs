@@ -36,6 +36,27 @@ public class PlayerAnimations : MonoBehaviour
         anim.SetFloat("yVel", yvel);
     }
 
+    public void AnimDash(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                anim.SetTrigger("UpDash");
+                break;
+            case 2:
+                anim.SetTrigger("FwdDash");
+                break;
+            case 3:
+                anim.SetTrigger("DownDash");
+                break;
+            case 4:
+                anim.SetTrigger("EndDash");
+                break;
+            default:
+                break;
+        }
+    }
+
     public void AnimJump(int i)
     {
         switch (i)
