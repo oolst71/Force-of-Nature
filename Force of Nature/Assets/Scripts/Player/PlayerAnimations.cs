@@ -48,6 +48,9 @@ public class PlayerAnimations : MonoBehaviour
                 //anim.ResetTrigger("EndAtk");
 
                 break;
+            case 4:
+                anim.SetTrigger("AirAtk");
+                break;
             default:
                 break;
         }

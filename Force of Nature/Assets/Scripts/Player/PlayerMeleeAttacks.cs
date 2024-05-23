@@ -239,6 +239,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
             case 1: //attack up - MAY NEED TO ADD GRAVITY HERE IN THE FUTURE
                 activeBox = upBox;
                 activeBox.SetActive(true);
+                playerAnim.AnimateAttack(4);
                 if (Mathf.Abs(pC.aim.x) >= playerData.deadzoneX)
                 {
                     eightDirAim.x = Mathf.Sign(pC.aim.x);
