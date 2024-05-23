@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 dashDir;
     public float faceDir;
 
+    private bool dashActive;
+
     private LayerMask ground;
     [SerializeField]public bool grounded;
     private float coyoteTimer;
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
         coyoteTimer = 0f;
         playerData.dashCd = true;
         playerData.airDashed = false;
+        dashActive = false;
     }
 
     void FixedUpdate()
@@ -129,6 +132,11 @@ public class PlayerController : MonoBehaviour
         //{
         //    AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
         //}
+
+        if (dashActive)
+        {
+            AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
+        }
     }
 
 
@@ -269,20 +277,24 @@ public class PlayerController : MonoBehaviour
     {
         if (playerData.airDashed == false || GroundCheck())
         {
-            if (dashDir.y > 0)
-            {
-                playerAnim.AnimDash(1);
-            } else if (dashDir.y < 0)
-            {
-                playerAnim.AnimDash(3);
-            }
-            else
+            if (dashDir.x != 0)
             {
                 playerAnim.AnimDash(2);
+
             }
+            else if (dashDir.y > 0)
+            {
+                playerAnim.AnimDash(1);
+            }
+            else { 
+            
+                playerAnim.AnimDash(3);
+            }
+           
 
             StartCoroutine("DashCooldown");
             //trail.emitting = true;
+            dashActive = true;
             StartDashPosition = transform.position;
 
             
@@ -300,6 +312,7 @@ public class PlayerController : MonoBehaviour
                 playerData.airDashed = true;
             }
             playerAnim.AnimDash(4);
+            dashActive = false;
             ResetState();
             //trail.emitting = false;
         }
