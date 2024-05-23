@@ -28,6 +28,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnAbility()
     {
+        
         Debug.Log("break");
         if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
         {
@@ -134,15 +135,16 @@ public class PlayerAbilities : MonoBehaviour
         {
             case PlayerDataScrObj.eqElement.BLIZZARD:
                 spr.color = Color.cyan;
+                UIManager.Instance.SetBlizzardUI();
 
                 break;
             case PlayerDataScrObj.eqElement.WILDFIRE:
                 spr.color = Color.red;
-
+                UIManager.Instance.SetWildfireUI();
                 break;
             case PlayerDataScrObj.eqElement.TSUNAMI:
                 spr.color = Color.blue;
-
+                UIManager.Instance.SetTsunamiUI();
                 break;
             default:
                 break;
