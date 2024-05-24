@@ -12,7 +12,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     private activeEffect act;
 
-    private int health;
+    public int health;
     private SpriteRenderer spr;
     public EnemyDataScrObj enemyData;
     public PlayerDataScrObj playerData;

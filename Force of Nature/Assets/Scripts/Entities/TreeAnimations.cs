@@ -38,6 +38,12 @@ public class TreeAnimations : MonoBehaviour
                 //anim.ResetTrigger("EndAtk");
 
                 break;
+            case 4:
+                anim.SetTrigger("Hurt");
+                break;
+            case 5:
+                anim.SetTrigger("Recovered");
+                break;
             default:
                 break;
         }

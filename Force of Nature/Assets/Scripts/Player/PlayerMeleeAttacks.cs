@@ -27,13 +27,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     public bool attackDash;
 
-    public GameObject up;
-    public GameObject down;
-    public GameObject left;
-    public GameObject right;
-    public GameObject upleft;
-    public GameObject upright;
-    private GameObject selected;
 
     [SerializeField]private GameObject fwdBox;
     [SerializeField] private GameObject upBox;
@@ -136,15 +129,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
                 }
 
-                if (pC.faceDir < 0)
-                {
-                    selected = left;
-                }
-                else
-                {
-                    selected = right;
-                }
-                selected.GetComponent<SpriteRenderer>().enabled = true;
                 if (playerData.sideAttackBoosted)
                 {
                     playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
@@ -208,8 +192,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
                 break;
             case -1: //attack down
-                selected = down;
-                selected.GetComponent<SpriteRenderer>().enabled = true;
                 if (pC.grounded)
                 {
                     rb.velocity = Vector2.zero;
@@ -255,9 +237,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 switch (eightDirAim.x)
                     {
                         case -1:
-                            selected = upleft;
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST;
-                            selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = playerData.atkPower_UpLeft;
                             while (atkDashTimer < playerData.atkTimeUp)
@@ -268,9 +248,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             }
                             break;
                         case 0:
-                            selected = up;
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPBOOST;
-                            selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = playerData.atkPower_Up;
                             while (atkDashTimer < playerData.atkTimeUp)
@@ -281,9 +259,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                             }
                             break;
                         case 1:
-                            selected = upright;
                             playerData.atkType = PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST;
-                            selected.GetComponent<SpriteRenderer>().enabled = true;
 
                             rb.velocity = playerData.atkPower_UpRight;
                             while (atkDashTimer < playerData.atkTimeUp)
@@ -319,7 +295,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
         }
         activeBox.SetActive(false);
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
-        selected.GetComponent<SpriteRenderer>().enabled = false;
         Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
         if (!attackQueued)
         {

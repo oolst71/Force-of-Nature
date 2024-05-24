@@ -22,6 +22,8 @@ public class TreeBehaviour : MonoBehaviour
     private bool attackCooldown;
     [SerializeField] private Vector2 atkSize;
     private TreeAnimations anim;
+    int storedHP;
+    int currHP;
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +36,19 @@ public class TreeBehaviour : MonoBehaviour
         attackActive = false;
         attackCooldown = true;
         rb = GetComponent<Rigidbody2D>();
-
+        storedHP = dmgScript.health;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        currHP = dmgScript.health;
+        if (currHP != storedHP)
+        {
+            storedHP = currHP;
+            currentState = TreeState.HURT;
+        }
+        storedHP = dmgScript.health;
         switch (currentState)
         {
             case TreeState.ATTACKING:
@@ -56,27 +65,24 @@ public class TreeBehaviour : MonoBehaviour
                         attackActive = true;
                         StartCoroutine("AttackingTree");
                     }
-                    else
-                    {
                         if (player.transform.position.x < transform.position.x)
-                        {
-                            dir = -1;
-                        }
-                        else
-                        {
-                            dir = 1;
-                        }
+                            {
+                                dir = -1;
+                            }
+                            else
+                            {
+                                dir = 1;
+                            }
 
-                        //walk towards player if not in range
-                        if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2)
-                        {
-                            rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+                            //walk towards player if not in range
+                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
+                            {
+                                rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
 
-                        }
-                        transform.localScale = new Vector2(-dir, transform.localScale.y);
-
+                            }
+                            transform.localScale = new Vector2(-dir, transform.localScale.y);
+                        
                     }
-                }
                 break;
             case TreeState.AIPATROLLING:
                 //check player position
@@ -118,7 +124,7 @@ public class TreeBehaviour : MonoBehaviour
                 break;
             case TreeState.HURT:
                 StopCoroutine("AttackingTree");
-                attackCooldown = true;
+                StartCoroutine("BeHurt");
                 break;
             default:
                 break;
@@ -128,6 +134,7 @@ public class TreeBehaviour : MonoBehaviour
     private IEnumerator AttackingTree()
     {
         Debug.Log("starting atk");
+        rb.velocity = Vector2.zero;
         anim.AnimateAttack(1);
         attackCooldown = false;
         Debug.Log("windup start");
@@ -154,6 +161,15 @@ public class TreeBehaviour : MonoBehaviour
         Debug.Log("cooldown end");
         attackCooldown = true;
 
+    }
+
+    private IEnumerator BeHurt()
+    {
+        anim.AnimateAttack(4);
+        yield return new WaitForSeconds(0.15f);
+        currentState = TreeState.IDLE;
+        attackCooldown = true;
+        anim.AnimateAttack(5);
     }
 
 }
