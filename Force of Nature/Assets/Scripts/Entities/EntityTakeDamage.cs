@@ -21,6 +21,7 @@ public class EntityTakeDamage : MonoBehaviour
     private Vector2 kbPower;
     private Vector2 posMod;
     private GameObject player;
+    public GameObject dmgTextPrefab;
     private float kbTime;
     private bool teleport;
     private int ability;
@@ -51,6 +52,10 @@ public class EntityTakeDamage : MonoBehaviour
     {
         Debug.Log("hit!");
         health -= dmg;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.clr = Color.white;
+        dtb.dmg = dmg.ToString();
         kbDir = dir;
         kbTime = atkTime;
         player = playerp;
@@ -72,6 +77,32 @@ public class EntityTakeDamage : MonoBehaviour
     public void TakeAbilityDamage(int dmg, int id)
     {
         health -= dmg;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        switch (id)
+        {
+            default:
+                break;
+        }
+        dtb.dmg = dmg.ToString();
+        switch (id)
+        {
+            case 1: //icicle
+                dtb.clr = new Color(0.6f, 0.6f, 1, 1);
+
+                break;
+            case 2: //wave
+                dtb.clr = new Color(0.2f, 0.2f, 1, 1);
+
+
+                break;
+            case 3: //fire
+                dtb.clr = new Color(1, 0.3f, 0.01f, 1);
+
+                break;
+            default:
+                break;
+        }
         if (health <= 0)
         {
             Debug.Log("die");
@@ -119,6 +150,10 @@ public class EntityTakeDamage : MonoBehaviour
                     if (burnTimer >= 0.7f)
                     {
                         health -= 2;
+                        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
+                        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+                        dtb.dmg = "2";
+                        dtb.clr = new Color(1, 0.3f, 0.01f, 1);
                         Debug.Log("burning, " + health);
                         if (health <= 0)
                         {

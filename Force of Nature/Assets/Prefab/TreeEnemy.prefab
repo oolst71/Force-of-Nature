@@ -139,6 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 33a68122c55820743bfaf15e1397f506, type: 2}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+  dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
+  moveSpeedMulti: 0
 --- !u!50 &4899003722844561361
 Rigidbody2D:
   serializedVersion: 4
