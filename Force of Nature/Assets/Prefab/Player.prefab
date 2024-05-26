@@ -546,12 +546,6 @@ MonoBehaviour:
   atkDashTimer: 0
   atkCycle: 0
   attackDash: 0
-  up: {fileID: 5698516720224029655}
-  down: {fileID: 4493594564066090578}
-  left: {fileID: 8194117790086343575}
-  right: {fileID: 5946867793010547186}
-  upleft: {fileID: 3084685832234682506}
-  upright: {fileID: 3270512615672783639}
   fwdBox: {fileID: 4073984407781736871}
   upBox: {fileID: 5274503209142876462}
   downBox: {fileID: 4680320258528863142}
