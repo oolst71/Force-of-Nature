@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6809403908174488417}
   - component: {fileID: 796541881873948185}
   - component: {fileID: -8701206187971728764}
+  - component: {fileID: 4610990639177874780}
   m_Layer: 7
   m_Name: FlyingMonster
   m_TagString: Untagged
@@ -101,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9733b605bad208a4fbd5cec3d61bcf5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  chaseSpeed: 0.3
+  moveSpeed: 2
+  chaseSpeed: 0.2
   attackOffset: 5
   attackDowntime: 640
   Spit: {fileID: 4828144021944684889, guid: ef41877bad98ed6409b61f643bf4c046, type: 3}
@@ -192,6 +193,27 @@ CapsuleCollider2D:
   m_Offset: {x: -0.7856293, y: 0.087290764}
   m_Size: {x: 2.4532166, y: 4.1117306}
   m_Direction: 0
+--- !u!95 &4610990639177874780
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981985252084698847}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f96807b6b8af1345a92a45305d9d9d1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3128601467568192054
 GameObject:
   m_ObjectHideFlags: 0
