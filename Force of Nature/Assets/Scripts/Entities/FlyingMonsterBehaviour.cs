@@ -37,8 +37,16 @@ public class FlyingMonsterBehaviour : MonoBehaviour
 
     void Update()
     {
-        float distanceFromPlayer=Vector2.Distance(transform.position, player.position);
-        if(distanceFromPlayer <= lineofsight)
+        if (moveDirection.x == -1.0f)
+        {
+            isflipped = true;
+        }
+        else
+        {
+            isflipped = false;
+        }
+        float distanceFromPlayer = Vector2.Distance(transform.position, player.position);
+        if (distanceFromPlayer <= lineofsight)
         {
             seeplayer = true;
         }
@@ -46,33 +54,26 @@ public class FlyingMonsterBehaviour : MonoBehaviour
         {
             seeplayer = false;
         }
-        if (player.position.x < transform.position.x && seeplayer&& !isflipped)
-        {
-            sp.flipX = false;
-        }
-        if(player.position.x > transform.position.x && seeplayer && !isflipped)
+
+        if (player.position.x < transform.position.x && seeplayer && !isflipped)
         {
             sp.flipX = true;
+        }
+        if (player.position.x > transform.position.x && seeplayer && !isflipped)
+        {
+            sp.flipX = false;
         }
         if (player.position.x < transform.position.x && seeplayer && isflipped)
         {
-            sp.flipX = true;
+            sp.flipX = false;
         }
         if (player.position.x > transform.position.x && seeplayer && isflipped)
         {
+            sp.flipX = true;
+        }
+        if (!seeplayer /*&& isflipped*/)
+        {
             sp.flipX = false;
-        }
-        if (!seeplayer&&this.transform.rotation.y!=180)
-        {
-            sp.flipX = false; 
-        }
-        if(this.transform.rotation.y != 0)
-        {
-            isflipped = true;
-        }
-        else
-        {
-            isflipped = false;
         }
 
         StartSpawn();

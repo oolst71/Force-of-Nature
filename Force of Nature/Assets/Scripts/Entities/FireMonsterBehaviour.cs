@@ -37,7 +37,6 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void Update()
     {
-        print(isflipped);
         if (moveDirection.x==-1.0f)
         {
             isflipped = true;
