@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class AfterImage : MonoBehaviour
 {
+    [SerializeField] private PlayerDataScrObj playerData;
+
+
     [SerializeField]
     private float _activeTime;
     private float _timeActivated;
@@ -69,13 +72,22 @@ public class AfterImage : MonoBehaviour
 
     private void Update()
     {
-        //print(this._spriteRenderer);
+        print(playerData.faceDir);
         if (!_isUpdate)
             return;
 
         _alpha *= _alphaMiltiplier;
         _color.a = _alpha;
         _spriteRenderer.color = _color;
+        if(playerData.faceDir == -1)
+        {
+            _spriteRenderer.flipX = false;
+        }
+        else
+        {
+            _spriteRenderer.flipX = true;
+
+        }
 
         if (Time.time >= (_timeActivated + _activeTime))
         {
