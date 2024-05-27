@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,10 +17,12 @@ public class PlayerAbilities : MonoBehaviour
     public Transform flamePoint;
     public bool abCooldown;
     private Rigidbody2D rb;
+    private PlayerAnimations anims;
 
     // Start is called before the first frame update
     void Start()
     {
+        anims = GetComponent<PlayerAnimations>();
         spr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
@@ -95,12 +98,23 @@ public class PlayerAbilities : MonoBehaviour
         abCooldown = false;
         rb.velocity = Vector2.zero;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
+        anims.AnimateAbility(1);
         yield return new WaitForSeconds(0.1f); //windup
         //execute ability here
         //instantiate wave
-        Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir, transform.position.y - 1.8f), Quaternion.identity);
-        yield return new WaitForSeconds(0.1f); //recovery
+        if (playerData.faceDir > 0)
+        {
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+
+        }
+        else
+        {
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        }
+        yield return new WaitForSeconds(0.33f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
+        anims.AnimateAbility(4);
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
     }
