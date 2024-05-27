@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fd42faa81d7a74788cc17e96ed3030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   _activeTime: 0.5
   _alphaInit: 0.75
   _alphaMiltiplier: 0.95
