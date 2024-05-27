@@ -57,6 +57,14 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
+    public void ResetTriggers()
+    {
+        anim.ResetTrigger("Attack1");
+        anim.ResetTrigger("Attack2");
+        anim.ResetTrigger("EndAtk");
+        anim.ResetTrigger("AirAtk");
+    }
+
     public void AnimJump(int i)
     {
         switch (i)
@@ -72,6 +80,7 @@ public class PlayerAnimations : MonoBehaviour
 
     public void AnimateAttack(int i)
     {
+        ResetTriggers();
         switch (i)
         {
             case 1:
