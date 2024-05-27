@@ -1543,7 +1543,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -26.4
+      value: -29.7
       objectReference: {fileID: 0}
     - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1583,11 +1583,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2981985252084698847, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: moveSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11779,6 +11783,10 @@ PrefabInstance:
     - target: {fileID: 7322953323292441027, guid: e98f088d77e1d3f4186587f566185199, type: 3}
       propertyPath: m_Name
       value: FireMonster
+      objectReference: {fileID: 0}
+    - target: {fileID: 7322953323292441027, guid: e98f088d77e1d3f4186587f566185199, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

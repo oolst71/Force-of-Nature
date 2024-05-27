@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2674798304728886657}
   - component: {fileID: 7403545890273857675}
   - component: {fileID: 2848840338755419876}
-  m_Layer: 6
+  - component: {fileID: 9188194612440794639}
+  m_Layer: 9
   m_Name: Spit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +116,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -148,3 +149,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &9188194612440794639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4828144021944684889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd78de7e2f7ae884ebcb9d02cd6fa4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3

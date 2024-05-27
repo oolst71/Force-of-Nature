@@ -76,6 +76,7 @@ public class FlyingMonsterBehaviour : MonoBehaviour
             sp.flipX = false;
         }
 
+
         StartSpawn();
     }
 
