@@ -7302,7 +7302,7 @@ PrefabInstance:
       objectReference: {fileID: 1823291917}
     - target: {fileID: 2143056387819788493, guid: 11e99c44de89e8c46bd5bd895bba9aad, type: 3}
       propertyPath: cameraMode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2143056387819788493, guid: 11e99c44de89e8c46bd5bd895bba9aad, type: 3}
       propertyPath: linkedObject
