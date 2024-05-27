@@ -58,7 +58,7 @@ public class CameraController : MonoBehaviour
     }
 
 
-    private void LateUpdate() //using lateupdate so the camera's position updates after the linked object's
+    private void LateUpdate() 
     {
         switch (cameraMode)
         {
@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour
 
     }
 
-    void FollowingCamera() //camera mode 2, literally just follows the object with no other stuff - idk why you'd use this but it was so easy to add i figured i might as well
+    void FollowingCamera() //camera mode 2, just follows the object
     {
         if (linkedObject.transform.position.y > baseY + yOffset)
         {
@@ -150,51 +150,51 @@ public class CameraController : MonoBehaviour
 
 
         //y axis camera movement
-        if (objectRb.velocity.y < 0f)
-        {
-            yTarget = -5;
-        }
-        else
-        {
-            yTarget = 0;
-        }
-        if (yTarget != yCurrentTarget)
-        {
-            yCurrentTarget = yTarget;
-            ySource = yOffset;
-            yDistance = yCurrentTarget - ySource;
-            yProgress = 0;
-        }
-        if (yProgress < 1) { 
-            yCurrentDistance = Mathf.Abs(yCurrentTarget - yOffset);
+        //if (objectRb.velocity.y < 0f)
+        //{
+        //    yTarget = -5;
+        //}
+        //else
+        //{
+        //    yTarget = 0;
+        //}
+        //if (yTarget != yCurrentTarget)
+        //{
+        //    yCurrentTarget = yTarget;
+        //    ySource = yOffset;
+        //    yDistance = yCurrentTarget - ySource;
+        //    yProgress = 0;
+        //}
+        //if (yProgress < 1) { 
+        //    yCurrentDistance = Mathf.Abs(yCurrentTarget - yOffset);
         
-            if (yProgress > 0.7f)
-            {
-                yMomentum = 2f;
-                if (yProgress > 0.85f)
-                {
-                    yMomentum = 1.5f;
-                    if (yProgress > 0.95f)
-                    {
-                        yMomentum = 1f;
-                    }
-                }
-            }
-            else
-            {
-                yMomentum = 2.5f;
-            }
-            yProgress += yMomentum * Time.deltaTime;
-        }
-        yOffset = ySource + (yProgress * yDistance);
-        if (yOffset < -5)
-        {
-            yOffset = -5;
-        } else if (yOffset > 0)
-        {
-            yOffset = 0;
-        }
-        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y + yOffset + yBaseOffset, -10);
+        //    if (yProgress > 0.7f)
+        //    {
+        //        yMomentum = 2f;
+        //        if (yProgress > 0.85f)
+        //        {
+        //            yMomentum = 1.5f;
+        //            if (yProgress > 0.95f)
+        //            {
+        //                yMomentum = 1f;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        yMomentum = 2.5f;
+        //    }
+        //    yProgress += yMomentum * Time.deltaTime;
+        //}
+        //yOffset = ySource + (yProgress * yDistance);
+        //if (yOffset < -5)
+        //{
+        //    yOffset = -5;
+        //} else if (yOffset > 0)
+        //{
+        //    yOffset = 0;
+        //}
+        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
     }
 
     void FixedCamera() //camera mode 3
