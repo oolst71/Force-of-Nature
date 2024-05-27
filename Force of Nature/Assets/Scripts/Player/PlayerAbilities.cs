@@ -68,7 +68,7 @@ public class PlayerAbilities : MonoBehaviour
                 playerData.equipped = playerData.loadout.Length - 1;
             }
             eq = playerData.loadout[playerData.equipped];
-            SetColor();
+            //SetColor();
 
         }
 
@@ -85,7 +85,7 @@ public class PlayerAbilities : MonoBehaviour
                 }
             eq = playerData.loadout[playerData.equipped];
 
-            SetColor();
+            //SetColor();
         }
     }
 
@@ -134,16 +134,16 @@ public class PlayerAbilities : MonoBehaviour
         switch (eq)
         {
             case PlayerDataScrObj.eqElement.BLIZZARD:
-               // spr.color = Color.cyan;
+                //spr.color = Color.cyan;
                 UIManager.Instance.SetBlizzardUI();
 
                 break;
-            case PlayerDataScrObj.eqElement.WILDFIRE:
-               // spr.color = Color.red;
-                UIManager.Instance.SetWildfireUI();
-                break;
+           case PlayerDataScrObj.eqElement.WILDFIRE:
+              //spr.color = Color.red;
+               UIManager.Instance.SetWildfireUI();
+               break;
             case PlayerDataScrObj.eqElement.TSUNAMI:
-              //  spr.color = Color.blue;
+                //spr.color = Color.blue;
                 UIManager.Instance.SetTsunamiUI();
                 break;
             default:
