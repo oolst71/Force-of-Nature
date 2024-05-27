@@ -51,7 +51,7 @@ MonoBehaviour:
   atkPower_Up: {x: 0, y: 90}
   atkPower_UpLeft: {x: -30, y: 72}
   atkPower_UpRight: {x: 30, y: 72}
-  atkRecoveryTime: 0.25
+  atkRecoveryTime: 0.35
   atkTimeForwardAir: 0.08
   atkTimeForwardGround: 0.05
   atkTimeForwardUnmoving: 0.08
@@ -78,4 +78,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
   - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
   currentState: 3
-  atkType: 5
+  atkType: 1
