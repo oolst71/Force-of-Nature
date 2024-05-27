@@ -291,7 +291,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
             if (Mathf.Abs(pC.aim.x) > playerData.deadzoneX)
             {
                 playerData.currAccel = playerData.maxWalkSpeed * pC.faceDir;
-            };
+            }
         }
         activeBox.SetActive(false);
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
