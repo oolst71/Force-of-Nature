@@ -78,6 +78,21 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
+    public void AnimateAbility(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                anim.SetTrigger("WaterAbility");
+                break;
+            case 4:
+                anim.SetTrigger("EndAbility");
+                break;
+            default:
+                break;
+        }
+    }
+
     public void AnimateAttack(int i)
     {
         ResetTriggers();

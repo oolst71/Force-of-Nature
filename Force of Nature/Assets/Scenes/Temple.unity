@@ -684,6 +684,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform tiles_0 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 7.4481344
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -3.094067
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -829,6 +837,14 @@ PrefabInstance:
     - target: {fileID: 2211073205600689428, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
       propertyPath: m_Name
       value: Platform tiles_0 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 8.00706
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -3.37353
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3097,6 +3113,14 @@ PrefabInstance:
     - target: {fileID: 5188940978312456314, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 18.41114
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -8.575569
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5793,6 +5817,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform tiles_0 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 20.815353
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -9.777676
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5853,6 +5885,14 @@ PrefabInstance:
     - target: {fileID: 5188940978312456314, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 14.953738
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -6.846869
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6214,7 +6254,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1534819320}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cc226993489df5d41ac135aeeaf51343, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8353,7 +8393,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2136386867}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cc226993489df5d41ac135aeeaf51343, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8565,6 +8605,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform tiles_0
       objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Size.y
+      value: 4.294181
+      objectReference: {fileID: 0}
+    - target: {fileID: 8637064042024772007, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
+      propertyPath: m_Offset.y
+      value: -1.5170903
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8747,6 +8795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4451885283002250243, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: waveHeadPrefab
+      value: 
+      objectReference: {fileID: 6236021862949022564, guid: a18bc59a89e87d945be2c0b2a6498d8a, type: 3}
     - target: {fileID: 9116542877783109631, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: -30.6
