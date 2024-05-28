@@ -194,7 +194,20 @@ public class CameraController : MonoBehaviour
         //{
         //    yOffset = 0;
         //}
-        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+        if (linkedObject.transform.position.y > -26)
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -26, -10);
+
+        }
+        else if (linkedObject.transform.position.y < baseY + yOffset)
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+
+        }
+        else
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y, -10);
+        }
     }
 
     void FixedCamera() //camera mode 3
