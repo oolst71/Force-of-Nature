@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
         sprite = GetComponent<SpriteRenderer>();
-        sprite.transform.localScale = new Vector3(-faceDir, 1, 1);
+        sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         playerAnim = GetComponent<PlayerAnimations>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
@@ -201,7 +201,15 @@ public class PlayerController : MonoBehaviour
         {
             faceDir = Mathf.Sign(aim.x);
             playerData.faceDir = faceDir;
-            sprite.transform.localScale = new Vector3(-faceDir, 1, 1);
+            if (faceDir > 0)
+            {
+                sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
+            }
+            else
+            {
+                sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
         }
     }
 
