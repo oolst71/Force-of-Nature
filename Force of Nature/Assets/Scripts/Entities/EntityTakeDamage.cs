@@ -303,58 +303,62 @@ public class EntityTakeDamage : MonoBehaviour
 
     IEnumerator Knockback()
     {
-        switch (playerData.atkType)
+        if (this.gameObject.layer != 10)
         {
-            case PlayerDataScrObj.AttackType.MELEE_NOBOOST:
-                teleport = false;
-                Debug.Log("hit no boost");
-                kbTime = 0.001f;
-                rb.velocity = new Vector2(0, enemyData.knockUp);
-                transform.position = new Vector2(transform.position.x, transform.position.y + 0.2f);
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR:
-                teleport = false;
-                kbTime = 0.001f;
-                Debug.Log("hit no boost air");
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST:
-                teleport = true;
-                Debug.Log("hit fwd boost");
-                kbTime = playerData.atkTimeForwardGround - kbTime;
-               kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardGround;
-                posMod = new Vector2(1.5f * kbDir, 0.2f);
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST:
-                teleport = true;
-                Debug.Log("hit fwd air boost");
-                kbTime = playerData.atkTimeForwardAir - kbTime;
-                kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardAir;
-                posMod = new Vector2(1.5f * kbDir, 0.2f);
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_UPBOOST:
-                teleport = true;
-                Debug.Log("hit up");
-                kbTime = playerData.atkTimeUp - kbTime;
-                kbPower = playerData.atkPower_Up;
-                posMod = new Vector2(0.3f * kbDir, 0.7f);
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST:
-                teleport = true;
-                Debug.Log("hit up left");
-                kbTime = playerData.atkTimeUp - kbTime;
-                kbPower = playerData.atkPower_UpLeft;
-                posMod = new Vector2(-1, 1) * 1.2f;
-                break;
-            case PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST:
-                teleport = true;
-                Debug.Log("hit up right");
-                kbTime = playerData.atkTimeUp - kbTime;
-                kbPower = playerData.atkPower_UpRight;
-                posMod = Vector2.one * 1.2f;
-                break;
-            default:
-                break;
+            switch (playerData.atkType)
+            {
+                case PlayerDataScrObj.AttackType.MELEE_NOBOOST:
+                    teleport = false;
+                    Debug.Log("hit no boost");
+                    kbTime = 0.001f;
+                    rb.velocity = new Vector2(0, enemyData.knockUp);
+                    transform.position = new Vector2(transform.position.x, transform.position.y + 0.2f);
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR:
+                    teleport = false;
+                    kbTime = 0.001f;
+                    Debug.Log("hit no boost air");
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST:
+                    teleport = true;
+                    Debug.Log("hit fwd boost");
+                    kbTime = playerData.atkTimeForwardGround - kbTime;
+                   kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardGround;
+                    posMod = new Vector2(1.5f * kbDir, 0.2f);
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST:
+                    teleport = true;
+                    Debug.Log("hit fwd air boost");
+                    kbTime = playerData.atkTimeForwardAir - kbTime;
+                    kbPower = new Vector2(kbDir, 1) * playerData.atkPower_ForwardAir;
+                    posMod = new Vector2(1.5f * kbDir, 0.2f);
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_UPBOOST:
+                    teleport = true;
+                    Debug.Log("hit up");
+                    kbTime = playerData.atkTimeUp - kbTime;
+                    kbPower = playerData.atkPower_Up;
+                    posMod = new Vector2(0.3f * kbDir, 0.7f);
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_UPLEFTBOOST:
+                    teleport = true;
+                    Debug.Log("hit up left");
+                    kbTime = playerData.atkTimeUp - kbTime;
+                    kbPower = playerData.atkPower_UpLeft;
+                    posMod = new Vector2(-1, 1) * 1.2f;
+                    break;
+                case PlayerDataScrObj.AttackType.MELEE_UPRIGHTBOOST:
+                    teleport = true;
+                    Debug.Log("hit up right");
+                    kbTime = playerData.atkTimeUp - kbTime;
+                    kbPower = playerData.atkPower_UpRight;
+                    posMod = Vector2.one * 1.2f;
+                    break;
+                default:
+                    break;
+            }
         }
+       
 
         //switch (playerData.atkType)
         //{
