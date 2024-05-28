@@ -81,9 +81,9 @@ public class CameraController : MonoBehaviour
     {
         if (linkedObject.transform.position.y > baseY + yOffset)
         {
-            if (linkedObject.transform.position.y > -33)
+            if (linkedObject.transform.position.y > -26)
             {
-                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -33, -10);
+                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -26, -10);
 
             }
             else
