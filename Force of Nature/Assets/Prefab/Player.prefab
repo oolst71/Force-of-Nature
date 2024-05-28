@@ -320,7 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   iciclePrefab: {fileID: 6214453459344134514, guid: a9528ebff3900804fac02ad9f600d868, type: 3}
-  waveHeadPrefab: {fileID: 6936455846967601252, guid: 9ac1d463d6daf5043b88815050ee94bf, type: 3}
+  waveHeadPrefab: {fileID: 6236021862949022564, guid: a18bc59a89e87d945be2c0b2a6498d8a, type: 3}
   firePrefab: {fileID: 4672227696273955194, guid: 30a318e8cfe5c0747bf60a8b17428789, type: 3}
   iciclePoint: {fileID: 805856245886998919}
   flamePoint: {fileID: 8289716265868060480}
@@ -604,7 +604,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.2570543, y: -0.63442314}
+  m_Offset: {x: -1.257054, y: -0.63442314}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -823,7 +823,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.871171, y: 0.05066681}
+  m_Offset: {x: -0.871171, y: 0.05066681}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
