@@ -110,7 +110,10 @@ MonoBehaviour:
   linkedObject: {fileID: 0}
   objectRb: {fileID: 0}
   cameraMode: 1
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   camSpeed: 4
+  upperLimit: {fileID: 0}
+  lowerLimit: {fileID: 0}
   xOffset: 0
   xMomentum: 0
   xProgress: 0

@@ -7826,6 +7826,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 891009399}
     - target: {fileID: 2143056387819788493, guid: 11e99c44de89e8c46bd5bd895bba9aad, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+    - target: {fileID: 2143056387819788493, guid: 11e99c44de89e8c46bd5bd895bba9aad, type: 3}
       propertyPath: upperLimit
       value: 
       objectReference: {fileID: 725976946}

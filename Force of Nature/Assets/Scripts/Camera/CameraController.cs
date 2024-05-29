@@ -8,7 +8,8 @@ public class CameraController : MonoBehaviour
     public GameObject linkedObject; //the object that the camera is following
     public Rigidbody2D objectRb;
     public int cameraMode; //the mode of the camera - 1: following an object, 2: locked to an object (1 but without adjusting its position based on momentum), 3: locked onto a certain point (can be useful for, like, boss fights)
-   
+    public PlayerDataScrObj playerData;
+
     [SerializeField] private float camSpeed;
     [SerializeField]private GameObject upperLimit;
     [SerializeField] private GameObject lowerLimit;
@@ -109,43 +110,49 @@ public class CameraController : MonoBehaviour
 
 
         //x axis camera movement
-        if (objectRb.velocity.x != 0)
+
+        if (playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.ATTACKINGUNLOCKED)
         {
-            xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
-        }
-        if (xTarget != xCurrentTarget)
-        {
-            xCurrentTarget = xTarget;
-            xSource = xOffset;
-            xDistance = xCurrentTarget - xSource;
-            xProgress = 0;
-        }
-        if (xProgress < 1) { 
-            xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
-        
-            if (xProgress > 0.7f)
-            {
-                xMomentum = 1.5f;
-                if (xProgress > 0.85f)
+         if (objectRb.velocity.x != 0)
                 {
-                    xMomentum = 1f;
-                    if (xProgress > 0.95f)
-                    {
-                        xMomentum = 0.7f;
-                    }
+                    xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
                 }
-            }
-            else
-            {
-                xMomentum = 2f;
-            }
-        xProgress += xMomentum * Time.deltaTime;
+                if (xTarget != xCurrentTarget)
+                {
+                    xCurrentTarget = xTarget;
+                    xSource = xOffset;
+                    xDistance = xCurrentTarget - xSource;
+                    xProgress = 0;
+                }
+                if (xProgress < 1) { 
+                    xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
+        
+                    if (xProgress > 0.7f)
+                    {
+                        xMomentum = 1.5f;
+                        if (xProgress > 0.85f)
+                        {
+                            xMomentum = 1f;
+                            if (xProgress > 0.95f)
+                            {
+                                xMomentum = 0.7f;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        xMomentum = 2f;
+                    }
+                xProgress += xMomentum * Time.deltaTime;
+                }
+                xOffset = xSource + (xProgress * xDistance);
+                if (Mathf.Abs(xOffset) > 3)
+                {
+                    xOffset = 3 * Mathf.Sign(xOffset);
+                }
         }
-        xOffset = xSource + (xProgress * xDistance);
-        if (Mathf.Abs(xOffset) > 3)
-        {
-            xOffset = 3 * Mathf.Sign(xOffset);
-        }
+
+       
 
 
 
