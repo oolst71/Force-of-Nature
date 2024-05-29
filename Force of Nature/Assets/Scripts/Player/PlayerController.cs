@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float _afterDuration;
     public Transform AfterImageTranform;
+    public Material baseMat;
+    public Material deadMat;
     bool dead;
     public Vector2 StartDashPosition { get; private set; }
 
@@ -60,6 +62,7 @@ public class PlayerController : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         sprite = GetComponent<SpriteRenderer>();
         sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        sprite.material = baseMat;
         playerAnim = GetComponent<PlayerAnimations>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
@@ -163,12 +166,14 @@ public class PlayerController : MonoBehaviour
     public void Die()
     {
         dead = true;
+        sprite.material = deadMat;
         deathMan.OnDeath();
     }
 
     public void Respawn()
     {
         dead = false;
+        sprite.material = baseMat;
         deathMan.OnRespawn();
         transform.position = respawnPoint.transform.position;
         rb.velocity = Vector2.zero;

@@ -308,6 +308,8 @@ MonoBehaviour:
   _distanceBetweenImages: 0.5
   _afterDuration: 0.01
   AfterImageTranform: {fileID: 7252059006091645937}
+  baseMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  deadMat: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
 --- !u!114 &4451885283002250243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,6 +953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb147045b69a0a8438950af56919c4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ui: {fileID: 0}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
 --- !u!1 &8320262414744451156
 GameObject:
