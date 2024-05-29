@@ -27,6 +27,8 @@ public class PlayerAbilities : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
         abCooldown = true;
+        playerData.equipped = 0;
+        eq = PlayerDataScrObj.eqElement.BLIZZARD;
     }
 
     private void OnAbility()
@@ -63,6 +65,12 @@ public class PlayerAbilities : MonoBehaviour
 
      private void OnSwapAbilityLeft()
         {
+        Debug.Log("eq " + eq);
+        Debug.Log("equipped " + playerData.equipped);
+        Debug.Log("loadout 0" + playerData.loadout[0]);
+        Debug.Log("loadout 1" + playerData.loadout[1]);
+        Debug.Log("loadout 2" + playerData.loadout[2]);
+
         if (playerData.abilitiesUnlocked)
         {
             playerData.equipped--;
@@ -70,8 +78,13 @@ public class PlayerAbilities : MonoBehaviour
             {
                 playerData.equipped = playerData.loadout.Length - 1;
             }
+            Debug.Log("new eq " + eq);
+            Debug.Log("new equipped " + playerData.equipped);
             eq = playerData.loadout[playerData.equipped];
-            //SetColor();
+            Debug.Log("new new eq " + eq);
+            Debug.Log("new new equipped " + playerData.equipped);
+
+            SetColor();
 
         }
 
@@ -88,7 +101,7 @@ public class PlayerAbilities : MonoBehaviour
                 }
             eq = playerData.loadout[playerData.equipped];
 
-            //SetColor();
+            SetColor();
         }
     }
 

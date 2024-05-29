@@ -32,18 +32,23 @@ public class UIManager : MonoBehaviour
 
     public void SetBlizzardUI()
     {
+        Debug.Log("blizz called");
         WildfireHighlightImage.SetActive(false);
         BlizzardHighlightImage.SetActive(true);
         TsunamiHighlightImage.SetActive(false);
     }
     public void SetWildfireUI()
     {
+        Debug.Log("fire called");
+
         WildfireHighlightImage.SetActive(true);
         BlizzardHighlightImage.SetActive(false);
         TsunamiHighlightImage.SetActive(false);
     }
     public void SetTsunamiUI()
     {
+        Debug.Log("water called");
+
         WildfireHighlightImage.SetActive(false);
         BlizzardHighlightImage.SetActive(false);
         TsunamiHighlightImage.SetActive(true);

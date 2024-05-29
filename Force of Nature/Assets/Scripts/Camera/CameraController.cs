@@ -8,9 +8,11 @@ public class CameraController : MonoBehaviour
     public GameObject linkedObject; //the object that the camera is following
     public Rigidbody2D objectRb;
     public int cameraMode; //the mode of the camera - 1: following an object, 2: locked to an object (1 but without adjusting its position based on momentum), 3: locked onto a certain point (can be useful for, like, boss fights)
-   
-    [SerializeField] private float camSpeed;
+    public PlayerDataScrObj playerData;
 
+    [SerializeField] private float camSpeed;
+    [SerializeField]private GameObject upperLimit;
+    [SerializeField] private GameObject lowerLimit;
 
     public float xOffset;
     public float xMomentum;
@@ -81,9 +83,9 @@ public class CameraController : MonoBehaviour
     {
         if (linkedObject.transform.position.y > baseY + yOffset)
         {
-            if (linkedObject.transform.position.y > -33)
+            if (linkedObject.transform.position.y > upperLimit.transform.position.y)
             {
-                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -33, -10);
+                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, upperLimit.transform.position.y, -10);
 
             }
             else
@@ -94,7 +96,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, lowerLimit.transform.position.y, -10);
 
         }
     }
@@ -108,43 +110,49 @@ public class CameraController : MonoBehaviour
 
 
         //x axis camera movement
-        if (objectRb.velocity.x != 0)
+
+        if (playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.ATTACKINGUNLOCKED)
         {
-            xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
-        }
-        if (xTarget != xCurrentTarget)
-        {
-            xCurrentTarget = xTarget;
-            xSource = xOffset;
-            xDistance = xCurrentTarget - xSource;
-            xProgress = 0;
-        }
-        if (xProgress < 1) { 
-            xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
-        
-            if (xProgress > 0.7f)
-            {
-                xMomentum = 1.5f;
-                if (xProgress > 0.85f)
+         if (objectRb.velocity.x != 0)
                 {
-                    xMomentum = 1f;
-                    if (xProgress > 0.95f)
-                    {
-                        xMomentum = 0.7f;
-                    }
+                    xTarget = Mathf.Sign(objectRb.velocity.x) * 3;
                 }
-            }
-            else
-            {
-                xMomentum = 2f;
-            }
-        xProgress += xMomentum * Time.deltaTime;
+                if (xTarget != xCurrentTarget)
+                {
+                    xCurrentTarget = xTarget;
+                    xSource = xOffset;
+                    xDistance = xCurrentTarget - xSource;
+                    xProgress = 0;
+                }
+                if (xProgress < 1) { 
+                    xCurrentDistance = Mathf.Abs(xCurrentTarget - xOffset);
+        
+                    if (xProgress > 0.7f)
+                    {
+                        xMomentum = 1.5f;
+                        if (xProgress > 0.85f)
+                        {
+                            xMomentum = 1f;
+                            if (xProgress > 0.95f)
+                            {
+                                xMomentum = 0.7f;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        xMomentum = 2f;
+                    }
+                xProgress += xMomentum * Time.deltaTime;
+                }
+                xOffset = xSource + (xProgress * xDistance);
+                if (Mathf.Abs(xOffset) > 3)
+                {
+                    xOffset = 3 * Mathf.Sign(xOffset);
+                }
         }
-        xOffset = xSource + (xProgress * xDistance);
-        if (Mathf.Abs(xOffset) > 3)
-        {
-            xOffset = 3 * Mathf.Sign(xOffset);
-        }
+
+       
 
 
 
@@ -194,7 +202,20 @@ public class CameraController : MonoBehaviour
         //{
         //    yOffset = 0;
         //}
-        transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+        if (linkedObject.transform.position.y > upperLimit.transform.position.y)
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, upperLimit.transform.position.y, -10);
+
+        }
+        else if (linkedObject.transform.position.y < lowerLimit.transform.position.y)
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, lowerLimit.transform.position.y, -10);
+
+        }
+        else
+        {
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, linkedObject.transform.position.y, -10);
+        }
     }
 
     void FixedCamera() //camera mode 3
