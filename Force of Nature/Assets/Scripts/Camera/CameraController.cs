@@ -10,7 +10,8 @@ public class CameraController : MonoBehaviour
     public int cameraMode; //the mode of the camera - 1: following an object, 2: locked to an object (1 but without adjusting its position based on momentum), 3: locked onto a certain point (can be useful for, like, boss fights)
    
     [SerializeField] private float camSpeed;
-
+    [SerializeField]private GameObject upperLimit;
+    [SerializeField] private GameObject lowerLimit;
 
     public float xOffset;
     public float xMomentum;
@@ -81,9 +82,9 @@ public class CameraController : MonoBehaviour
     {
         if (linkedObject.transform.position.y > baseY + yOffset)
         {
-            if (linkedObject.transform.position.y > -26)
+            if (linkedObject.transform.position.y > upperLimit.transform.position.y)
             {
-                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -26, -10);
+                transform.position = new Vector3(linkedObject.transform.position.x + xOffset, upperLimit.transform.position.y, -10);
 
             }
             else
@@ -94,7 +95,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, lowerLimit.transform.position.y, -10);
 
         }
     }
@@ -194,14 +195,14 @@ public class CameraController : MonoBehaviour
         //{
         //    yOffset = 0;
         //}
-        if (linkedObject.transform.position.y > -26)
+        if (linkedObject.transform.position.y > upperLimit.transform.position.y)
         {
-            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, -26, -10);
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, upperLimit.transform.position.y, -10);
 
         }
-        else if (linkedObject.transform.position.y < baseY + yOffset)
+        else if (linkedObject.transform.position.y < lowerLimit.transform.position.y)
         {
-            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, baseY + yOffset, -10);
+            transform.position = new Vector3(linkedObject.transform.position.x + xOffset, lowerLimit.transform.position.y, -10);
 
         }
         else
