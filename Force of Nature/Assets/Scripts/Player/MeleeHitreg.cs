@@ -24,7 +24,7 @@ public class MeleeHitreg : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.gameObject.layer == 7)
+        if (collision.transform.gameObject.layer == 7 || collision.transform.gameObject.layer == 10)
         {
             EntityTakeDamage etd = collision.GetComponent<EntityTakeDamage>();
             if (etd != null)

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 418570401473050305}
   - component: {fileID: 2143056387819788493}
   - component: {fileID: 1433426053126062898}
+  - component: {fileID: 264375250929075403}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -108,8 +109,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   linkedObject: {fileID: 0}
   objectRb: {fileID: 0}
-  cameraMode: 2
+  cameraMode: 1
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   camSpeed: 4
+  upperLimit: {fileID: 0}
+  lowerLimit: {fileID: 0}
   xOffset: 0
   xMomentum: 0
   xProgress: 0
@@ -130,6 +134,21 @@ MonoBehaviour:
   yCurrentDistance: 0
   yMaxOffset: 0
 --- !u!114 &1433426053126062898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508034035087665030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fc81f6e193eb44a87a326c4cd516aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollAxis: 0
+  autoScroll: 0
+  speed: 0
+--- !u!114 &264375250929075403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

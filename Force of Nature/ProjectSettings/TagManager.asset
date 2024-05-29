@@ -15,7 +15,7 @@ TagManager:
   - Enemies
   - Player
   - Bullet
-  - 
+  - Breakable
   - 
   - 
   - 
@@ -67,4 +67,10 @@ TagManager:
     locked: 0
   - name: Platform
     uniqueID: 2091946371
+    locked: 0
+  - name: DeathBG
+    uniqueID: 1309594491
+    locked: 0
+  - name: Player
+    uniqueID: 2592904891
     locked: 0
