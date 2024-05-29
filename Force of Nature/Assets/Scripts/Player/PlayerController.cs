@@ -165,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        playerAnim.AnimDeath(true);
         dead = true;
         sprite.material = deadMat;
         deathMan.OnDeath();
@@ -172,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
         deathMan.OnRespawn();

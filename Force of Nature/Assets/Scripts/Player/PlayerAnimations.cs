@@ -23,6 +23,18 @@ public class PlayerAnimations : MonoBehaviour
         
     }
 
+    public void AnimDeath(bool dead)
+    {
+        if (dead)
+        {
+            anim.SetTrigger("Die");
+        }
+        else
+        {
+            anim.SetTrigger("Respawn");
+        }
+    }
+
     public void ChangeAnimState(int st)
     {
         anim.SetInteger("currState", st);
