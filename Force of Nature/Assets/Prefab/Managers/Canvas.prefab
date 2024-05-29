@@ -882,6 +882,7 @@ MonoBehaviour:
   WildfireUI: {fileID: 7002575153461085265}
   BlizzardUI: {fileID: 2605724744725851763}
   TsunamiUI: {fileID: 8203022546143239412}
+  HealthBar: {fileID: 4930269617862859001}
   WildfireHighlightImage: {fileID: 4068233460681918613}
   BlizzardHighlightImage: {fileID: 2304170929615862450}
   TsunamiHighlightImage: {fileID: 5375541940978920453}

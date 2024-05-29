@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject respawnPoint;
     [SerializeField]private bool jumpBuffer;
     [SerializeField] private GameObject hpBar;
+    [SerializeField] private DeathManager deathMan;
 
     //For AfterImageEffect
     [Space]
@@ -147,7 +148,7 @@ public class PlayerController : MonoBehaviour
         hpBar.GetComponent<Slider>().value = playerData.health;
         if (playerData.health <= 0)
         {
-            Respawn();
+            Die();
         }
         playerData.currentState = PlayerDataScrObj.playerState.HURT;
         hurtTimer = 0f;
@@ -156,8 +157,14 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    public void Die()
+    {
+        deathMan.OnDeath();
+    }
+
     public void Respawn()
     {
+        deathMan.OnRespawn();
         transform.position = respawnPoint.transform.position;
         rb.velocity = Vector2.zero;
         ResetState();
