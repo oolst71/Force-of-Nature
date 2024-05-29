@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     public GameObject WildfireHighlightImage;
     public GameObject BlizzardHighlightImage;
     public GameObject TsunamiHighlightImage;
+
+    public GameObject deathText;
+    public GameObject respawn;
+    public GameObject returntomenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,9 @@ public class UIManager : MonoBehaviour
         BlizzardHighlightImage.SetActive(false);
         TsunamiHighlightImage.SetActive(false);
         HealthBar.SetActive(true);
+        deathText.SetActive(false);
+        respawn.SetActive(false);
+        returntomenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -69,6 +76,20 @@ public class UIManager : MonoBehaviour
         WildfireHighlightImage.SetActive(false);
         BlizzardHighlightImage.SetActive(false);
         TsunamiHighlightImage.SetActive(false);
+    }
+
+    public void EnableDeathUI()
+    {
+        deathText.SetActive(true);
+        respawn.SetActive(true);
+        returntomenu.SetActive(true);
+    }
+
+    public void DisableDeathUI()
+    {
+        deathText.SetActive(false);
+        respawn.SetActive(false);
+        returntomenu.SetActive(false);
     }
 
     public void EnableUI(int equipped)

@@ -18,12 +18,15 @@ public class DeathManager : MonoBehaviour
     {
         deathBGSprite.enabled = true;
         ui.DisableUI();
+        ui.EnableDeathUI();
     }
 
     public void OnRespawn()
     {
         deathBGSprite.enabled = false;
         ui.EnableUI(playerData.equipped);
+        ui.DisableDeathUI();
+
     }
 
     // Update is called once per frame
