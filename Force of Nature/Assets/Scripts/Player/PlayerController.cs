@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private TrailRenderer trail;
     private SpriteRenderer sprite;
     private PlayerAnimations playerAnim;
+    private Vector3 deathPoint;
 
     public Vector2 aim; //the stick input of the player
     private Vector2 dashDir;
@@ -73,6 +74,13 @@ public class PlayerController : MonoBehaviour
         playerData.airDashed = false;
         dashActive = false;
         dead = false;
+        playerData.levelKills = 0;
+        playerData.levelTime = 0;
+    }
+
+    private void Update()
+    {
+        playerData.levelTime += Time.deltaTime;
     }
 
     void FixedUpdate()
@@ -145,33 +153,49 @@ public class PlayerController : MonoBehaviour
         {
             AfterImagePool.Instance.GetFromPool(AfterImageTranform, sprite, _afterImageOffset);
         }
+        if (dead)
+        {
+            Debug.Log(deathPoint.y);
+            transform.position = new Vector2(deathPoint.x, deathPoint.y);
+            rb.velocity = Vector2.zero;
+        }
     }
 
 
     public void TakeDamage(int damage)
     {
-        playerData.health -= damage;
-        hpBar.GetComponent<Slider>().value = playerData.health;
-        if (playerData.health <= 0)
+        if (!dead)
         {
-            Die();
+            Debug.Log("NOT DEAD");
+            playerData.health -= damage;
+            hpBar.GetComponent<Slider>().value = playerData.health;
+            if (playerData.health <= 0)
+            {
+                Die();
+            }
+            playerData.currentState = PlayerDataScrObj.playerState.HURT;
+            hurtTimer = 0f;
+            rb.velocity = Vector2.zero;
+            transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
         }
-        playerData.currentState = PlayerDataScrObj.playerState.HURT;
-        hurtTimer = 0f;
-        rb.velocity = Vector2.zero;
-        transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
-
+       
     }
 
     public void Die()
     {
-        dead = true;
-        sprite.material = deadMat;
-        deathMan.OnDeath();
+
+            deathPoint = transform.position;
+            playerAnim.AnimDeath(true);
+            dead = true;
+            sprite.material = deadMat;
+            deathMan.OnDeath();
+
+
     }
 
     public void Respawn()
     {
+        playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
         deathMan.OnRespawn();
