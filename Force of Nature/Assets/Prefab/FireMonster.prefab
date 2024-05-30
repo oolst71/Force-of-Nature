@@ -141,7 +141,7 @@ MonoBehaviour:
   rightCheckSize: {x: 1.42, y: 2.1}
   Wall:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   lineofsight: 8.8
 --- !u!50 &3136176813824655188
 Rigidbody2D:
