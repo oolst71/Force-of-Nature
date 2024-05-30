@@ -7810,18 +7810,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5530270370810038677, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
-      propertyPath: flashEffect
-      value: 
-      objectReference: {fileID: 1502222758}
-    - target: {fileID: 6760694774935579497, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
-      propertyPath: m_SortingLayer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6760694774935579497, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 393993107
-      objectReference: {fileID: 0}
     - target: {fileID: 6796764214726262478, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
       propertyPath: m_Name
       value: breakable wall (2)
@@ -7869,10 +7857,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6796764214726262478, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1502222758}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
 --- !u!1 &1315492124
 GameObject:
@@ -8661,25 +8646,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1502222751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6796764214726262478, guid: 8470d2d0f71047d4097cedbe746387bf, type: 3}
-  m_PrefabInstance: {fileID: 1297967936}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1502222758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1502222751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a5593c83ae8c5a41a1fd52b3f16d377, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
-  duration: 0.1
 --- !u!1001 &1514274195
 PrefabInstance:
   m_ObjectHideFlags: 0
