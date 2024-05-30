@@ -13,6 +13,7 @@ public class LevelEndMenu : MonoBehaviour
     [SerializeField] TMP_Text killsText;
     [SerializeField] TMP_Text killsScore;
     [SerializeField] GameObject buttons;
+    [SerializeField] PlayerDataScrObj playerData;
     string targetText;
 
     void Start()
@@ -43,6 +44,22 @@ public class LevelEndMenu : MonoBehaviour
         Debug.Log("coroutine start");
         yield return new WaitForSeconds(0.3f);
         //set time and score
+        Debug.Log("seconds: " + playerData.levelTime);
+        timeScore.text = "";
+        if ((int)(playerData.levelTime / 60) < 10)
+        {
+            timeScore.text += "0";
+        }
+        timeScore.text += ((int)(playerData.levelTime / 60)).ToString() + ":";
+        if ((int)playerData.levelTime - (int)(playerData.levelTime / 60) < 10)
+        {
+            timeScore.text += "0";
+
+        }
+        timeScore.text += (((int)playerData.levelTime - (int)(playerData.levelTime / 60))).ToString() + ":";
+        timeScore.text += ((playerData.levelTime - (int)playerData.levelTime).ToString()).Substring(2, 2);
+
+        killsScore.text = playerData.levelKills.ToString();
         targetText = "Level completed.";
         levelComplete.gameObject.SetActive(true);
         levelComplete.text = "";

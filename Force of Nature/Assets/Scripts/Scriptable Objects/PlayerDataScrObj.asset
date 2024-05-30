@@ -51,9 +51,9 @@ MonoBehaviour:
   atkPower_Up: {x: 0, y: 90}
   atkPower_UpLeft: {x: -30, y: 72}
   atkPower_UpRight: {x: 30, y: 72}
-  atkRecoveryTime: 0.35
+  atkRecoveryTime: 0.25
   atkTimeForwardAir: 0.08
-  atkTimeForwardGround: 0.05
+  atkTimeForwardGround: 0.06
   atkTimeForwardUnmoving: 0.08
   atkTimeUp: 0.08
   atkTimeUpUnmoving: 0.08

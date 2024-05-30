@@ -74,10 +74,13 @@ public class PlayerController : MonoBehaviour
         playerData.airDashed = false;
         dashActive = false;
         dead = false;
+        playerData.levelKills = 0;
+        playerData.levelTime = 0;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
+        playerData.levelTime += Time.deltaTime;
     }
 
     void FixedUpdate()

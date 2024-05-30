@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 796541881873948185}
   - component: {fileID: -8701206187971728764}
   - component: {fileID: 4610990639177874780}
+  - component: {fileID: 8730990562897646020}
   m_Layer: 7
   m_Name: FlyingMonster
   m_TagString: Untagged
@@ -158,6 +159,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 8730990562897646020}
 --- !u!70 &-8701206187971728764
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -214,6 +216,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8730990562897646020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2981985252084698847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5593c83ae8c5a41a1fd52b3f16d377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
+  duration: 0.1
 --- !u!1 &3128601467568192054
 GameObject:
   m_ObjectHideFlags: 0
