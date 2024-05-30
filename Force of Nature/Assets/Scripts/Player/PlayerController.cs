@@ -363,8 +363,9 @@ public class PlayerController : MonoBehaviour
             //trail.emitting = true;
             dashActive = true;
             StartDashPosition = transform.position;
+            AudioManager.instance.PlaySFX("Dash");
 
-            
+
             playerData.currentState = PlayerDataScrObj.playerState.DASHING;
             playerData.dashCd = false;
             rb.gravityScale = 0f;

@@ -75,13 +75,14 @@ public class PlayerMeleeAttacks : MonoBehaviour
             playerData.currentState = PlayerDataScrObj.playerState.ATTACKING;
             playerAnim.ChangeAnimState((int)playerData.currentState);
             atkCycle = false;
-
+            AudioManager.instance.AttackCount();
             StartCoroutine("MeleeAttack");
         }
         
         else if (playerData.playerStates[(int)playerData.currentState].canQueueAttacks)
         {
 
+            AudioManager.instance.AttackCount();
 
             StartCoroutine("QueueAttack");
         }

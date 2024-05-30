@@ -117,12 +117,17 @@ public class PlayerAbilities : MonoBehaviour
         //instantiate wave
         if (playerData.faceDir > 0)
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2.5f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            AudioManager.instance.WaterAttackRandom();
+            AudioManager.instance.PlaySFX("Tsunami");
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
         }
         else
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2.5f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            AudioManager.instance.WaterAttackRandom();
+
+            AudioManager.instance.PlaySFX("Tsunami");
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
         yield return new WaitForSeconds(0.33f); //recovery
@@ -137,6 +142,8 @@ public class PlayerAbilities : MonoBehaviour
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         yield return new WaitForSeconds(0.3f); //windup
+        AudioManager.instance.IceAttackRandom();
+        AudioManager.instance.PlaySFX("Ice");
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
         yield return new WaitForSeconds(0.3f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
@@ -149,6 +156,8 @@ public class PlayerAbilities : MonoBehaviour
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         yield return new WaitForSeconds(0.15f); //windup 
+        AudioManager.instance.FireAttackRandom();
+        AudioManager.instance.PlaySFX("Fire");
         Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 4f, flamePoint.position.y), Quaternion.identity);
         yield return new WaitForSeconds(0.6f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
