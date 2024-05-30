@@ -59,7 +59,7 @@ MonoBehaviour:
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
-  faceDir: 1
+  faceDir: -1
   abilityCd: 1
   icicleDmg: 2
   waveDmg: 4

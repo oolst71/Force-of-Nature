@@ -84,5 +84,8 @@ public class PlayerDataScrObj : ScriptableObject
     public enum AttackType { MELEE_NOBOOST, MELEE_FORWARDBOOST, MELEE_FORWARDAIRBOOST, MELEE_UPBOOST, MELEE_UPLEFTBOOST, MELEE_UPRIGHTBOOST, MELEE_NOBOOSTAIR }
     public AttackType atkType;
 
+    public float levelTime;
+    public int levelKills;
+
 }
 

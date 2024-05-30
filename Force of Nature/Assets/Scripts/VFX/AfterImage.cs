@@ -72,7 +72,7 @@ public class AfterImage : MonoBehaviour
 
     private void Update()
     {
-        print(playerData.faceDir);
+        //print(playerData.faceDir);
         if (!_isUpdate)
             return;
 
