@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4899003722844561361}
   - component: {fileID: 2931064709853135294}
   - component: {fileID: 6287987352924797657}
+  - component: {fileID: 652361084322754946}
   - component: {fileID: 57185576862344668}
   m_Layer: 7
   m_Name: TreeEnemy
@@ -142,6 +143,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 652361084322754946}
 --- !u!50 &4899003722844561361
 Rigidbody2D:
   serializedVersion: 4
@@ -215,6 +217,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &652361084322754946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4181812214048461553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5593c83ae8c5a41a1fd52b3f16d377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
+  duration: 0.1
 --- !u!114 &57185576862344668
 MonoBehaviour:
   m_ObjectHideFlags: 0

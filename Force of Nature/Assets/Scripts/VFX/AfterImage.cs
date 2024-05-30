@@ -85,7 +85,7 @@ public class AfterImage : MonoBehaviour
         }
         else
         {
-            _spriteRenderer.flipX = true;
+            //_spriteRenderer.flipX = true;
 
         }
 
@@ -93,6 +93,9 @@ public class AfterImage : MonoBehaviour
         {
             AfterImagePool.Instance.AddIntoPool(this);
         }
+
+        print(playerData.faceDir);
+
     }
 
     public void DetachFromParent()

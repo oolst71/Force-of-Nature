@@ -31,6 +31,9 @@ public class EntityTakeDamage : MonoBehaviour
     float elementTimer;
     float elementTime;
     public float moveSpeedMulti;
+
+    [SerializeField] private SimpleFlash flashEffect;
+
     
     bool ice;
     bool fire;
@@ -53,6 +56,7 @@ public class EntityTakeDamage : MonoBehaviour
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
     {
         Debug.Log("hit!");
+        flashEffect.Flash();
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
