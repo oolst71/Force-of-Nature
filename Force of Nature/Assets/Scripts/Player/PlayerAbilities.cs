@@ -117,12 +117,12 @@ public class PlayerAbilities : MonoBehaviour
         //instantiate wave
         if (playerData.faceDir > 0)
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2.5f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
         }
         else
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2.5f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
         yield return new WaitForSeconds(0.33f); //recovery
