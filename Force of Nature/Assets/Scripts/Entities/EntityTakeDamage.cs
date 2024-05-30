@@ -413,6 +413,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
+        playerData.levelKills += 1;
         gameObject.SetActive(false);
     }
     // Start is called before the first frame update
