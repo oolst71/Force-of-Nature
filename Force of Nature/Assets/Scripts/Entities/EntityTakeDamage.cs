@@ -57,6 +57,7 @@ public class EntityTakeDamage : MonoBehaviour
     {
         Debug.Log("hit!");
         flashEffect.Flash();
+        AudioManager.instance.HitRandom();
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
