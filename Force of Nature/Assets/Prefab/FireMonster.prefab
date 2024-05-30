@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4004394792242330284}
   - component: {fileID: 7496034314999131701}
   - component: {fileID: 3759295587759124552}
+  - component: {fileID: 1118293027802985586}
   m_Layer: 7
   m_Name: FireMonster
   m_TagString: Untagged
@@ -252,3 +253,18 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 1118293027802985586}
+--- !u!114 &1118293027802985586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322953323292441027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5593c83ae8c5a41a1fd52b3f16d377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
+  duration: 0.1
