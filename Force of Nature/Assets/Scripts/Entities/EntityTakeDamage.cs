@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityTakeDamage : MonoBehaviour
 {
     public enum activeEffect
     {
-        NONE, ICE, FIRE, WATER
+        NONE, ICE, FIRE, WATER, STUN
     }
 
     private activeEffect act;
@@ -37,6 +38,7 @@ public class EntityTakeDamage : MonoBehaviour
     bool ice;
     bool fire;
     bool water;
+    public bool frozen;
     void Start()
     {
         burnTimer = 0f;
@@ -55,6 +57,7 @@ public class EntityTakeDamage : MonoBehaviour
     {
         Debug.Log("hit!");
         flashEffect.Flash();
+        AudioManager.instance.HitRandom();
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
@@ -83,40 +86,39 @@ public class EntityTakeDamage : MonoBehaviour
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-        switch (id)
-        {
-            default:
-                break;
-        }
         dtb.dmg = dmg.ToString();
-        switch (id)
+        if (this.gameObject.layer == 7)
         {
-            case 1: //icicle
-                dtb.clr = new Color(0.6f, 0.6f, 1, 1);
+            switch (id)
+            {
+                case 1: //icicle
+                    dtb.clr = new Color(0.6f, 0.6f, 1, 1);
 
-                break;
-            case 2: //wave
-                dtb.clr = new Color(0.2f, 0.2f, 1, 1);
+                    break;
+                case 2: //wave
+                    dtb.clr = new Color(0.2f, 0.2f, 1, 1);
 
 
-                break;
-            case 3: //fire
-                dtb.clr = new Color(1, 0.3f, 0.01f, 1);
+                    break;
+                case 3: //fire
+                    dtb.clr = new Color(1, 0.3f, 0.01f, 1);
 
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
+            if (health <= 0)
+            {
+                Debug.Log("die");
+                Die();
+            }
+            else
+            {
+                ability = id;
+                StartCoroutine("EffectAbility");
+            }
         }
-        if (health <= 0)
-        {
-            Debug.Log("die");
-            Die();
-        }
-        else
-        {
-            ability = id;
-            StartCoroutine("EffectAbility");
-        }
+        
     }
     void Update()
     {
@@ -132,6 +134,10 @@ public class EntityTakeDamage : MonoBehaviour
                     case activeEffect.ICE:
                         //reset movement speed
                         moveSpeedMulti = 1f;
+                        if (frozen)
+                        {
+                            frozen = false;
+                        }
                         break;
                     case activeEffect.FIRE:
                         Debug.Log("stop burning");
@@ -153,10 +159,10 @@ public class EntityTakeDamage : MonoBehaviour
                     burnTimer += Time.deltaTime;
                     if (burnTimer >= 0.7f)
                     {
-                        health -= 2;
+                        health -= 1;
                         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
                         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-                        dtb.dmg = "2";
+                        dtb.dmg = "1";
                         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
                         Debug.Log("burning, " + health);
                         if (health <= 0)
@@ -252,6 +258,10 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyWet()
     {
         act = activeEffect.WATER;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Wet";
+        dtb.clr = new Color(0.2f, 0.2f, 1, 1);
         spr.color = Color.blue;
         elementTime = 4f;
     }
@@ -259,6 +269,10 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyBurning()
     {
         act = activeEffect.FIRE;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Burning";
+        dtb.clr = new Color(1, 0.3f, 0.01f, 1);
         spr.color = Color.red;
         elementTime = 4f;
     }
@@ -266,6 +280,10 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyCold()
     {
         act = activeEffect.ICE;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Cold";
+        dtb.clr = new Color(0.6f, 0.6f, 1, 1);
         spr.color = Color.cyan;
         elementTime = 4f;
         moveSpeedMulti = 0.4f; 
@@ -277,31 +295,84 @@ public class EntityTakeDamage : MonoBehaviour
         //create stun state
         //apply it here
         //set element effect to none
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Stun";
+        dtb.clr = new Color(0.8f, 0.8f, 0.8f, 1);
+        act = activeEffect.STUN;
+        elementTime = 2f;
+        spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
     }
 
     private void ApplyIceFire()
     {
         //deal extra damage
-        //set 
+        //set state to wet
+        health -= 7;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "7";
+        dtb.clr = new Color(0.2f, 0.2f, 1, 1);
+        GameObject dText = Instantiate(dmgTextPrefab, new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
+        dt.dmg = "Melted";
+        dt.clr = new Color(0.2f, 0.2f, 1, 1);
+        act = activeEffect.WATER;
+        spr.color = Color.blue;
+        elementTime = 2f;
     }
 
     private void ApplyFreeze()
     {
-        
+        //apply ice
+        act = activeEffect.ICE;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Frozen";
+        dtb.clr = new Color(0f, 0.5775638f, 1, 1);
+        spr.color = new Color(0f, 0.5775638f, 1, 1);
+        frozen = true;
+        elementTime = 8f;
     }
 
     private void ApplySteam()
     {
-
+        //launch
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Steamed";
+        dtb.clr = Color.gray;
+        act = activeEffect.WATER;
+        act = activeEffect.NONE;
+        spr.color = Color.white;
     }
 
     private void ApplyExtinguish()
     {
-        //extinguishes fire
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "Extinguished";
+        dtb.clr = Color.blue;
+        act = activeEffect.WATER;
+        spr.color = Color.blue;
+        elementTime = 2f;
     }
 
     private void ApplyMelt()
     {
+        act = activeEffect.NONE;
+        health -= 8;
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
+        DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
+        dtb.dmg = "8";
+        dtb.clr = new Color(1, 0.3f, 0.01f, 1);
+        GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
+        dt.dmg = "Thawed";
+        dt.clr = new Color(1, 0.3f, 0.01f, 1);
+        act = activeEffect.WATER;
+        spr.color = Color.white;
+
         //makes enemy take extra damage
     }
 
