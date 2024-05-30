@@ -26,6 +26,7 @@ public class WaveHeadBehaviour : MonoBehaviour
     {
         waveSegments.Clear();
         coll = GetComponent<BoxCollider2D>();
+        coll.enabled = false;
         rb = GetComponent<Rigidbody2D>();
         dirX = playerData.faceDir;
         xTime = coll.bounds.size.x / speed;
@@ -36,28 +37,14 @@ public class WaveHeadBehaviour : MonoBehaviour
 
     }
 
-    private void Update()
+    public void ActivateHitbox()
     {
-        if (moving)
-        {
-            if (BarrierCheck())
-            {
-                moving = false;
-            }
-        }
-        travelTimer += Time.deltaTime;
-        xTimer += Time.deltaTime;
-        if (xTimer >= xTime)
-        {
-            GameObject segment = Instantiate(waveBodyPrefab, transform.position, Quaternion.identity);
-            waveSegments.Add(segment);
-            xTimer = 0f;
-        }
-        if (travelTimer >= travelTime)
-        {
-            moving = false;
-            DissapearWave();
-        }
+        coll.enabled = true;
+    }
+
+    public void DeactivateHitbox()
+    {
+        coll.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,38 +55,10 @@ public class WaveHeadBehaviour : MonoBehaviour
         }
     }
 
-    private bool BarrierCheck()
-    {
-        if (Physics2D.BoxCast(new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 0.01f), 0.95f * coll.bounds.size, 0f, Vector2.right * dirX, 0.25f, ground))
-        {
-            return true;
-
-        }
-        else
-        {
-            return false;
-
-        }
-    }
 
     private void DissapearWave()
     {
-        for (int i = 0; i < waveSegments.Count; i++)
-        {
-            Destroy(waveSegments[i]);
-        }
         Destroy(gameObject);
     }
 
-    private void FixedUpdate()
-    {
-        if (moving)
-        {
-            rb.velocity = new Vector2(speed * dirX, 0);
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
-    }
 }
