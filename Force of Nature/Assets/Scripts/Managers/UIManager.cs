@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     //MONKE HEHEHEHEHEHEHEHE
-    // ??????????????????????
+    
     public static UIManager Instance { get; private set; }
 
     public GameObject WildfireUI;
@@ -21,6 +21,7 @@ public class UIManager : MonoBehaviour
     public GameObject deathText;
     public GameObject respawn;
     public GameObject returntomenu;
+    public GameObject buttons;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
         deathText.SetActive(false);
         respawn.SetActive(false);
         returntomenu.SetActive(false);
+        buttons.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,6 +85,7 @@ public class UIManager : MonoBehaviour
         deathText.SetActive(true);
         respawn.SetActive(true);
         returntomenu.SetActive(true);
+        buttons.SetActive(true);
     }
 
     public void DisableDeathUI()
@@ -90,6 +93,7 @@ public class UIManager : MonoBehaviour
         deathText.SetActive(false);
         respawn.SetActive(false);
         returntomenu.SetActive(false);
+        buttons.SetActive(false);
     }
 
     public void EnableUI(int equipped)
