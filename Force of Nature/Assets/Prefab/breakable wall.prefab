@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1867375970243011706}
   - component: {fileID: 5530270370810038677}
   - component: {fileID: 5739221655722016394}
+  - component: {fileID: 5771944444845846627}
   m_Layer: 10
   m_Name: breakable wall
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6796764214726262478}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 87.73503, y: 4.2, z: 0}
   m_LocalScale: {x: 1.2828, y: 1.2828, z: 1.2828}
   m_ConstrainProportionsScale: 0
@@ -74,8 +75,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 2129243703
-  m_SortingLayer: 6
+  m_SortingLayerID: 393993107
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 113420490, guid: 291b81251eae67848bfb2dc478ca038e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -177,6 +178,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 5771944444845846627}
 --- !u!251 &5739221655722016394
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -196,3 +198,17 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &5771944444845846627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796764214726262478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a5593c83ae8c5a41a1fd52b3f16d377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
+  duration: 0.1
