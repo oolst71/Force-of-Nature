@@ -308,13 +308,13 @@ public class EntityTakeDamage : MonoBehaviour
         //deal extra damage
         //set state to wet
         health -= 7;
-        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "7";
         dtb.clr = new Color(0.2f, 0.2f, 1, 1);
-        GameObject dText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
-        DamageTextBehaviour dt = dmgText.GetComponent<DamageTextBehaviour>();
-        dt.dmg = "Freeze-Burned";
+        GameObject dText = Instantiate(dmgTextPrefab, new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
+        dt.dmg = "Melted";
         dt.clr = new Color(0.2f, 0.2f, 1, 1);
         act = activeEffect.WATER;
         spr.color = Color.blue;
@@ -361,14 +361,14 @@ public class EntityTakeDamage : MonoBehaviour
     {
         act = activeEffect.NONE;
         health -= 8;
-        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
+        GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "8";
         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
-        GameObject dText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        DamageTextBehaviour dt = dmgText.GetComponent<DamageTextBehaviour>();
-        dt.dmg = "1, 0.3f, 0.01f, 1";
-        dt.clr = Color.blue;
+        GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
+        dt.dmg = "Thawed";
+        dt.clr = new Color(1, 0.3f, 0.01f, 1);
         act = activeEffect.WATER;
         spr.color = Color.white;
 
