@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerDataScrObj
   m_EditorClassIdentifier: 
   loadout: 000000000100000002000000
-  equipped: 2
+  equipped: 0
   maxHealth: 100
-  health: 73
+  health: 62
   abilitiesUnlocked: 1
   accelBasedMovement: 1
   freeDirectionDash: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   maxWalkSpeed: 20
   baseGravity: 7
   moveSpeed: 20
-  jumpSpeed: 33
+  jumpSpeed: 32
   dashPower: 80
   dashDuration: 0.15
   dashCooldown: 0.2
@@ -79,5 +79,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
   currentState: 3
   atkType: 1
-  levelTime: 212.7365
-  levelKills: 6
+  levelTime: 39.118942
+  levelKills: 3
