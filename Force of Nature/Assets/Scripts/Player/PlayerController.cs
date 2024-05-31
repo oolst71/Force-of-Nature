@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     private float hurtTimer;
     [SerializeField] private GameObject respawnPoint;
     [SerializeField]private bool jumpBuffer;
-    [SerializeField] private GameObject hpBar;
+    [SerializeField] public GameObject hpBar;
     [SerializeField] private DeathManager deathMan;
 
     //For AfterImageEffect
