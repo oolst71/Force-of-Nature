@@ -5,6 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -312,6 +314,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(0);
             //return to main menu
         }
       

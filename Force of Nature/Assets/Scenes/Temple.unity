@@ -672,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.663174
+      value: -6.52
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6540,7 +6540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.53
+      value: -6.47
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13419,7 +13419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.421963
+      value: -6.36
       objectReference: {fileID: 0}
     - target: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14651,6 +14651,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   hurtTime: 0.3
+  sideDetector: {fileID: 0}
   atkSize: {x: 4, y: 1.8}
 --- !u!4 &1808080566 stripped
 Transform:
