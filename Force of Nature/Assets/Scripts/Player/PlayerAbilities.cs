@@ -139,11 +139,11 @@ public class PlayerAbilities : MonoBehaviour
     {
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
-        yield return new WaitForSeconds(0.3f); //windup
+        yield return new WaitForSeconds(0.2f); //windup
         AudioManager.instance.IceAttackRandom();
         AudioManager.instance.PlaySFX("Ice");
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
-        yield return new WaitForSeconds(0.3f); //recovery
+        yield return new WaitForSeconds(0.2f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
