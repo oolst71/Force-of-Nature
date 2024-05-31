@@ -356,11 +356,10 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Steamed";
         dtb.clr = Color.gray;
-        act = activeEffect.WATER;
         act = activeEffect.NONE;
         spr.color = Color.white;
         particle.SetInteger("activeEffect", (int)act);
-
+        rb.velocity = new Vector2(rb.velocity.x, 40);
     }
 
     private void ApplyExtinguish()
@@ -397,7 +396,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     IEnumerator Knockback()
     {
-        if (this.gameObject.layer != 10)
+        if (gameObject.layer != 10 && gameObject.GetComponent<FlyingMonsterBehaviour>() == null)
         {
             switch (playerData.atkType)
             {

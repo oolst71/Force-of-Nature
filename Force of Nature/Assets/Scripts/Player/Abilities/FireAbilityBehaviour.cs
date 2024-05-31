@@ -10,13 +10,24 @@ public class FireAbilityBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine("FireBehaviour");
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    IEnumerator FireBehaviour()
+    public void FlameActivate()
     {
-        yield return new WaitForSeconds(0.6f);
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    public void FlameDeactivate()
+    {
+        GetComponent<BoxCollider2D>().enabled = false;
+
+    }
+
+    public void FlameDie()
+    {
         Destroy(gameObject);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,12 +36,5 @@ public class FireAbilityBehaviour : MonoBehaviour
         {
             collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.fireDmg, 3);
         }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
