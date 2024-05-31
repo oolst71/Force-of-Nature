@@ -256,7 +256,6 @@ public class PlayerController : MonoBehaviour
             if (faceDir > 0)
             {
                 sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
-
             }
             else
             {

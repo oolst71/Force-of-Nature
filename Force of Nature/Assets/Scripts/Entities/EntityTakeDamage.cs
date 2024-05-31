@@ -396,7 +396,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     IEnumerator Knockback()
     {
-        if (this.gameObject.layer != 10)
+        if (gameObject.layer != 10 && gameObject.GetComponent<FlyingMonsterBehaviour>() == null)
         {
             switch (playerData.atkType)
             {
