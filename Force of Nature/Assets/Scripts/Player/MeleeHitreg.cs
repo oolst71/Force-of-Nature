@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class MeleeHitreg : MonoBehaviour
 {
@@ -30,6 +33,17 @@ public class MeleeHitreg : MonoBehaviour
             if (etd != null)
             {
                 Debug.Log("got script");
+                if (etd.act == EntityTakeDamage.activeEffect.WATER)
+                {
+                    playerData.health += 5;
+                    //make character blink green
+                    if (playerData.health > playerData.maxHealth)
+                    {
+                        playerData.health = playerData.maxHealth;
+                    }
+                    playerController.hpBar.GetComponent<Slider>().value = playerData.health;
+
+                }
                 etd.TakeDamage(playerData.atkDamage, playerController.faceDir, attacks.atkDashTimer, transform.parent.gameObject, true);
             }
             else

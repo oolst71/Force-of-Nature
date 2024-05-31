@@ -11,7 +11,7 @@ public class EntityTakeDamage : MonoBehaviour
         NONE, ICE, FIRE, WATER, STUN
     }
 
-    private activeEffect act;
+    public activeEffect act;
 
     public int health;
     private SpriteRenderer spr;
@@ -308,7 +308,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.dmg = "Stun";
         dtb.clr = new Color(0.8f, 0.8f, 0.8f, 1);
         act = activeEffect.STUN;
-        elementTime = 2f;
+        elementTime = 1f;
         spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
         particle.SetInteger("activeEffect", (int)act);
 

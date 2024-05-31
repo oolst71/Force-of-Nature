@@ -56,7 +56,7 @@ public class TreeBehaviour : MonoBehaviour
                 //if not attacking, check cooldowns and if can attack
                 //if yes and yes, attack
                 //else, walk towards player
-                if (!dmgScript.frozen)
+                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                 {
                     if (!attackActive)
                     {
@@ -93,7 +93,7 @@ public class TreeBehaviour : MonoBehaviour
 
                 break;
             case TreeState.AIPATROLLING:
-                if (!dmgScript.frozen)
+                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                 {
                 if (Mathf.Abs(transform.position.x - player.transform.position.x) < (atkSize.x - 1))
                 {
@@ -132,7 +132,7 @@ public class TreeBehaviour : MonoBehaviour
                 break;
             case TreeState.IDLE:
                 //check for player nearby, if player is nearby enter patrol state
-                if (!dmgScript.frozen)
+                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                 {
                     if (Mathf.Abs(transform.position.x - player.transform.position.x) < 15)
                     {
