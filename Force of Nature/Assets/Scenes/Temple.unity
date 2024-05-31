@@ -3443,6 +3443,8 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 0}
+  frozen: 0
 --- !u!95 &547685273
 Animator:
   serializedVersion: 5
@@ -10379,6 +10381,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8075604345546940393, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
+      propertyPath: m_Pitch
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075604345546940393, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
+      propertyPath: m_Volume
+      value: 0.04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11290,6 +11300,8 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 0}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 0}
+  frozen: 0
 --- !u!70 &1800608045
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
