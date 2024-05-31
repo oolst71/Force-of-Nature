@@ -56,36 +56,45 @@ public class TreeBehaviour : MonoBehaviour
                 //if not attacking, check cooldowns and if can attack
                 //if yes and yes, attack
                 //else, walk towards player
-                if (!attackActive)
+                if (!dmgScript.frozen)
                 {
-
-                    if (attackCooldown && Mathf.Abs(transform.position.x - player.transform.position.x) < atkSize.x)
+                    if (!attackActive)
                     {
-                        Debug.Log("should start attack");
-                        attackActive = true;
-                        StartCoroutine("AttackingTree");
-                    }
-                        if (player.transform.position.x < transform.position.x)
-                            {
-                                dir = -1;
-                            }
-                            else
-                            {
-                                dir = 1;
-                            }
 
-                            //walk towards player if not in range
-                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
-                            {
-                                rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+                        if (attackCooldown && Mathf.Abs(transform.position.x - player.transform.position.x) < atkSize.x)
+                        {
+                            Debug.Log("should start attack");
+                            attackActive = true;
+                            StartCoroutine("AttackingTree");
+                        }
+                            if (player.transform.position.x < transform.position.x)
+                                {
+                                    dir = -1;
+                                }
+                                else
+                                {
+                                    dir = 1;
+                                }
 
-                            }
-                            transform.localScale = new Vector2(-dir, transform.localScale.y);
+                                //walk towards player if not in range
+                                if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
+                                {
+                                    rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+
+                                }
+                                transform.localScale = new Vector2(-dir, transform.localScale.y);
                         
-                    }
+                        }
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero;
+                }
+
                 break;
             case TreeState.AIPATROLLING:
-                //check player position
+                if (!dmgScript.frozen)
+                {
                 if (Mathf.Abs(transform.position.x - player.transform.position.x) < (atkSize.x - 1))
                 {
                     currentState = TreeState.ATTACKING;
@@ -111,15 +120,29 @@ public class TreeBehaviour : MonoBehaviour
                 }
                 rb.velocity = new Vector2(treeData.speed * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
                 transform.localScale = new Vector2(-dir, transform.localScale.y);
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero;
+                }
+                //check player position
+
 
 
                 break;
             case TreeState.IDLE:
                 //check for player nearby, if player is nearby enter patrol state
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < 15)
+                if (!dmgScript.frozen)
                 {
-                    currentState = TreeState.AIPATROLLING;
-                    currentTarget = 0;
+                    if (Mathf.Abs(transform.position.x - player.transform.position.x) < 15)
+                    {
+                        currentState = TreeState.AIPATROLLING;
+                        currentTarget = 0;
+                    }
+                }
+                else
+                {
+                    rb.velocity = Vector2.zero;
                 }
                 break;
             case TreeState.HURT:
