@@ -5,18 +5,17 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
-
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]private PlayerDataScrObj playerData;
+    [SerializeField] private PlayerDataScrObj playerData;
 
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private TrailRenderer trail;
-    private SpriteRenderer sprite;
-    private PlayerAnimations playerAnim;
+    [SerializeField] private Transform spriteHolder;
+    [SerializeField] private SpriteRenderer sprite;
+    public PlayerAnimations playerAnim;
     private Vector3 deathPoint;
 
     public Vector2 aim; //the stick input of the player
@@ -26,11 +25,11 @@ public class PlayerController : MonoBehaviour
     private bool dashActive;
 
     private LayerMask ground;
-    [SerializeField]public bool grounded;
+    [SerializeField] public bool grounded;
     private float coyoteTimer;
     private float hurtTimer;
     [SerializeField] private GameObject respawnPoint;
-    [SerializeField]private bool jumpBuffer;
+    [SerializeField] private bool jumpBuffer;
     [SerializeField] public GameObject hpBar;
     [SerializeField] private DeathManager deathMan;
 
@@ -45,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private float _dashCooldown;
     private float _dashTimeLeft;
     private float _lastImageXPosition;
-    private float _lastDash=-1000f;
+    private float _lastDash = -1000f;
     private float _afterImageTimer;
     [SerializeField]
     private float _afterDuration;
@@ -63,10 +62,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         trail = GetComponent<TrailRenderer>();
-        sprite = GetComponent<SpriteRenderer>();
-        sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        //spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
         sprite.material = baseMat;
-        playerAnim = GetComponent<PlayerAnimations>();
         trail.emitting = false;
         ground = LayerMask.GetMask("Platform"); //here you put in any layers that the player can step on
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
@@ -99,31 +96,34 @@ public class PlayerController : MonoBehaviour
         }
         if (playerData.playerStates[(int)playerData.currentState].canMove)
         {
-                if (Mathf.Abs(aim.x) > playerData.deadzoneX)
+            if (Mathf.Abs(aim.x) > playerData.deadzoneX)
+            {
+                if (faceDir == Mathf.Sign(playerData.currAccel))
                 {
-                    if (faceDir == Mathf.Sign(playerData.currAccel)){
-                        playerData.currAccel += playerData.accel * faceDir;
-                        if (Mathf.Abs(playerData.currAccel) > playerData.maxWalkSpeed)
-                        {
-                            playerData.currAccel = faceDir * playerData.maxWalkSpeed;
-                        }
-                    } else
+                    playerData.currAccel += playerData.accel * faceDir;
+                    if (Mathf.Abs(playerData.currAccel) > playerData.maxWalkSpeed)
                     {
-                        playerData.currAccel += (playerData.accel + playerData.decel) * faceDir;
+                        playerData.currAccel = faceDir * playerData.maxWalkSpeed;
                     }
-                   
-                } else
+                }
+                else
                 {
-                    if (playerData.currAccel != 0f)
+                    playerData.currAccel += (playerData.accel + playerData.decel) * faceDir;
+                }
+
+            }
+            else
+            {
+                if (playerData.currAccel != 0f)
+                {
+                    playerData.currAccel = (Mathf.Abs(playerData.currAccel) - playerData.decel) * faceDir;
+                    if (Mathf.Sign(playerData.currAccel) != faceDir)
                     {
-                        playerData.currAccel = (Mathf.Abs(playerData.currAccel) - playerData.decel) * faceDir;
-                        if (Mathf.Sign(playerData.currAccel) != faceDir)
-                        {
-                            playerData.currAccel = 0f;
+                        playerData.currAccel = 0f;
                     }
                 }
             }
-                rb.velocity = new Vector2(playerData.currAccel, rb.velocity.y);
+            rb.velocity = new Vector2(playerData.currAccel, rb.velocity.y);
             if (grounded && rb.velocity.x != 0)
             {
                 playerData.currentState = PlayerDataScrObj.playerState.RUNNING;
@@ -180,17 +180,17 @@ public class PlayerController : MonoBehaviour
             rb.velocity = Vector2.zero;
             transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
         }
-       
+
     }
 
     public void Die()
     {
 
-            deathPoint = transform.position;
-            playerAnim.AnimDeath(true);
-            dead = true;
-            sprite.material = deadMat;
-            deathMan.OnDeath();
+        deathPoint = transform.position;
+        playerAnim.AnimDeath(true);
+        dead = true;
+        sprite.material = deadMat;
+        deathMan.OnDeath();
 
 
     }
@@ -213,7 +213,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dead)
         {
-     if (playerData.playerStates[(int)playerData.currentState].canJump)
+            if (playerData.playerStates[(int)playerData.currentState].canJump)
             {
                 if (grounded || coyoteTimer <= playerData.coyoteTime)
                 {
@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
             //respawn
             Respawn();
         }
-       
+
     }
 
     private void CheckMovementBuffers()
@@ -255,12 +255,12 @@ public class PlayerController : MonoBehaviour
             playerData.faceDir = faceDir;
             if (faceDir > 0)
             {
-                sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
             }
             else
             {
-                sprite.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
     }
@@ -269,55 +269,54 @@ public class PlayerController : MonoBehaviour
     {
         if (!dead)
         {
-          if (playerData.playerStates[(int)playerData.currentState].canDash && playerData.dashCd)
+            if (playerData.playerStates[(int)playerData.currentState].canDash && playerData.dashCd)
+            {
+                if (playerData.freeDirectionDash) //UNUSED CODE FOR UNLOCKED DIRECTION AIMING WITH THE STICK
                 {
-                    if (playerData.freeDirectionDash) //UNUSED CODE FOR UNLOCKED DIRECTION AIMING WITH THE STICK
+                    dashDir = aim;
+                    if (aim.y < 0.35f && aim.y > -0.35f)
                     {
-                        dashDir = aim;
-                        if (aim.y < 0.35f && aim.y > -0.35f)
+                        dashDir.y = 0f;
+                        if (aim.x == 0f)
                         {
-                            dashDir.y = 0f;
-                            if (aim.x == 0f)
-                            {
-                                dashDir.x = faceDir;
-                            }
+                            dashDir.x = faceDir;
                         }
-                    } //END OF CURRENTLY UNUSED CODE
+                    }
+                } //END OF CURRENTLY UNUSED CODE
+                else
+                {
+                    Vector2 eightDirAim = aim;
+                    if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
+                    {
+                        eightDirAim.x = Mathf.Sign(aim.x);
+                    }
                     else
                     {
-                        Vector2 eightDirAim = aim;
-                        if (Mathf.Abs(aim.x) >= playerData.deadzoneX)
-                        {
-                            eightDirAim.x = Mathf.Sign(aim.x);
-                        }
-                        else
-                        {
-                            eightDirAim.x = 0;
-                        }
-                        if (Mathf.Abs(aim.y) >= playerData.deadzoneY)
-                        {
-                            eightDirAim.y = Mathf.Sign(aim.y);
-                        }
-                        else
-                        {
-                            eightDirAim.y = 0;
-                        }
-                        if (eightDirAim == Vector2.zero)
-                        {
-                            eightDirAim.x = faceDir;
-                        }
-                        dashDir = eightDirAim;
+                        eightDirAim.x = 0;
                     }
-                    dashDir.Normalize();
-                    StartCoroutine("PlayerDash");
+                    if (Mathf.Abs(aim.y) >= playerData.deadzoneY)
+                    {
+                        eightDirAim.y = Mathf.Sign(aim.y);
+                    }
+                    else
+                    {
+                        eightDirAim.y = 0;
+                    }
+                    if (eightDirAim == Vector2.zero)
+                    {
+                        eightDirAim.x = faceDir;
+                    }
+                    dashDir = eightDirAim;
                 }
+                dashDir.Normalize();
+                StartCoroutine("PlayerDash");
+            }
         }
         else
         {
-            SceneManager.LoadScene(0);
             //return to main menu
         }
-      
+
     }
 
     private bool GroundCheck()
@@ -356,11 +355,12 @@ public class PlayerController : MonoBehaviour
             {
                 playerAnim.AnimDash(1);
             }
-            else { 
-            
+            else
+            {
+
                 playerAnim.AnimDash(3);
             }
-           
+
 
             StartCoroutine("DashCooldown");
             //trail.emitting = true;
@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour
             ResetState();
             //trail.emitting = false;
         }
-        
+
     }
 
     IEnumerator DashCooldown()
