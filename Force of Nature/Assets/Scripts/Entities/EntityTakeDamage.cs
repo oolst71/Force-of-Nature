@@ -11,7 +11,7 @@ public class EntityTakeDamage : MonoBehaviour
         NONE, ICE, FIRE, WATER, STUN
     }
 
-    public activeEffect act;
+    private activeEffect act;
 
     public int health;
     private SpriteRenderer spr;
@@ -31,7 +31,6 @@ public class EntityTakeDamage : MonoBehaviour
     float elementTimer;
     float elementTime;
     public float moveSpeedMulti;
-    public Animator particle;
 
     [SerializeField] private SimpleFlash flashEffect;
 
@@ -149,7 +148,6 @@ public class EntityTakeDamage : MonoBehaviour
                         break;
                 }
                 act = activeEffect.NONE;
-                particle.SetInteger("activeEffect", (int)act);
                 spr.color = Color.white;
                 //check for active effect
                 //if there is one, set it to NONE
@@ -266,8 +264,6 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = new Color(0.2f, 0.2f, 1, 1);
         spr.color = Color.blue;
         elementTime = 4f;
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplyBurning()
@@ -279,8 +275,6 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
         spr.color = Color.red;
         elementTime = 4f;
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplyCold()
@@ -292,9 +286,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = new Color(0.6f, 0.6f, 1, 1);
         spr.color = Color.cyan;
         elementTime = 4f;
-        moveSpeedMulti = 0.4f;
-        particle.SetInteger("activeEffect", (int)act);
-
+        moveSpeedMulti = 0.4f; 
     }
 
     private void ApplyStun()
@@ -308,10 +300,8 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.dmg = "Stun";
         dtb.clr = new Color(0.8f, 0.8f, 0.8f, 1);
         act = activeEffect.STUN;
-        elementTime = 1f;
+        elementTime = 2f;
         spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplyIceFire()
@@ -330,8 +320,6 @@ public class EntityTakeDamage : MonoBehaviour
         act = activeEffect.WATER;
         spr.color = Color.blue;
         elementTime = 2f;
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplyFreeze()
@@ -345,8 +333,6 @@ public class EntityTakeDamage : MonoBehaviour
         spr.color = new Color(0f, 0.5775638f, 1, 1);
         frozen = true;
         elementTime = 8f;
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplySteam()
@@ -356,10 +342,9 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Steamed";
         dtb.clr = Color.gray;
+        act = activeEffect.WATER;
         act = activeEffect.NONE;
         spr.color = Color.white;
-        particle.SetInteger("activeEffect", (int)act);
-        rb.velocity = new Vector2(rb.velocity.x, 40);
     }
 
     private void ApplyExtinguish()
@@ -371,8 +356,6 @@ public class EntityTakeDamage : MonoBehaviour
         act = activeEffect.WATER;
         spr.color = Color.blue;
         elementTime = 2f;
-        particle.SetInteger("activeEffect", (int)act);
-
     }
 
     private void ApplyMelt()
@@ -389,7 +372,6 @@ public class EntityTakeDamage : MonoBehaviour
         dt.clr = new Color(1, 0.3f, 0.01f, 1);
         act = activeEffect.WATER;
         spr.color = Color.white;
-        particle.SetInteger("activeEffect", (int)act);
 
         //makes enemy take extra damage
     }
