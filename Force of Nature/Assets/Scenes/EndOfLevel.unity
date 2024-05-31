@@ -123,44 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &925691118 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8404052263282704944, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1262601703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2866148736455399188, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1415560649 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5568020239331985718, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1546198880 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1927472778059969312, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1591136192
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,17 +215,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1784181337 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4436692252465984855, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1905662070
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,17 +283,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1983389687 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4380371079209485630, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-  m_PrefabInstance: {fileID: 6867238481225463009}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &6867238481225463009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -435,34 +375,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: buttons
-      value: 
-      objectReference: {fileID: 1415560649}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: killsText
-      value: 
-      objectReference: {fileID: 925691118}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: timeScore
-      value: 
-      objectReference: {fileID: 1262601703}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: killsScore
-      value: 
-      objectReference: {fileID: 1983389687}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: playerData
-      value: 
-      objectReference: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: timeElapsed
-      value: 
-      objectReference: {fileID: 1784181337}
-    - target: {fileID: 4801654602512019574, guid: 66d980aa783212849a13c22f161bbb49, type: 3}
-      propertyPath: levelComplete
-      value: 
-      objectReference: {fileID: 1546198880}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
