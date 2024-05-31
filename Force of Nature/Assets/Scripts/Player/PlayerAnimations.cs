@@ -97,6 +97,9 @@ public class PlayerAnimations : MonoBehaviour
             case 1:
                 anim.SetTrigger("WaterAbility");
                 break;
+            case 2:
+                anim.SetTrigger("FireAbility");
+                break;
             case 4:
                 anim.SetTrigger("EndAbility");
                 break;

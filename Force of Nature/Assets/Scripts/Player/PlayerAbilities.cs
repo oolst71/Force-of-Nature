@@ -117,7 +117,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             AudioManager.instance.WaterAttackRandom();
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
         }
         else
@@ -125,7 +125,7 @@ public class PlayerAbilities : MonoBehaviour
             AudioManager.instance.WaterAttackRandom();
 
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
         yield return new WaitForSeconds(0.33f); //recovery
@@ -153,11 +153,21 @@ public class PlayerAbilities : MonoBehaviour
     {
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
-        yield return new WaitForSeconds(0.15f); //windup 
+        anims.AnimateAbility(2);
+        yield return new WaitForSeconds(0.2f); //windup 
         AudioManager.instance.FireAttackRandom();
         AudioManager.instance.PlaySFX("Fire");
-        Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 4f, flamePoint.position.y), Quaternion.identity);
+        if (playerData.faceDir > 0)
+        {
+        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+        }
+        else
+        {
+        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        }
         yield return new WaitForSeconds(0.6f); //recovery
+        anims.AnimateAbility(4);
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
