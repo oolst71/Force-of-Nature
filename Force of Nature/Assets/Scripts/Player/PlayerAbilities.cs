@@ -8,7 +8,7 @@ public class PlayerAbilities : MonoBehaviour
 {
 
     [SerializeField] private PlayerDataScrObj playerData;
-    private SpriteRenderer spr;
+    [SerializeField] private SpriteRenderer spr;
     private PlayerDataScrObj.eqElement eq;
     public GameObject iciclePrefab;
     public GameObject waveHeadPrefab;
@@ -17,13 +17,11 @@ public class PlayerAbilities : MonoBehaviour
     public Transform flamePoint;
     public bool abCooldown;
     private Rigidbody2D rb;
-    private PlayerAnimations anims;
+    [SerializeField] private PlayerAnimations anims;
 
     // Start is called before the first frame update
     void Start()
     {
-        anims = GetComponent<PlayerAnimations>();
-        spr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
         abCooldown = true;
@@ -33,7 +31,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnAbility()
     {
-        
+
         Debug.Log("break");
         if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
         {
@@ -59,12 +57,12 @@ public class PlayerAbilities : MonoBehaviour
                     break;
             }
         }
-        
+
     }
 
 
-     private void OnSwapAbilityLeft()
-        {
+    private void OnSwapAbilityLeft()
+    {
         Debug.Log("eq " + eq);
         Debug.Log("equipped " + playerData.equipped);
         Debug.Log("loadout 0" + playerData.loadout[0]);
@@ -90,15 +88,15 @@ public class PlayerAbilities : MonoBehaviour
 
     }
     private void OnSwapAbilityRight()
-        {
+    {
 
         if (playerData.abilitiesUnlocked)
         {
-             playerData.equipped++;
-                if (playerData.equipped >= playerData.loadout.Length)
-                {
-                    playerData.equipped = 0;
-                }
+            playerData.equipped++;
+            if (playerData.equipped >= playerData.loadout.Length)
+            {
+                playerData.equipped = 0;
+            }
             eq = playerData.loadout[playerData.equipped];
 
             SetColor();
@@ -174,10 +172,10 @@ public class PlayerAbilities : MonoBehaviour
                 UIManager.Instance.SetBlizzardUI();
 
                 break;
-           case PlayerDataScrObj.eqElement.WILDFIRE:
-              //spr.color = Color.red;
-               UIManager.Instance.SetWildfireUI();
-               break;
+            case PlayerDataScrObj.eqElement.WILDFIRE:
+                //spr.color = Color.red;
+                UIManager.Instance.SetWildfireUI();
+                break;
             case PlayerDataScrObj.eqElement.TSUNAMI:
                 //spr.color = Color.blue;
                 UIManager.Instance.SetTsunamiUI();
@@ -186,11 +184,11 @@ public class PlayerAbilities : MonoBehaviour
                 break;
         }
     }
-   
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

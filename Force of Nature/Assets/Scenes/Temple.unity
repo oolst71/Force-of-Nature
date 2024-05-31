@@ -3443,6 +3443,8 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 0}
+  frozen: 0
 --- !u!95 &547685273
 Animator:
   serializedVersion: 5
@@ -11290,6 +11292,8 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 0}
   moveSpeedMulti: 0
+  flashEffect: {fileID: 0}
+  frozen: 0
 --- !u!70 &1800608045
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -13607,7 +13611,7 @@ PrefabInstance:
     - target: {fileID: 4694368216020926046, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: 2903436049652137437, guid: 4325851ceae1f6d44aa24d3bd5b7e899, type: 2}
     - target: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
       propertyPath: m_Name
       value: DamageTextPopup
@@ -13723,6 +13727,14 @@ PrefabInstance:
     - target: {fileID: 3182657333758623950, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840275244515078747, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: m_Size.x
+      value: 4.758166
+      objectReference: {fileID: 0}
+    - target: {fileID: 5840275244515078747, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: m_Offset.x
+      value: -1.8937061
       objectReference: {fileID: 0}
     - target: {fileID: 6138765768337048425, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_Color.a

@@ -12,7 +12,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     [SerializeField] private PlayerDataScrObj playerData;
     [SerializeField] private Rigidbody2D rb;
 
-    private PlayerAnimations playerAnim;
+    [SerializeField] private PlayerAnimations playerAnim;
 
     private bool velReset;
     private bool attackActive;
@@ -44,7 +44,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
     private void Start()
 
     {
-        playerAnim = GetComponent<PlayerAnimations>();
         atkCycle = false;
         fwdBox.SetActive(false);
         upBox.SetActive(false);
