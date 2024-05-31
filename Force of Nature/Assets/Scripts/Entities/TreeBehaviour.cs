@@ -82,7 +82,12 @@ public class TreeBehaviour : MonoBehaviour
                                 //walk towards player if not in range
                                 if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
                                 {
-                                    rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > 45)
+                            {
+                                currentState = TreeState.AIPATROLLING;
+                                currentTarget = 0;
+                            }
+                            rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
 
                                 }
                                 transform.localScale = new Vector2(-dir, transform.localScale.y);
@@ -98,7 +103,7 @@ public class TreeBehaviour : MonoBehaviour
             case TreeState.AIPATROLLING:
                 if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                 {
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < (atkSize.x - 1))
+                if (Mathf.Abs(transform.position.x - player.transform.position.x) < 10)
                 {
                     currentState = TreeState.ATTACKING;
                 } else
@@ -185,7 +190,17 @@ public class TreeBehaviour : MonoBehaviour
     {
         anim.AnimateAttack(4);
         yield return new WaitForSeconds(0.15f);
-        currentState = TreeState.IDLE;
+
+        if (Mathf.Abs(transform.position.x - player.transform.position.x) < 35)
+        {
+            currentState = TreeState.ATTACKING;
+            currentTarget = 0;
+        }
+        else
+        {
+            currentState = TreeState.AIPATROLLING;
+
+        }
         attackCooldown = true;
         anim.AnimateAttack(5);
     }
