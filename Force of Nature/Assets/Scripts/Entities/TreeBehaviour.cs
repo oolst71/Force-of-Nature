@@ -101,7 +101,7 @@ public class TreeBehaviour : MonoBehaviour
                             }
 
                             //walk towards player if not in range
-                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
+                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > 3 && attackActive == false)
                             {
                                 if (Mathf.Abs(transform.position.x - player.transform.position.x) > 45)
                                 {
@@ -110,7 +110,11 @@ public class TreeBehaviour : MonoBehaviour
                                 }
                                 rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
 
-                            }
+                        }
+                        else
+                        {
+                            rb.velocity = Vector2.zero;
+                        }
                             transform.localScale = new Vector2(-dir, transform.localScale.y);
 
                         }
