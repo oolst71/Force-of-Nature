@@ -33,6 +33,8 @@ public class EntityTakeDamage : MonoBehaviour
     public float moveSpeedMulti;
     public Animator particle;
 
+    public GameObject DeadVFX;
+
     [SerializeField] private SimpleFlash flashEffect;
 
     
@@ -506,6 +508,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
+        Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
         playerData.levelKills += 1;
         gameObject.SetActive(false);
     }
