@@ -8,7 +8,7 @@ public class PlayerAbilities : MonoBehaviour
 {
 
     [SerializeField] private PlayerDataScrObj playerData;
-    private SpriteRenderer spr;
+    [SerializeField] private SpriteRenderer spr;
     private PlayerDataScrObj.eqElement eq;
     public GameObject iciclePrefab;
     public GameObject waveHeadPrefab;
@@ -17,13 +17,11 @@ public class PlayerAbilities : MonoBehaviour
     public Transform flamePoint;
     public bool abCooldown;
     private Rigidbody2D rb;
-    private PlayerAnimations anims;
+    [SerializeField] private PlayerAnimations anims;
 
     // Start is called before the first frame update
     void Start()
     {
-        anims = GetComponent<PlayerAnimations>();
-        spr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
         abCooldown = true;
@@ -33,7 +31,7 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnAbility()
     {
-        
+
         Debug.Log("break");
         if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
         {
@@ -59,12 +57,12 @@ public class PlayerAbilities : MonoBehaviour
                     break;
             }
         }
-        
+
     }
 
 
-     private void OnSwapAbilityLeft()
-        {
+    private void OnSwapAbilityLeft()
+    {
         Debug.Log("eq " + eq);
         Debug.Log("equipped " + playerData.equipped);
         Debug.Log("loadout 0" + playerData.loadout[0]);
@@ -90,15 +88,15 @@ public class PlayerAbilities : MonoBehaviour
 
     }
     private void OnSwapAbilityRight()
-        {
+    {
 
         if (playerData.abilitiesUnlocked)
         {
-             playerData.equipped++;
-                if (playerData.equipped >= playerData.loadout.Length)
-                {
-                    playerData.equipped = 0;
-                }
+            playerData.equipped++;
+            if (playerData.equipped >= playerData.loadout.Length)
+            {
+                playerData.equipped = 0;
+            }
             eq = playerData.loadout[playerData.equipped];
 
             SetColor();
@@ -117,12 +115,17 @@ public class PlayerAbilities : MonoBehaviour
         //instantiate wave
         if (playerData.faceDir > 0)
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            AudioManager.instance.WaterAttackRandom();
+            AudioManager.instance.PlaySFX("Tsunami");
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
         }
         else
         {
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            AudioManager.instance.WaterAttackRandom();
+
+            AudioManager.instance.PlaySFX("Tsunami");
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
         yield return new WaitForSeconds(0.33f); //recovery
@@ -136,9 +139,15 @@ public class PlayerAbilities : MonoBehaviour
     {
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
-        yield return new WaitForSeconds(0.3f); //windup
+        anims.AnimateAbility(3);
+
+        yield return new WaitForSeconds(0.2f); //windup
+        AudioManager.instance.IceAttackRandom();
+        AudioManager.instance.PlaySFX("Ice");
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
-        yield return new WaitForSeconds(0.3f); //recovery
+        yield return new WaitForSeconds(0.2f); //recovery
+        anims.AnimateAbility(4);
+
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
@@ -148,9 +157,21 @@ public class PlayerAbilities : MonoBehaviour
     {
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
-        yield return new WaitForSeconds(0.15f); //windup 
-        Instantiate(firePrefab, new Vector2(flamePoint.parent.transform.position.x + playerData.faceDir * 4f, flamePoint.position.y), Quaternion.identity);
+        anims.AnimateAbility(2);
+        yield return new WaitForSeconds(0.2f); //windup 
+        AudioManager.instance.FireAttackRandom();
+        AudioManager.instance.PlaySFX("Fire");
+        if (playerData.faceDir > 0)
+        {
+        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+        }
+        else
+        {
+        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+
+        }
         yield return new WaitForSeconds(0.6f); //recovery
+        anims.AnimateAbility(4);
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(playerData.abilityCd);
         abCooldown = true;
@@ -165,10 +186,10 @@ public class PlayerAbilities : MonoBehaviour
                 UIManager.Instance.SetBlizzardUI();
 
                 break;
-           case PlayerDataScrObj.eqElement.WILDFIRE:
-              //spr.color = Color.red;
-               UIManager.Instance.SetWildfireUI();
-               break;
+            case PlayerDataScrObj.eqElement.WILDFIRE:
+                //spr.color = Color.red;
+                UIManager.Instance.SetWildfireUI();
+                break;
             case PlayerDataScrObj.eqElement.TSUNAMI:
                 //spr.color = Color.blue;
                 UIManager.Instance.SetTsunamiUI();
@@ -177,11 +198,11 @@ public class PlayerAbilities : MonoBehaviour
                 break;
         }
     }
-   
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

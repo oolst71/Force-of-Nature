@@ -250,12 +250,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c287731b93243469958d87a3903c04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelComplete: {fileID: 0}
-  timeElapsed: {fileID: 0}
-  timeScore: {fileID: 0}
-  killsText: {fileID: 0}
-  killsScore: {fileID: 0}
-  buttons: {fileID: 0}
+  levelComplete: {fileID: 1927472778059969312}
+  timeElapsed: {fileID: 4436692252465984855}
+  timeScore: {fileID: 2866148736455399188}
+  killsText: {fileID: 8404052263282704944}
+  killsScore: {fileID: 4380371079209485630}
+  buttons: {fileID: 5568020239331985718}
+  playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
 --- !u!1 &399798304695917499
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +545,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3898543969255742513}
+  - component: {fileID: 4385328253633314059}
+  - component: {fileID: 5063292468947351571}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -574,6 +577,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4385328253633314059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568020239331985718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 1fb93969fd1a31247906094f216c38f4, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 43c1d100-826f-4847-8485-8067443bdd71
+    m_ActionName: EndLevelMenu/Continue[/XInputControllerWindows/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05f1bd0e-721f-48b8-b6aa-3018fe9f07b9
+    m_ActionName: EndLevelMenu/Back to menu[/XInputControllerWindows/buttonEast]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: EndLevelMenu
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &5063292468947351571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5568020239331985718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc661fe1d5e34ba4b85c5702971e9c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5594589999440879969
 GameObject:
   m_ObjectHideFlags: 0

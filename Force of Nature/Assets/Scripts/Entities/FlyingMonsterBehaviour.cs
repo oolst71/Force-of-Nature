@@ -24,11 +24,18 @@ public class FlyingMonsterBehaviour : MonoBehaviour
     private bool touchedGround, touchedRoof, touchedRight;
     private Rigidbody2D EnemyRB;
     private SpriteRenderer sp;
+    private EntityTakeDamage dmgScript;
+    private bool storeFreeze;
+    private Animator anim;
 
-    
+
     private float currentSpeed;
     void Start()
     {
+        
+        dmgScript = GetComponent<EntityTakeDamage>();
+        storeFreeze = dmgScript.frozen;
+        anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         sp= GetComponent<SpriteRenderer>();
         EnemyRB = GetComponent<Rigidbody2D>();
@@ -37,7 +44,16 @@ public class FlyingMonsterBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (moveDirection.x == -1.0f)
+        if (!dmgScript.frozen)
+        {
+            if (storeFreeze != dmgScript.frozen)
+            {
+
+                anim.SetTrigger("Thaw");
+                storeFreeze = dmgScript.frozen;
+
+            }
+            if (moveDirection.x == -1.0f)
         {
             isflipped = true;
         }
@@ -78,24 +94,41 @@ public class FlyingMonsterBehaviour : MonoBehaviour
 
 
         StartSpawn();
+        }
+        else
+        {
+            if (storeFreeze != dmgScript.frozen)
+            {
+
+                anim.SetTrigger("Freeze");
+                storeFreeze = dmgScript.frozen;
+
+            }
+            EnemyRB.velocity = Vector2.zero;
+        }
+       
     }
 
     void FixedUpdate()
     {
-        if (!seeplayer)
+        if (!dmgScript.frozen)
         {
-            EnemyRB.velocity = moveDirection * moveSpeed;
-            HitLogic();
+     if (!seeplayer)
+            {
+                EnemyRB.velocity = moveDirection * moveSpeed;
+                HitLogic();
+            }
+            else
+            {
+                startTimer = true;
+                //if (player.position.x - attackOffset < this.transform.position.x || player.position.x + attackOffset > this.transform.position.x)
+                //{
+                //    startTimer = true;
+                //}
+                transform.position=Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(player.position.x, transform.position.y), chaseSpeed);
+            }
         }
-        else
-        {
-            startTimer = true;
-            //if (player.position.x - attackOffset < this.transform.position.x || player.position.x + attackOffset > this.transform.position.x)
-            //{
-            //    startTimer = true;
-            //}
-            transform.position=Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(player.position.x, transform.position.y), chaseSpeed);
-        }
+       
     }
 
     void HitLogic()

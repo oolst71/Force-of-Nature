@@ -17,6 +17,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
     [SerializeField] Vector2 rightCheckSize;
     [SerializeField] LayerMask Wall;
     //[SerializeField] bool goingUp = true;
+    public EnemyDataScrObj slimeData;
     public float lineofsight;
     private bool seeplayer;
     private Transform player;
@@ -24,57 +25,97 @@ public class FireMonsterBehaviuor : MonoBehaviour
     private bool touchedGround, touchedRoof, touchedRight;
     private Rigidbody2D EnemyRB;
     private SpriteRenderer sp;
-
+    private BoxCollider2D coll;
+    [SerializeField] private GroundDetection groundDetector;
+    private LayerMask plyr;
+    private EntityTakeDamage dmgScript;
+    private bool storeFreeze;
+    private Animator anim;
 
     private float currentSpeed;
     void Start()
     {
+        anim = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         sp = GetComponent<SpriteRenderer>();
         EnemyRB = GetComponent<Rigidbody2D>();
+        plyr = LayerMask.GetMask("Player");
+        coll = GetComponent<BoxCollider2D>();
         currentSpeed = chaseSpeed;
+        dmgScript = GetComponent<EntityTakeDamage>();
+    }
+
+    public void Attack()
+    {
+        if (Physics2D.BoxCast(gameObject.transform.position, coll.bounds.size, 0f, Vector2.down, 0.01f, plyr))
+        {
+            player.GetComponent<PlayerController>().TakeDamage(slimeData.attackDamage);
+        }
     }
 
     void Update()
     {
-        if (moveDirection.x==-1.0f)
+        if (!dmgScript.frozen)
         {
-            isflipped = true;
-        }
-        else
-        {
-            isflipped = false;
-        }
-        float distanceFromPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceFromPlayer <= lineofsight)
-        {
-            seeplayer = true;
-        }
-        else
-        {
-            seeplayer = false;
-        }
+            if (storeFreeze != dmgScript.frozen)
+            {
+                
+                anim.SetTrigger("Thaw");
+                storeFreeze = dmgScript.frozen;
 
-        if (player.position.x < transform.position.x && seeplayer && !isflipped)
-        {
-            sp.flipX = true;
+            }
+
+            if (moveDirection.x==-1.0f)
+                {
+                    isflipped = true;
+                }
+                else
+                {
+                    isflipped = false;
+                }
+                float distanceFromPlayer = Vector2.Distance(transform.position, player.position);
+                if (distanceFromPlayer <= lineofsight)
+                {
+                    seeplayer = true;
+                }
+                else
+                {
+                    seeplayer = false;
+                }
+
+                if (player.position.x < transform.position.x && seeplayer && !isflipped)
+                {
+                    sp.flipX = true;
+                }
+                if (player.position.x > transform.position.x && seeplayer && !isflipped)
+                {
+                    sp.flipX = false;
+                }
+                if (player.position.x < transform.position.x && seeplayer && isflipped)
+                {
+                    sp.flipX = false;
+                }
+                if (player.position.x > transform.position.x && seeplayer && isflipped)
+                {
+                    sp.flipX = true;
+                }
+                if (!seeplayer /*&& isflipped*/)
+                {
+                    sp.flipX = false;
+                }
         }
-        if (player.position.x > transform.position.x && seeplayer && !isflipped)
+        else
         {
-            sp.flipX = false;
+            if (storeFreeze != dmgScript.frozen)
+            {
+
+                anim.SetTrigger("Freeze");
+                storeFreeze = dmgScript.frozen;
+
+            }
+            EnemyRB.velocity = Vector2.zero;
         }
-        if (player.position.x < transform.position.x && seeplayer && isflipped)
-        {
-            sp.flipX = false;
-        }
-        if (player.position.x > transform.position.x && seeplayer && isflipped)
-        {
-            sp.flipX = true;
-        }
-        if (!seeplayer /*&& isflipped*/)
-        {
-            sp.flipX = false;
-        }
+      
         
 
         //StartSpawn();
@@ -82,20 +123,24 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!seeplayer)
+        if (!dmgScript.frozen)
         {
-            EnemyRB.velocity = moveDirection * moveSpeed;
-            HitLogic();
+            if (!seeplayer)
+            {
+                EnemyRB.velocity = moveDirection * moveSpeed;
+                HitLogic();
+            }
+            else
+            {
+                startTimer = true;
+                //if (player.position.x - attackOffset < this.transform.position.x || player.position.x + attackOffset > this.transform.position.x)
+                //{
+                //    startTimer = true;
+                //}
+                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(player.position.x, transform.position.y), chaseSpeed);
+            }
         }
-        else
-        {
-            startTimer = true;
-            //if (player.position.x - attackOffset < this.transform.position.x || player.position.x + attackOffset > this.transform.position.x)
-            //{
-            //    startTimer = true;
-            //}
-            transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(player.position.x, transform.position.y), chaseSpeed);
-        }
+       
     }
 
     void HitLogic()
@@ -111,6 +156,8 @@ public class FireMonsterBehaviuor : MonoBehaviour
     {
         return Physics2D.OverlapBox(gameObject.transform.position, size, 0f, layer);
     }
+
+
 
     void Flip()
     {

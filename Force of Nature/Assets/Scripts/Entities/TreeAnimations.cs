@@ -44,6 +44,12 @@ public class TreeAnimations : MonoBehaviour
             case 5:
                 anim.SetTrigger("Recovered");
                 break;
+            case 6:
+                anim.SetTrigger("Freeze");
+                break;
+            case 7:
+                anim.SetTrigger("Thaw");
+                break;
             default:
                 break;
         }

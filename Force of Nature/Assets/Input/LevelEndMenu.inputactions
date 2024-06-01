@@ -1,0 +1,54 @@
+{
+    "name": "LevelEndMenu",
+    "maps": [
+        {
+            "name": "EndLevelMenu",
+            "id": "9f24527e-7ec5-45a2-8a16-2c75340bd202",
+            "actions": [
+                {
+                    "name": "Continue",
+                    "type": "Button",
+                    "id": "43c1d100-826f-4847-8485-8067443bdd71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Back to menu",
+                    "type": "Button",
+                    "id": "05f1bd0e-721f-48b8-b6aa-3018fe9f07b9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3f391051-105e-4c78-b5eb-3dea44c58df9",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Continue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5594a7f9-0439-44f9-9f1c-9f63bfc8fb55",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back to menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

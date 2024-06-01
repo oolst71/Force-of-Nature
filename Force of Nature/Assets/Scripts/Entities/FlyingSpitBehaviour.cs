@@ -21,6 +21,8 @@ public class FlyingSpitBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        AudioManager.instance.PlaySFX("EggCrack");
+
         if (collision.transform.gameObject.layer == 8)
         {
             PlayerController pc = collision.GetComponent<PlayerController>();
