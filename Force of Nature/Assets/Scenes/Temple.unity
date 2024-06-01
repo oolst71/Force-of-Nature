@@ -520,6 +520,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingMonster (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3181,6 +3185,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 889912267878039268, guid: 10720d8e505c98a4f9dbc049c2b2f505, type: 3}
   m_PrefabInstance: {fileID: 105469310}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &264517999
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 406.83337
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -24.00627
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2413897085101220061, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981985252084698847, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: m_Name
+      value: FlyingMonster (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
 --- !u!4 &264657048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 794467232826753219, guid: dd61f583c7eba184aa4a73c6bef735cb, type: 3}
@@ -20996,6 +21057,7 @@ MonoBehaviour:
   dmgTextPrefab: {fileID: 0}
   moveSpeedMulti: 0
   particle: {fileID: 0}
+  DeadVFX: {fileID: 0}
   flashEffect: {fileID: 0}
   frozen: 0
 --- !u!70 &1800608045
@@ -25698,6 +25760,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlyingMonster (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26282,7 +26348,7 @@ PrefabInstance:
       objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 9116542877783109631, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.3
+      value: 32.4
       objectReference: {fileID: 0}
     - target: {fileID: 9116542877783109631, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26524,3 +26590,4 @@ SceneRoots:
   - {fileID: 1408924788}
   - {fileID: 2020188976}
   - {fileID: 851949195}
+  - {fileID: 264517999}
