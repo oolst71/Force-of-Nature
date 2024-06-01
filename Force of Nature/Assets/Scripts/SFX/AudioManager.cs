@@ -50,6 +50,17 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopMusic(string name)
+    {
+        Sound s = Array.Find(musicSounds, x => x.name == name);
+
+        if (s != null)
+        {
+            musicSource.clip = s.clip;
+            musicSource.Stop();
+        }
+    }
+
     public void PlaySFX(string name)
     {
         Sound s = Array.Find(sfxSounds, x => x.name == name);
@@ -188,6 +199,15 @@ public class AudioManager : MonoBehaviour
 
 
     }
-    //void 
+    public void TurnOffThemeSong()
+    {
+        StopMusic("GameMusic");
+        StopMusic("CaveAmbience");
+    }
 
+    public void TurnOnThemeSong()
+    {
+        PlayMusic("CaveAmbience");
+        PlayMusic("GameMusic");
+    }
 }

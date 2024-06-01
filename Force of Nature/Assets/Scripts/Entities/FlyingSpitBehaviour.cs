@@ -21,10 +21,11 @@ public class FlyingSpitBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        AudioManager.instance.PlaySFX("EggCrack");
+        
 
         if (collision.transform.gameObject.layer == 8)
         {
+            AudioManager.instance.PlaySFX("EggCrack");
             PlayerController pc = collision.GetComponent<PlayerController>();
             pc.TakeDamage(damage);
         }

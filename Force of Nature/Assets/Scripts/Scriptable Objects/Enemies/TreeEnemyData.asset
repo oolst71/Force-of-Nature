@@ -24,4 +24,4 @@ MonoBehaviour:
   attackCd: 1
   attackWindupTime: 0.5
   attackRecoveryTime: 0.5
-  attackDamage: 38
+  attackDamage: 10
