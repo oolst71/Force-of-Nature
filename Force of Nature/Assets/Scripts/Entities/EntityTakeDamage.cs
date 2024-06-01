@@ -54,6 +54,10 @@ public class EntityTakeDamage : MonoBehaviour
         ice = false;
         fire = false;
         water = false;
+        //if(DeadVFX==null)
+        //{
+        //    DeadVFX=
+        //}
     }
 
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
@@ -508,9 +512,9 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
-        Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
         playerData.levelKills += 1;
         gameObject.SetActive(false);
+        Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
     }
     // Start is called before the first frame update
 
