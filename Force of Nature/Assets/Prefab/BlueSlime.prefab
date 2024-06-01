@@ -135,11 +135,11 @@ GameObject:
   - component: {fileID: 4221043862600551699}
   - component: {fileID: 3136176813824655188}
   - component: {fileID: 4004394792242330284}
-  - component: {fileID: 7496034314999131701}
   - component: {fileID: 3759295587759124552}
   - component: {fileID: 1118293027802985586}
+  - component: {fileID: 8585124680558983304}
   m_Layer: 7
-  m_Name: FireMonster
+  m_Name: BlueSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,7 +155,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 28.9, y: -43, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5361753009901720138}
@@ -204,7 +204,7 @@ SpriteRenderer:
   m_SortingLayerID: 393993107
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e43e159e8bfc5924182fab3baa2f6f06, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91d9f9aec3aec544db847dd6f5c706cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c11a170bcababfe47af02e6a7edb7c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  chaseSpeed: 0.05
+  moveSpeed: 4
+  chaseSpeed: 0.1
   moveDirection: {x: -1, y: 0}
   rightCheck: {fileID: 5594025370356971821}
   rightCheckSize: {x: 1.42, y: 2.1}
@@ -236,8 +236,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1088
   slimeData: {fileID: 11400000, guid: 2d2b42d4ad404744f9b6fe5c5a1005e4, type: 2}
-  lineofsight: 8.8
-  groundDetector: {fileID: 0}
+  lineofsight: 14.96
+  groundDetector: {fileID: 6745267396987434160}
 --- !u!50 &3136176813824655188
 Rigidbody2D:
   serializedVersion: 4
@@ -310,27 +310,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.3815727, y: 7.4725037}
   m_EdgeRadius: 0
---- !u!95 &7496034314999131701
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7322953323292441027}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 69ed91c571fee744caf13d184c9fb475, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &3759295587759124552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,7 +329,7 @@ MonoBehaviour:
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
   particle: {fileID: 8040665980009473662}
-  DeadVFX: {fileID: 6421718514267192558, guid: 6ef42a5e09763ee4bb259eb0db6fae4a, type: 3}
+  DeadVFX: {fileID: 8653596959964889514, guid: 457e60ae48a3eec4abd49395334fcb99, type: 3}
   flashEffect: {fileID: 1118293027802985586}
   frozen: 0
 --- !u!114 &1118293027802985586
@@ -367,6 +346,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flashMaterial: {fileID: 2100000, guid: 616bff133bb3b5644b66e29ee56d1cf2, type: 2}
   duration: 0.1
+--- !u!95 &8585124680558983304
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322953323292441027}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6c96f80feffbcc6449657bd2c9310eff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &7338592266741040673
 PrefabInstance:
   m_ObjectHideFlags: 0

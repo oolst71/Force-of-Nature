@@ -155,12 +155,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a18442b3ab4934490cb204e5279a27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  act: 0
   health: 0
   enemyData: {fileID: 11400000, guid: 4bfd7dc5eb0698c478a029cce6c2bc8c, type: 2}
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
   particle: {fileID: 7984262367224139912}
+  DeadVFX: {fileID: 2907670280690420997, guid: 6777a04e7c348db47b437a27adba0784, type: 3}
   flashEffect: {fileID: 8730990562897646020}
   frozen: 0
 --- !u!70 &-8701206187971728764

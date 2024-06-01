@@ -148,6 +148,7 @@ MonoBehaviour:
   dmgTextPrefab: {fileID: 5474501700892443285, guid: 5a764f694c23cac45b24080a2d4df18a, type: 3}
   moveSpeedMulti: 0
   particle: {fileID: 3609030504583114595}
+  DeadVFX: {fileID: 1767804824654843188, guid: 0b5d8173b0912824aa18cf665c846249, type: 3}
   flashEffect: {fileID: 652361084322754946}
   frozen: 0
 --- !u!50 &4899003722844561361
