@@ -19,12 +19,13 @@ public class IcicleBehaviour : MonoBehaviour
         dirX = playerData.faceDir;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 6)
         {
             Destroy(gameObject);
-        } else if (collision.gameObject.layer == 7 || collision.gameObject.layer == 10)
+        }
+        else if (collision.gameObject.layer == 7 || collision.gameObject.layer == 10)
         {
             collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.icicleDmg, 1);
             Destroy(gameObject);

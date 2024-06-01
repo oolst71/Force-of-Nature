@@ -26,6 +26,7 @@ public class TreeBehaviour : MonoBehaviour
     private TreeAnimations anim;
     int storedHP;
     int currHP;
+    private bool storeFreeze;
 
     // Start is called before the first frame update
     void Start()
@@ -40,118 +41,140 @@ public class TreeBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         storedHP = dmgScript.health;
         dir = -1;
+        storeFreeze = dmgScript.frozen;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        currHP = dmgScript.health;
-        if (currHP != storedHP)
+            currHP = dmgScript.health;
+            if (currHP != storedHP)
+            {
+                storedHP = currHP;
+                currentState = TreeState.HURT;
+            }
+            storedHP = dmgScript.health;
+        if (storeFreeze != dmgScript.frozen)
         {
-            storedHP = currHP;
-            currentState = TreeState.HURT;
+            Debug.Log("fr");
+            if (dmgScript.frozen)
+            {
+                Debug.Log("Freeze");
+                anim.AnimateAttack(6);
+            }
+            else
+            {
+                Debug.Log("Thaw");
+
+                anim.AnimateAttack(7);
+
+            }
+            storeFreeze = dmgScript.frozen;
+
         }
-        storedHP = dmgScript.health;
+
         switch (currentState)
-        {
-            case TreeState.ATTACKING:
-                //if attacking, do nothing
-                //if not attacking, check cooldowns and if can attack
-                //if yes and yes, attack
-                //else, walk towards player
-                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
-                {
-                    if (!attackActive)
+            {
+                case TreeState.ATTACKING:
+                    //if attacking, do nothing
+                    //if not attacking, check cooldowns and if can attack
+                    //if yes and yes, attack
+                    //else, walk towards player
+                    if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                     {
-
-                        if (attackCooldown && Mathf.Abs(transform.position.x - player.transform.position.x) < atkSize.x)
+                        if (!attackActive)
                         {
-                            Debug.Log("should start attack");
-                            attackActive = true;
-                            StartCoroutine("AttackingTree");
-                        }
-                            if (player.transform.position.x < transform.position.x)
-                                {
-                                    dir = -1;
-                                }
-                                else
-                                {
-                                    dir = 1;
-                                }
 
-                                //walk towards player if not in range
-                                if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
-                                {
-                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > 45)
+                            if (attackCooldown && Mathf.Abs(transform.position.x - player.transform.position.x) < atkSize.x)
                             {
-                                currentState = TreeState.AIPATROLLING;
-                                currentTarget = 0;
+                                Debug.Log("should start attack");
+                                attackActive = true;
+                                StartCoroutine("AttackingTree");
                             }
-                            rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+                            if (player.transform.position.x < transform.position.x)
+                            {
+                                dir = -1;
+                            }
+                            else
+                            {
+                                dir = 1;
+                            }
 
+                            //walk towards player if not in range
+                            if (Mathf.Abs(transform.position.x - player.transform.position.x) > atkSize.x / 2 && attackActive == false)
+                            {
+                                if (Mathf.Abs(transform.position.x - player.transform.position.x) > 45)
+                                {
+                                    currentState = TreeState.AIPATROLLING;
+                                    currentTarget = 0;
                                 }
-                                transform.localScale = new Vector2(-dir, transform.localScale.y);
-                        
+                                rb.velocity = new Vector2(treeData.speed * 1.2f * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+
+                            }
+                            transform.localScale = new Vector2(-dir, transform.localScale.y);
+
                         }
-                }
-                else
-                {
-                    rb.velocity = Vector2.zero;
-                }
-
-                break;
-            case TreeState.AIPATROLLING:
-                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
-                {
-                if (Mathf.Abs(transform.position.x - player.transform.position.x) < 10)
-                {
-                    currentState = TreeState.ATTACKING;
-                } else
-                if (sideDetector.flip)
-                    {
-                        dir *= -1;
-                        sideDetector.flip = false;
                     }
-                if (groundDetector.flip)
+                    else
                     {
-                        transform.position = new Vector2(transform.position.x + (-0.05f * dir), transform.position.y); 
-                        dir *= -1;
+                        rb.velocity = Vector2.zero;
                     }
-                rb.velocity = new Vector2(treeData.speed * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
-                transform.localScale = new Vector2(-dir, transform.localScale.y);
-                }
-                else
-                {
-                    rb.velocity = Vector2.zero;
-                }
-                //check player position
 
-
-
-                break;
-            case TreeState.IDLE:
-                //check for player nearby, if player is nearby enter patrol state
-                if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
-                {
-                    if (Mathf.Abs(transform.position.x - player.transform.position.x) < 35)
+                    break;
+                case TreeState.AIPATROLLING:
+                    if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
                     {
-                        currentState = TreeState.AIPATROLLING;
-                        currentTarget = 0;
+                        if (Mathf.Abs(transform.position.x - player.transform.position.x) < 10)
+                        {
+                            currentState = TreeState.ATTACKING;
+                        }
+                        else
+                        if (sideDetector.flip)
+                        {
+                            dir *= -1;
+                            sideDetector.flip = false;
+                        }
+                        if (groundDetector.flip)
+                        {
+                            transform.position = new Vector2(transform.position.x + (-0.05f * dir), transform.position.y);
+                            dir *= -1;
+                        }
+                        rb.velocity = new Vector2(treeData.speed * dmgScript.moveSpeedMulti * dir, rb.velocity.y);
+                        transform.localScale = new Vector2(-dir, transform.localScale.y);
                     }
-                }
-                else
-                {
-                    rb.velocity = Vector2.zero;
-                }
-                break;
-            case TreeState.HURT:
-                StopCoroutine("AttackingTree");
-                attackActive = false;
-                StartCoroutine("BeHurt");
-                break;
-            default:
-                break;
-        }
+                    else
+                    {
+                        rb.velocity = Vector2.zero;
+                    }
+                    //check player position
+
+
+
+                    break;
+                case TreeState.IDLE:
+                    //check for player nearby, if player is nearby enter patrol state
+                    if (!dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
+                    {
+                        if (Mathf.Abs(transform.position.x - player.transform.position.x) < 35)
+                        {
+                            currentState = TreeState.AIPATROLLING;
+                            currentTarget = 0;
+                        }
+                    }
+                    else
+                    {
+                        rb.velocity = Vector2.zero;
+                    }
+                    break;
+                case TreeState.HURT:
+                    StopCoroutine("AttackingTree");
+                    attackActive = false;
+                    StartCoroutine("BeHurt");
+                    break;
+                default:
+                    break;
+            }
+        
     }
 
     private IEnumerator AttackingTree()
@@ -188,7 +211,11 @@ public class TreeBehaviour : MonoBehaviour
 
     private IEnumerator BeHurt()
     {
-        anim.AnimateAttack(4);
+        if (!dmgScript.frozen)
+        {
+            anim.AnimateAttack(4);
+
+        }
         yield return new WaitForSeconds(0.15f);
 
         if (Mathf.Abs(transform.position.x - player.transform.position.x) < 35)
@@ -202,7 +229,10 @@ public class TreeBehaviour : MonoBehaviour
 
         }
         attackCooldown = true;
-        anim.AnimateAttack(5);
+        if (!dmgScript.frozen)
+        {
+            anim.AnimateAttack(5);
+        }
     }
 
 }
