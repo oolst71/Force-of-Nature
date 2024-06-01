@@ -16,6 +16,7 @@ public class DeathManager : MonoBehaviour
 
     public void OnDeath()
     {
+        AudioManager.instance.TurnOffThemeSong();
         deathBGSprite.enabled = true;
         ui.DisableUI();
         ui.EnableDeathUI();
@@ -23,6 +24,8 @@ public class DeathManager : MonoBehaviour
 
     public void OnRespawn()
     {
+        AudioManager.instance.TurnOnThemeSong();
+
         deathBGSprite.enabled = false;
         ui.EnableUI(playerData.equipped);
         ui.DisableDeathUI();
