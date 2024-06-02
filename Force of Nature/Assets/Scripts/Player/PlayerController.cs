@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public Material baseMat;
     public Material deadMat;
     bool dead;
+    public TMP_Text onboardingText;
     public Vector2 StartDashPosition { get; private set; }
 
     void Start()
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
         dead = false;
         playerData.levelKills = 0;
         playerData.levelTime = 0;
+        onboardingText.enabled = false;
     }
 
     private void Update()
@@ -164,6 +167,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnOnboarding()
+    {
+        if (onboardingText.enabled)
+        {
+            onboardingText.enabled = false;
+        }
+        else
+        {
+            onboardingText.enabled = true;
+        }
+    }
 
     public void TakeDamage(int damage)
     {
