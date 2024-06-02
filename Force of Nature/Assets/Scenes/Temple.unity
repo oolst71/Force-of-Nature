@@ -6639,6 +6639,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &596956429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4192454936968687252, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+  m_PrefabInstance: {fileID: 3711933286779442068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e88dee636595da140b9d36e9d731a498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &605953083
 GameObject:
   m_ObjectHideFlags: 0
@@ -21461,7 +21472,7 @@ Transform:
   m_GameObject: {fileID: 1843784488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.49, y: -46.02, z: 3.9398367}
+  m_LocalPosition: {x: 83.46, y: -43.06, z: 3.9398367}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25907,6 +25918,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc7b47301a00bcd46a80d17d3ae39ecc, type: 3}
+--- !u!1001 &3711933286779442068
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4944973693703359897, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_Name
+      value: LevelManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 829.6593
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 842.5692
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.039076
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6665822797795707379, guid: 71b480f07f5521c40937b180acc45659, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71b480f07f5521c40937b180acc45659, type: 3}
 --- !u!1001 &7793148555766510343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26027,6 +26095,10 @@ PrefabInstance:
       propertyPath: hpBar
       value: 
       objectReference: {fileID: 1666138485}
+    - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: levelManager
+      value: 
+      objectReference: {fileID: 596956429}
     - target: {fileID: 2922896065540602061, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -26309,3 +26381,4 @@ SceneRoots:
   - {fileID: 524500487}
   - {fileID: 1478642126}
   - {fileID: 2022298760}
+  - {fileID: 3711933286779442068}

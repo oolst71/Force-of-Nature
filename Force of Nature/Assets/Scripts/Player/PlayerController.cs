@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform spriteHolder;
     [SerializeField] private SpriteRenderer sprite;
     public PlayerAnimations playerAnim;
+    [SerializeField]private LoadLevel levelManager;
     private Vector3 deathPoint;
 
     public Vector2 aim; //the stick input of the player
@@ -197,6 +198,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        levelManager.ReloadLevel();
         playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
