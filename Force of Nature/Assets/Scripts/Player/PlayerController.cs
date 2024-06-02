@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -213,13 +214,14 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
-        levelManager.ReloadLevel();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //levelManager.ReloadLevel();
         playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
         deathMan.OnRespawn();
-        transform.position = respawnPoint.transform.position;
-        rb.velocity = Vector2.zero;
+        //transform.position = respawnPoint.transform.position;
+        //rb.velocity = Vector2.zero;
         ResetState();
         playerData.health = playerData.maxHealth;
         hpBar.GetComponent<Slider>().value = playerData.health;
