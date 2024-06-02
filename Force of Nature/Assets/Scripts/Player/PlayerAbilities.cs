@@ -139,7 +139,7 @@ public class PlayerAbilities : MonoBehaviour
 
         yield return new WaitForSeconds(0.2f); //windup
         AudioManager.instance.IceAttackRandom();
-        AudioManager.instance.PlaySFX("Ice");
+
         Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
         yield return new WaitForSeconds(0.2f); //recovery
         anims.AnimateAbility(4);

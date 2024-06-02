@@ -169,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dead)
         {
+            AudioManager.instance.PlaySFX("Hurt");
             Debug.Log("NOT DEAD");
             playerData.health -= damage;
             hpBar.GetComponent<Slider>().value = playerData.health;
@@ -186,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-
+        AudioManager.instance.PlaySFX("Death");
         deathPoint = transform.position;
         playerAnim.AnimDeath(true);
         dead = true;

@@ -34,6 +34,7 @@ public class MeleeHitreg : MonoBehaviour
                 Debug.Log("got script");
                 if (etd.act == EntityTakeDamage.activeEffect.WATER)
                 {
+                    AudioManager.instance.PlaySFX("Heal");
                     playerData.health += 5;
                     //make character blink green
                     if (playerData.health > playerData.maxHealth)
