@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadLevel : MonoBehaviour
 {
@@ -8,9 +9,11 @@ public class LoadLevel : MonoBehaviour
 
     public List<GameObject> entityList = new List<GameObject>();
     public List<Vector3> entityLocations = new List<Vector3>();
+    public PlayerDataScrObj playerData;
 
     void Start()
     {
+        playerData.currentLevel = SceneManager.GetActiveScene().buildIndex;
         GameObject[] respawns = GameObject.FindGameObjectsWithTag("Respawnable");
         for (int i = 0; i < respawns.Length; i++)
         {

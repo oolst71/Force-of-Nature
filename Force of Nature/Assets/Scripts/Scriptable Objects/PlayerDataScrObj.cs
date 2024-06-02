@@ -87,5 +87,7 @@ public class PlayerDataScrObj : ScriptableObject
     public float levelTime;
     public int levelKills;
 
+    public int currentLevel;
+
 }
 
