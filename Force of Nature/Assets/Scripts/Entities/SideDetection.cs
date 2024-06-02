@@ -14,7 +14,7 @@ public class SideDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == 6)
+        if (collision.gameObject.layer == 6 || collision.gameObject.layer == 10)
         {
             flip = true;
         }
