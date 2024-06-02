@@ -45,10 +45,14 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     {
         atkCycle = false;
-        fwdBox.SetActive(false);
-        upBox.SetActive(false);
-        downBox.SetActive(false);
-        downAirBox.SetActive(false);
+        fwdBox.SetActive(true);
+        fwdBox.GetComponent<BoxCollider2D>().enabled = false;
+        upBox.SetActive(true);
+        upBox.GetComponent<BoxCollider2D>().enabled = false;
+        downBox.SetActive(true);
+        downBox.GetComponent<BoxCollider2D>().enabled = false;
+        downAirBox.SetActive(true);
+        downAirBox.GetComponent<BoxCollider2D>().enabled = false;
         timer = 0;
         pC = GetComponent<PlayerController>();
         velReset = false;
@@ -116,7 +120,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
         {
             case 0: //attack forward
                 activeBox = fwdBox;
-                activeBox.SetActive(true);
+                activeBox.GetComponent<BoxCollider2D>().enabled = true;
                 if (atkCycle)
                 {
 
@@ -197,7 +201,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     rb.velocity = Vector2.zero;
                     playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
                     activeBox = downBox;
-                    activeBox.SetActive(true);
+                    activeBox.GetComponent<BoxCollider2D>().enabled = true;
                     while (atkDashTimer < playerData.atkTimeDownGround)
                     {
                         yield return new WaitForFixedUpdate();
@@ -208,7 +212,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 {
                     playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR;
                     activeBox = downAirBox;
-                    activeBox.SetActive(true);
+                    activeBox.GetComponent<BoxCollider2D>().enabled = true;
                     playerData.currentState = PlayerDataScrObj.playerState.ATTACKINGUNLOCKED;
                     yield return new WaitForSeconds(playerData.atkTimeDownAir);
                     while (atkDashTimer < playerData.atkTimeDownAir)
@@ -220,7 +224,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 break;
             case 1: //attack up - MAY NEED TO ADD GRAVITY HERE IN THE FUTURE
                 activeBox = upBox;
-                activeBox.SetActive(true);
+                activeBox.GetComponent<BoxCollider2D>().enabled = true;
                 playerAnim.AnimateAttack(4);
                 if (Mathf.Abs(pC.aim.x) >= playerData.deadzoneX)
                 {
@@ -293,7 +297,10 @@ public class PlayerMeleeAttacks : MonoBehaviour
                 playerData.currAccel = playerData.maxWalkSpeed * pC.faceDir;
             }
         }
-        activeBox.SetActive(false);
+
+        activeBox.GetComponent<BoxCollider2D>().enabled = false;
+
+
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
         Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
         if (!attackQueued)
