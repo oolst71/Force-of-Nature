@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PlayerDataScrObj
   m_EditorClassIdentifier: 
   loadout: 000000000100000002000000
-  equipped: 1
+  equipped: 0
   maxHealth: 100
-  health: 100
+  health: 85
   abilitiesUnlocked: 1
   accelBasedMovement: 1
   freeDirectionDash: 0
@@ -59,9 +59,9 @@ MonoBehaviour:
   atkTimeUpUnmoving: 0.08
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
-  faceDir: -1
-  abilityCd: -5.1500015
-  icicleDmg: 2
+  faceDir: 1
+  abilityCd: -20.299973
+  icicleDmg: 1
   waveDmg: 4
   fireDmg: 3
   gd: 1
@@ -79,5 +79,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
   currentState: 3
   atkType: 1
-  levelTime: 98.506836
-  levelKills: 1
+  levelTime: 17.805853
+  levelKills: 2
+  currentLevel: 5
