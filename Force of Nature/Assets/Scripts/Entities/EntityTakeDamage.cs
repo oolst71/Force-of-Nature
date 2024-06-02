@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EntityTakeDamage : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class EntityTakeDamage : MonoBehaviour
     float elementTimer;
     float elementTime;
     public float moveSpeedMulti;
+    public GameObject hpBar;
     public Animator particle;
 
     public GameObject DeadVFX;
@@ -104,7 +106,7 @@ public class EntityTakeDamage : MonoBehaviour
                     break;
                 case 2: //wave
                     dtb.clr = new Color(0.2f, 0.2f, 1, 1);
-
+                    rb.velocity = new Vector2(30 * playerData.faceDir, rb.velocity.y);
 
                     break;
                 case 3: //fire
@@ -377,6 +379,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = Color.blue;
         act = activeEffect.WATER;
         playerData.health += 25;
+        hpBar.GetComponent<Slider>().value = playerData.health;
         spr.color = Color.blue;
         elementTime = 2f;
         particle.SetInteger("activeEffect", (int)act);

@@ -44,7 +44,7 @@ public class MeleeHitreg : MonoBehaviour
                     playerController.hpBar.GetComponent<Slider>().value = playerData.health;
 
                 }
-                etd.TakeDamage(playerData.atkDamage, playerController.faceDir, attacks.atkDashTimer, transform.parent.gameObject, true);
+                etd.TakeDamage(Random.Range(playerData.atkDamage - 1, playerData.atkDamage + 2), playerController.faceDir, attacks.atkDashTimer, transform.parent.gameObject, true);
             }
             else
             {

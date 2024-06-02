@@ -36,7 +36,10 @@ public class FireMonsterBehaviuor : MonoBehaviour
     private bool storeFreeze;
     private Animator anim;
 
+    private int currHP;
+
     bool hurt;
+    private float hurtTime;
 
     private float currentSpeed;
     void Start()
@@ -53,7 +56,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     public void Attack()
     {
-        if (Physics2D.BoxCast(gameObject.transform.position, coll.bounds.size, 0f, Vector2.down, 0.01f, plyr))
+        if (Physics2D.BoxCast(gameObject.transform.position, coll.bounds.size, 0f, Vector2.down, 0.01f, plyr) && !hurt && dmgScript.act != EntityTakeDamage.activeEffect.STUN)
         {
             player.GetComponent<PlayerController>().TakeDamage(slimeData.attackDamage);
         }
@@ -61,7 +64,21 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void Update()
     {
-        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN)
+        if (currHP!= dmgScript.health)
+        {
+            hurt = true;
+        }
+        if (hurt)
+        {
+            hurtTime += Time.deltaTime;
+            if (hurtTime > 0.8f)
+            {
+                hurt = false;
+                hurtTime = 0f;
+            }
+        }
+        currHP = dmgScript.health;
+        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN && !hurt)
         {
             if (storeFreeze != dmgScript.frozen)
             {
@@ -129,7 +146,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN)
+        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN && !hurt)
         {
             if (!seeplayer)
             {
