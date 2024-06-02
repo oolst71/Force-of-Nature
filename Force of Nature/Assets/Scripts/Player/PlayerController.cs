@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform spriteHolder;
     [SerializeField] private SpriteRenderer sprite;
     public PlayerAnimations playerAnim;
+    [SerializeField]private LoadLevel levelManager;
     private Vector3 deathPoint;
 
     public Vector2 aim; //the stick input of the player
@@ -52,6 +54,7 @@ public class PlayerController : MonoBehaviour
     public Material baseMat;
     public Material deadMat;
     bool dead;
+    public TMP_Text onboardingText;
     public Vector2 StartDashPosition { get; private set; }
 
     void Start()
@@ -75,6 +78,7 @@ public class PlayerController : MonoBehaviour
         dead = false;
         playerData.levelKills = 0;
         playerData.levelTime = 0;
+        onboardingText.enabled = false;
     }
 
     private void Update()
@@ -163,6 +167,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnOnboarding()
+    {
+        if (onboardingText.enabled)
+        {
+            onboardingText.enabled = false;
+        }
+        else
+        {
+            onboardingText.enabled = true;
+        }
+    }
 
     public void TakeDamage(int damage)
     {
@@ -198,6 +213,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        levelManager.ReloadLevel();
         playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
@@ -254,15 +270,19 @@ public class PlayerController : MonoBehaviour
         {
             faceDir = Mathf.Sign(aim.x);
             playerData.faceDir = faceDir;
-            if (faceDir > 0)
+            if ((playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.CASTING && playerData.currentState != PlayerDataScrObj.playerState.DASHING))
             {
-                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                if (faceDir > 0)
+                {
+                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
+                }
+                else
+                {
+                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
             }
-            else
-            {
-                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
+
         }
     }
 
