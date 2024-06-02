@@ -2961,7 +2961,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1490747092427035788, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
       propertyPath: m_UseOneWay
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 191991210740786479, guid: 212510cbd3e3ac74e908369b651e24c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17886,9 +17886,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 5fb5a4c5ae748c347a3d5e00947bb41a, type: 3}
     - target: {fileID: 1358469147369014429, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
+      propertyPath: sfxSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0dd6a1ed54affd2438a08bbcb86311f1, type: 3}
+    - target: {fileID: 1358469147369014429, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
+      propertyPath: sfxSounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: de07ce8f3c112294f96210df12b32240, type: 3}
+    - target: {fileID: 1358469147369014429, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
       propertyPath: sfxSounds.Array.data[5].clip
       value: 
       objectReference: {fileID: 8300000, guid: 706d7abaa5d76f848b9be36e158a79cd, type: 3}
+    - target: {fileID: 1358469147369014429, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
+      propertyPath: sfxSounds.Array.data[19].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 17340853fca7da843a20e6e16a542a96, type: 3}
     - target: {fileID: 3246047714689197073, guid: 73f892ee6d666c746b1a42046a66c0b2, type: 3}
       propertyPath: m_Volume
       value: 0.13

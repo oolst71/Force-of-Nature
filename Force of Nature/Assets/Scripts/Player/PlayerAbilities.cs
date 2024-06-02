@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PlayerAbilities : MonoBehaviour
 {
@@ -18,6 +17,7 @@ public class PlayerAbilities : MonoBehaviour
     public Transform flamePoint;
     public bool abCooldown;
     private Rigidbody2D rb;
+    private float newAbilityCd;
     [SerializeField] private PlayerAnimations anims;
 
     // Start is called before the first frame update
@@ -26,6 +26,7 @@ public class PlayerAbilities : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spr.color = Color.white;
         abCooldown = true;
+        newAbilityCd = playerData.abilityCd;
         playerData.equipped = 0;
         eq = PlayerDataScrObj.eqElement.BLIZZARD;
     }
@@ -34,7 +35,7 @@ public class PlayerAbilities : MonoBehaviour
     {
 
         Debug.Log("break");
-        if ((playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5) && abCooldown && playerData.gd)
+        if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
         {
             rb.velocity = Vector3.zero;
             switch (eq)
@@ -64,8 +65,15 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnSwapAbilityLeft()
     {
+        newAbilityCd = playerData.abilityCd -= .15f;
 
-        if (playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5)
+        Debug.Log("eq " + eq);
+        Debug.Log("equipped " + playerData.equipped);
+        Debug.Log("loadout 0" + playerData.loadout[0]);
+        Debug.Log("loadout 1" + playerData.loadout[1]);
+        Debug.Log("loadout 2" + playerData.loadout[2]);
+
+        if (playerData.abilitiesUnlocked)
         {
             playerData.equipped--;
             if (playerData.equipped < 0)
@@ -85,8 +93,9 @@ public class PlayerAbilities : MonoBehaviour
     }
     private void OnSwapAbilityRight()
     {
+        newAbilityCd = playerData.abilityCd -= .15f;
 
-        if (playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5)
+        if (playerData.abilitiesUnlocked)
         {
             playerData.equipped++;
             if (playerData.equipped >= playerData.loadout.Length)
@@ -127,7 +136,8 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(0.33f); //recovery
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         anims.AnimateAbility(4);
-        yield return new WaitForSeconds(playerData.abilityCd);
+        yield return new WaitForSeconds(newAbilityCd);
+        newAbilityCd = playerData.abilityCd;
         abCooldown = true;
     }
 
@@ -145,7 +155,8 @@ public class PlayerAbilities : MonoBehaviour
         anims.AnimateAbility(4);
 
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
-        yield return new WaitForSeconds(playerData.abilityCd);
+        yield return new WaitForSeconds(newAbilityCd);
+        newAbilityCd = playerData.abilityCd;
         abCooldown = true;
     }
 
@@ -169,7 +180,8 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(0.6f); //recovery
         anims.AnimateAbility(4);
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
-        yield return new WaitForSeconds(playerData.abilityCd);
+        yield return new WaitForSeconds(newAbilityCd);
+        newAbilityCd = playerData.abilityCd;
         abCooldown = true;
     }
 
