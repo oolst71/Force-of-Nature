@@ -270,15 +270,19 @@ public class PlayerController : MonoBehaviour
         {
             faceDir = Mathf.Sign(aim.x);
             playerData.faceDir = faceDir;
-            if (faceDir > 0)
+            if ((playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.CASTING && playerData.currentState != PlayerDataScrObj.playerState.DASHING))
             {
-                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+                if (faceDir > 0)
+                {
+                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
+                }
+                else
+                {
+                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                }
             }
-            else
-            {
-                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-            }
+
         }
     }
 
