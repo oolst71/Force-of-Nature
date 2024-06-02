@@ -90,6 +90,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: c0729e2a8b40da64ea7ba46c48be57ef, type: 3}
   - name: Hit2
     clip: {fileID: 8300000, guid: dcfd5d6baaf8734498c63271fc8941e3, type: 3}
+  - name: Hurt
+    clip: {fileID: 8300000, guid: 0f494e1c4d95e65499d8016be64b2dd3, type: 3}
+  - name: Death
+    clip: {fileID: 0}
+  - name: Heal
+    clip: {fileID: 0}
   musicSource: {fileID: 8075604345546940393}
   sfxSource: {fileID: 3246047714689197073}
 --- !u!1 &2082256606993091420

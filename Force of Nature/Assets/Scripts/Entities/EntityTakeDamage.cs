@@ -63,7 +63,6 @@ public class EntityTakeDamage : MonoBehaviour
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
     {
         Debug.Log("hit!");
-        flashEffect.Flash();
         AudioManager.instance.HitRandom();
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
@@ -83,6 +82,7 @@ public class EntityTakeDamage : MonoBehaviour
         }
         else
         {
+            flashEffect.Flash();
             Debug.Log("kb start");
             StartCoroutine("Knockback");
         }

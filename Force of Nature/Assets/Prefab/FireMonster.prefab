@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6544785773808545798}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5636889322621527183
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1009886656174951791}
+  m_Layer: 7
+  m_Name: Detection (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1009886656174951791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636889322621527183}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6544785773808545798}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6772980640239045311
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +171,7 @@ GameObject:
   - component: {fileID: 1118293027802985586}
   m_Layer: 7
   m_Name: FireMonster
-  m_TagString: Untagged
+  m_TagString: Respawnable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,6 +190,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5361753009901720138}
+  - {fileID: 1009886656174951791}
   - {fileID: 7054328624986003970}
   - {fileID: 3413957466970850647}
   m_Father: {fileID: 0}
@@ -231,13 +263,16 @@ MonoBehaviour:
   chaseSpeed: 0.05
   moveDirection: {x: -1, y: 0}
   rightCheck: {fileID: 5594025370356971821}
+  groundCheck: {fileID: 5636889322621527183}
   rightCheckSize: {x: 1.42, y: 2.1}
+  groundCheckSize: {x: 0.64, y: 0.68}
   Wall:
     serializedVersion: 2
     m_Bits: 1088
   slimeData: {fileID: 11400000, guid: 2d2b42d4ad404744f9b6fe5c5a1005e4, type: 2}
   lineofsight: 8.8
   groundDetector: {fileID: 6745267396987434160}
+  GroundCollider: {fileID: 4163853247403862996}
 --- !u!50 &3136176813824655188
 Rigidbody2D:
   serializedVersion: 4

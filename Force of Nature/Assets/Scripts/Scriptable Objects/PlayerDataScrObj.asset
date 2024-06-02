@@ -15,7 +15,7 @@ MonoBehaviour:
   loadout: 000000000100000002000000
   equipped: 1
   maxHealth: 100
-  health: 25
+  health: 100
   abilitiesUnlocked: 1
   accelBasedMovement: 1
   freeDirectionDash: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   atkForwardKnockback: 15
   atkDamage: 2
   atkPower_ForwardGround: {x: 20, y: 0}
-  atkPower_ForwardAir: {x: 80, y: 0}
+  atkPower_ForwardAir: {x: 20, y: 0}
   atkPower_Up: {x: 0, y: 90}
   atkPower_UpLeft: {x: -30, y: 72}
   atkPower_UpRight: {x: 30, y: 72}
@@ -60,7 +60,7 @@ MonoBehaviour:
   atkTimeDownAir: 0.08
   atkTimeDownGround: 0.1
   faceDir: -1
-  abilityCd: 1
+  abilityCd: -5.1500015
   icicleDmg: 2
   waveDmg: 4
   fireDmg: 3
@@ -78,6 +78,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dd7061ee901c3e4bb79a10da0951539, type: 2}
   - {fileID: 11400000, guid: 6faf5f64cf824f94daacde449d303639, type: 2}
   currentState: 3
-  atkType: 3
-  levelTime: 145.65878
-  levelKills: 20
+  atkType: 1
+  levelTime: 98.506836
+  levelKills: 1

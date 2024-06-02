@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform spriteHolder;
     [SerializeField] private SpriteRenderer sprite;
     public PlayerAnimations playerAnim;
+    [SerializeField]private LoadLevel levelManager;
     private Vector3 deathPoint;
 
     public Vector2 aim; //the stick input of the player
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!dead)
         {
+            AudioManager.instance.PlaySFX("Hurt");
             Debug.Log("NOT DEAD");
             playerData.health -= damage;
             hpBar.GetComponent<Slider>().value = playerData.health;
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-
+        AudioManager.instance.PlaySFX("Death");
         deathPoint = transform.position;
         playerAnim.AnimDeath(true);
         dead = true;
@@ -197,6 +199,7 @@ public class PlayerController : MonoBehaviour
 
     public void Respawn()
     {
+        levelManager.ReloadLevel();
         playerAnim.AnimDeath(false);
         dead = false;
         sprite.material = baseMat;
