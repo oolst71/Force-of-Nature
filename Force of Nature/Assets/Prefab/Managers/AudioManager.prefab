@@ -93,7 +93,7 @@ MonoBehaviour:
   - name: Hurt
     clip: {fileID: 8300000, guid: 0f494e1c4d95e65499d8016be64b2dd3, type: 3}
   - name: Death
-    clip: {fileID: 8300000, guid: 17340853fca7da843a20e6e16a542a96, type: 3}
+    clip: {fileID: 8300000, guid: 29fc0dbf68b3399448c76af1630d5dea, type: 3}
   - name: Heal
     clip: {fileID: 8300000, guid: 8b73e017753b6474cb8d880dcb11c102, type: 3}
   musicSource: {fileID: 8075604345546940393}
