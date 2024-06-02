@@ -16569,10 +16569,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 949078236905047836, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2508674259302942948, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -16652,14 +16648,6 @@ PrefabInstance:
     - target: {fileID: 2508674259302942948, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3853426108501126080, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.000016682
-      objectReference: {fileID: 0}
-    - target: {fileID: 3853426108501126080, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.58993
       objectReference: {fileID: 0}
     - target: {fileID: 7927919274912725180, guid: b40f25d8242682f4e9d3d88a357a883e, type: 3}
       propertyPath: m_Name
