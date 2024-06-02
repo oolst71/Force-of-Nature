@@ -272,7 +272,7 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Wet";
         dtb.clr = new Color(0.2f, 0.2f, 1, 1);
-        spr.color = Color.blue;
+        //spr.color = Color.blue;
         elementTime = 4f;
         particle.SetInteger("activeEffect", (int)act);
 
@@ -285,7 +285,7 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Burning";
         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
-        spr.color = Color.red;
+        //spr.color = Color.red;
         elementTime = 4f;
         particle.SetInteger("activeEffect", (int)act);
 
@@ -298,7 +298,7 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Cold";
         dtb.clr = new Color(0.6f, 0.6f, 1, 1);
-        spr.color = Color.cyan;
+        //spr.color = Color.cyan;
         elementTime = 4f;
         moveSpeedMulti = 0.4f;
         particle.SetInteger("activeEffect", (int)act);
@@ -317,7 +317,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = new Color(0.8f, 0.8f, 0.8f, 1);
         act = activeEffect.STUN;
         elementTime = 1f;
-        spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
+        //spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
         particle.SetInteger("activeEffect", (int)act);
 
     }
@@ -336,7 +336,7 @@ public class EntityTakeDamage : MonoBehaviour
         dt.dmg = "Melted";
         dt.clr = new Color(0.2f, 0.2f, 1, 1);
         act = activeEffect.WATER;
-        spr.color = Color.blue;
+        //spr.color = Color.blue;
         elementTime = 2f;
         particle.SetInteger("activeEffect", (int)act);
 
@@ -350,7 +350,7 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Frozen";
         dtb.clr = new Color(0f, 0.5775638f, 1, 1);
-        spr.color = new Color(0f, 0.5775638f, 1, 1);
+        //spr.color = new Color(0f, 0.5775638f, 1, 1);
         frozen = true;
         elementTime = 8f;
         particle.SetInteger("activeEffect", (int)act);
@@ -366,7 +366,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.clr = Color.gray;
         act = activeEffect.STEAM;
         elementTime = 0.5f;
-        spr.color = Color.white;
+        //spr.color = Color.white;
         particle.SetInteger("activeEffect", (int)act);
         rb.velocity = new Vector2(rb.velocity.x, 40);
     }
@@ -380,7 +380,7 @@ public class EntityTakeDamage : MonoBehaviour
         act = activeEffect.WATER;
         playerData.health += 25;
         hpBar.GetComponent<Slider>().value = playerData.health;
-        spr.color = Color.blue;
+        //spr.color = Color.blue;
         elementTime = 2f;
         particle.SetInteger("activeEffect", (int)act);
 
@@ -399,7 +399,7 @@ public class EntityTakeDamage : MonoBehaviour
         dt.dmg = "Thawed";
         dt.clr = new Color(1, 0.3f, 0.01f, 1);
         act = activeEffect.WATER;
-        spr.color = Color.white;
+        //spr.color = Color.white;
         particle.SetInteger("activeEffect", (int)act);
 
         //makes enemy take extra damage
