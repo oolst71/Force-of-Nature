@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerAbilities : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class PlayerAbilities : MonoBehaviour
     {
 
         Debug.Log("break");
-        if (playerData.abilitiesUnlocked && abCooldown && playerData.gd)
+        if ((playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5) && abCooldown && playerData.gd)
         {
             rb.velocity = Vector3.zero;
             switch (eq)
@@ -73,7 +74,7 @@ public class PlayerAbilities : MonoBehaviour
         Debug.Log("loadout 1" + playerData.loadout[1]);
         Debug.Log("loadout 2" + playerData.loadout[2]);
 
-        if (playerData.abilitiesUnlocked)
+        if (playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5)
         {
             playerData.equipped--;
             if (playerData.equipped < 0)
@@ -95,7 +96,7 @@ public class PlayerAbilities : MonoBehaviour
     {
         newAbilityCd = playerData.abilityCd -= .15f;
 
-        if (playerData.abilitiesUnlocked)
+        if (playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5)
         {
             playerData.equipped++;
             if (playerData.equipped >= playerData.loadout.Length)
