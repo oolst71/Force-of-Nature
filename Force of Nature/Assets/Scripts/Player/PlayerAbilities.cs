@@ -151,7 +151,12 @@ public class PlayerAbilities : MonoBehaviour
         yield return new WaitForSeconds(0.2f); //windup
         AudioManager.instance.IceAttackRandom();
 
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y), Quaternion.identity);
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 2.4f), iciclePoint.position.y + 1f), Quaternion.identity);
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 2.2f), iciclePoint.position.y), Quaternion.identity);
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y + 1.5f), Quaternion.identity);
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 1.3f), iciclePoint.position.y - 0.5f), Quaternion.identity);
+        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 1.6f), iciclePoint.position.y + 0.5f), Quaternion.identity);
+
         yield return new WaitForSeconds(0.2f); //recovery
         anims.AnimateAbility(4);
 

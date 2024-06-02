@@ -8,7 +8,7 @@ public class EntityTakeDamage : MonoBehaviour
 {
     public enum activeEffect
     {
-        NONE, ICE, FIRE, WATER, STUN
+        NONE, ICE, FIRE, WATER, STUN, STEAM
     }
 
     public activeEffect act;
@@ -362,7 +362,8 @@ public class EntityTakeDamage : MonoBehaviour
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Steamed";
         dtb.clr = Color.gray;
-        act = activeEffect.NONE;
+        act = activeEffect.STEAM;
+        elementTime = 0.5f;
         spr.color = Color.white;
         particle.SetInteger("activeEffect", (int)act);
         rb.velocity = new Vector2(rb.velocity.x, 40);
@@ -512,7 +513,10 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
-        playerData.levelKills += 1;
+        if (gameObject.layer == 7)
+        {
+            playerData.levelKills += 1;
+        }
         gameObject.SetActive(false);
         Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
     }
