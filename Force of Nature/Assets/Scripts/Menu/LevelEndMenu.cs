@@ -51,12 +51,12 @@ public class LevelEndMenu : MonoBehaviour
             timeScore.text += "0";
         }
         timeScore.text += ((int)(playerData.levelTime / 60)).ToString() + ":";
-        if ((int)playerData.levelTime - (int)(playerData.levelTime / 60) < 10)
+        if ((int)playerData.levelTime - ((int)(playerData.levelTime / 60) * 60) < 10)
         {
             timeScore.text += "0";
 
         }
-        timeScore.text += (((int)playerData.levelTime - (int)(playerData.levelTime / 60))).ToString() + ":";
+        timeScore.text += (((int)playerData.levelTime - ((int)(playerData.levelTime / 60) * 60))).ToString() + ":";
         timeScore.text += ((playerData.levelTime - (int)playerData.levelTime).ToString()).Substring(2, 2);
 
         killsScore.text = playerData.levelKills.ToString();

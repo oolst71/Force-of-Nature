@@ -10,11 +10,15 @@ public class IcicleBehaviour : MonoBehaviour
     [SerializeField] private float dirX;
     [SerializeField] private PlayerDataScrObj playerData;
     private Rigidbody2D rb;
+    [SerializeField] private List<Sprite> icicleSprites;
+    private SpriteRenderer sr;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        sr.sprite = icicleSprites[Random.Range(0, icicleSprites.Count)];
         rb = GetComponent<Rigidbody2D>();
         dirX = playerData.faceDir;
     }
