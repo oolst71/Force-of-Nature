@@ -24,6 +24,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
     public float atkDashTimer;
 
     public bool atkCycle;
+    public bool currAtk;
 
     public bool attackDash;
 
@@ -45,6 +46,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     {
         atkCycle = false;
+        currAtk = atkCycle;
         fwdBox.SetActive(true);
         fwdBox.GetComponent<BoxCollider2D>().enabled = false;
         upBox.SetActive(true);
@@ -73,7 +75,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
     private void OnAttack()
     {
-        if (playerData.playerStates[(int)playerData.currentState].canAttack)
+        if (playerData.playerStates[(int)playerData.currentState].canAttack && !attackActive)
         {
             playerData.currentState = PlayerDataScrObj.playerState.ATTACKING;
             playerAnim.ChangeAnimState((int)playerData.currentState);
@@ -132,7 +134,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
                     playerAnim.AnimateAttack(1);
 
                 }
-
+                currAtk = atkCycle;
                 if (playerData.sideAttackBoosted)
                 {
                     playerData.atkType = PlayerDataScrObj.AttackType.MELEE_NOBOOST;
@@ -302,6 +304,7 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
 
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
+ 
         Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
         if (!attackQueued)
         {

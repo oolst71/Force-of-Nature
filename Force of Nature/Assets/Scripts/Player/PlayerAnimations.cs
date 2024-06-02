@@ -6,7 +6,9 @@ public class PlayerAnimations : MonoBehaviour
 {
     private Animator anim;
     [SerializeField] private PlayerDataScrObj playerData;
+    private bool queueReset;
     int count;
+    [SerializeField] private BoxCollider2D sideColl;
 
 
     // Start is called before the first frame update
@@ -20,7 +22,6 @@ public class PlayerAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void AnimDeath(bool dead)
@@ -46,6 +47,16 @@ public class PlayerAnimations : MonoBehaviour
     {
         anim.SetBool("Grounded", st);
         anim.SetFloat("yVel", yvel);
+    }
+
+    public void EnableSideCollider()
+    {
+        sideColl.enabled = true;
+    }
+
+    public void DisableSideCollider()
+    {
+        sideColl.enabled = false;
     }
 
     public void AnimDash(int i)
@@ -136,5 +147,6 @@ public class PlayerAnimations : MonoBehaviour
             default:
                 break;
         }
+        queueReset = true;
     }
 }

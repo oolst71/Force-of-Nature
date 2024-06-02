@@ -445,6 +445,7 @@ MonoBehaviour:
   playerAnim: {fileID: 2805738630753100669}
   atkDashTimer: 0
   atkCycle: 0
+  currAtk: 0
   attackDash: 0
   fwdBox: {fileID: 4073984407781736871}
   upBox: {fileID: 5274503209142876462}
@@ -594,6 +595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
+  sideColl: {fileID: 5840275244515078747}
 --- !u!95 &6340003350435589006
 Animator:
   serializedVersion: 5
@@ -681,7 +683,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -1.837363, y: -0.63442314}
+  m_Offset: {x: -2.1623657, y: -0.63442314}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -692,7 +694,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.6454797, y: 3.2925322}
+  m_Size: {x: 5.295485, y: 3.2925322}
   m_EdgeRadius: 0
 --- !u!114 &1690905738669631468
 MonoBehaviour:

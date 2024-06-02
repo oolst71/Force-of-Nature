@@ -376,6 +376,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.dmg = "Extinguished";
         dtb.clr = Color.blue;
         act = activeEffect.WATER;
+        playerData.health += 25;
         spr.color = Color.blue;
         elementTime = 2f;
         particle.SetInteger("activeEffect", (int)act);

@@ -54,8 +54,8 @@ public class PlayerController : MonoBehaviour
     public Transform AfterImageTranform;
     public Material baseMat;
     public Material deadMat;
-    bool dead;
-    public TMP_Text onboardingText;
+    public bool dead;
+    public Image onboardingText;
     public Vector2 StartDashPosition { get; private set; }
 
     void Start()
@@ -337,6 +337,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            SceneManager.LoadScene(0);
             //return to main menu
         }
 

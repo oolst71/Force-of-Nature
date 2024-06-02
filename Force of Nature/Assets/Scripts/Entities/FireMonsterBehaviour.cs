@@ -36,6 +36,8 @@ public class FireMonsterBehaviuor : MonoBehaviour
     private bool storeFreeze;
     private Animator anim;
 
+    bool hurt;
+
     private float currentSpeed;
     void Start()
     {
