@@ -21,12 +21,16 @@ public class IcicleBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //AudioManager.instance.PlaySFX("Ice");
+
         if (collision.gameObject.layer == 6)
         {
+            AudioManager.instance.PlaySFX("Ice");
             Destroy(gameObject);
         }
         else if (collision.gameObject.layer == 7 || collision.gameObject.layer == 10)
         {
+            AudioManager.instance.PlaySFX("Ice");
             collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.icicleDmg, 1);
             Destroy(gameObject);
         }
