@@ -512,7 +512,10 @@ public class EntityTakeDamage : MonoBehaviour
 
     public void Die()
     {
-        playerData.levelKills += 1;
+        if (gameObject.layer == 7)
+        {
+            playerData.levelKills += 1;
+        }
         gameObject.SetActive(false);
         Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
     }
