@@ -102,6 +102,11 @@ MonoBehaviour:
   speed: 25
   dirX: 1
   playerData: {fileID: 11400000, guid: 863d74dddceabc644b499b404dcc48a6, type: 2}
+  icicleSprites:
+  - {fileID: 21300000, guid: 43d02efee55e69f478fbfc0ef18ffc0d, type: 3}
+  - {fileID: 21300000, guid: 68c0de8b4acb5824dab4b78e151a348d, type: 3}
+  - {fileID: 21300000, guid: d0ab3363adc74d143b387cd75d7eeb22, type: 3}
+  - {fileID: 21300000, guid: fcb883549a0a1d846b386dae747e7d80, type: 3}
 --- !u!50 &7928393372923868853
 Rigidbody2D:
   serializedVersion: 4
