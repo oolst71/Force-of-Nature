@@ -21,6 +21,9 @@ public class AudioManager : MonoBehaviour
     private int icecount;
     private int watercount;
     private int hitcount;
+
+    private bool ishealcooldown;
+    private bool ishealready;
     private void Awake()
     {
         if(instance == null)
@@ -38,6 +41,7 @@ public class AudioManager : MonoBehaviour
     {
         PlayMusic("CaveAmbience");
         PlayMusic("GameMusic");
+        ishealready = true;
     }
     public void PlayMusic(string name)
     {
@@ -196,7 +200,13 @@ public class AudioManager : MonoBehaviour
 
         AttackRandom();
 
-
+        if(ishealcooldown)
+        {
+            AudioManager.instance.PlaySFX("Heal");
+            ishealcooldown = false;
+            ishealready=false;
+            StartCoroutine(Healcooldown());
+        }
 
     }
     public void TurnOffThemeSong()
@@ -210,4 +220,20 @@ public class AudioManager : MonoBehaviour
         PlayMusic("CaveAmbience");
         PlayMusic("GameMusic");
     }
+
+    public void PlayHeal()
+    {
+        if(ishealready)
+        {
+            ishealcooldown = true;
+        }
+    }
+
+    IEnumerator Healcooldown()
+    {
+        yield return new WaitForSeconds(5);
+        ishealready = true;
+    }
+
+    
 }
