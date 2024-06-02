@@ -59,7 +59,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void Update()
     {
-        if (!dmgScript.frozen)
+        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN)
         {
             if (storeFreeze != dmgScript.frozen)
             {
@@ -127,7 +127,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dmgScript.frozen)
+        if (!dmgScript.frozen && dmgScript.act != EntityTakeDamage.activeEffect.STUN)
         {
             if (!seeplayer)
             {
