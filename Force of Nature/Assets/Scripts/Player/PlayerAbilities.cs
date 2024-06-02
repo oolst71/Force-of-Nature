@@ -19,6 +19,7 @@ public class PlayerAbilities : MonoBehaviour
     public bool abCooldown;
     private Rigidbody2D rb;
     private float newAbilityCd;
+    private float faceDirectionDuringCast;
     [SerializeField] private PlayerAnimations anims;
 
     // Start is called before the first frame update
@@ -116,6 +117,8 @@ public class PlayerAbilities : MonoBehaviour
         rb.velocity = Vector2.zero;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         anims.AnimateAbility(1);
+
+        faceDirectionDuringCast = playerData.faceDir;
         yield return new WaitForSeconds(0.1f); //windup
         //execute ability here
         //instantiate wave
@@ -123,7 +126,7 @@ public class PlayerAbilities : MonoBehaviour
         {
             AudioManager.instance.WaterAttackRandom();
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
         }
         else
@@ -131,10 +134,15 @@ public class PlayerAbilities : MonoBehaviour
             AudioManager.instance.WaterAttackRandom();
 
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + playerData.faceDir * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
         yield return new WaitForSeconds(0.33f); //recovery
+        if (playerData.faceDir != faceDirectionDuringCast)
+        {
+            playerData.faceDir = faceDirectionDuringCast;
+        }
+
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         anims.AnimateAbility(4);
         yield return new WaitForSeconds(newAbilityCd);
@@ -148,18 +156,29 @@ public class PlayerAbilities : MonoBehaviour
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         anims.AnimateAbility(3);
 
+        faceDirectionDuringCast = playerData.faceDir;
         yield return new WaitForSeconds(0.2f); //windup
         AudioManager.instance.IceAttackRandom();
 
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 2.4f), iciclePoint.position.y + 1f), Quaternion.identity);
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 2.2f), iciclePoint.position.y), Quaternion.identity);
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + playerData.faceDir, iciclePoint.position.y + 1.5f), Quaternion.identity);
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 1.3f), iciclePoint.position.y - 0.5f), Quaternion.identity);
-        Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (playerData.faceDir * 1.6f), iciclePoint.position.y + 0.5f), Quaternion.identity);
+        GameObject icicle1 = Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (faceDirectionDuringCast * 2.4f), iciclePoint.position.y + 1f), Quaternion.identity);
+        GameObject icicle2 = Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (faceDirectionDuringCast * 2.2f), iciclePoint.position.y), Quaternion.identity);
+        GameObject icicle3 = Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + faceDirectionDuringCast, iciclePoint.position.y + 1.5f), Quaternion.identity);
+        GameObject icicle4 = Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (faceDirectionDuringCast * 1.3f), iciclePoint.position.y - 0.5f), Quaternion.identity);
+        GameObject icicle5 = Instantiate(iciclePrefab, new Vector2(iciclePoint.parent.transform.position.x + (faceDirectionDuringCast * 1.6f), iciclePoint.position.y + 0.5f), Quaternion.identity);
+
+        icicle1.GetComponent<IcicleBehaviour>().dirX = faceDirectionDuringCast;
+        icicle2.GetComponent<IcicleBehaviour>().dirX = faceDirectionDuringCast;
+        icicle3.GetComponent<IcicleBehaviour>().dirX = faceDirectionDuringCast;
+        icicle4.GetComponent<IcicleBehaviour>().dirX = faceDirectionDuringCast;
+        icicle5.GetComponent<IcicleBehaviour>().dirX = faceDirectionDuringCast;
 
         yield return new WaitForSeconds(0.2f); //recovery
-        anims.AnimateAbility(4);
+        if (playerData.faceDir != faceDirectionDuringCast)
+        {
+            playerData.faceDir = faceDirectionDuringCast;
+        }
 
+        anims.AnimateAbility(4);
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(newAbilityCd);
         newAbilityCd = playerData.abilityCd;
@@ -171,19 +190,26 @@ public class PlayerAbilities : MonoBehaviour
         abCooldown = false;
         playerData.currentState = PlayerDataScrObj.playerState.CASTING;
         anims.AnimateAbility(2);
+        
+        faceDirectionDuringCast = playerData.faceDir;
         yield return new WaitForSeconds(0.2f); //windup 
         AudioManager.instance.FireAttackRandom();
         AudioManager.instance.PlaySFX("Fire");
-        if (playerData.faceDir > 0)
+        if (faceDirectionDuringCast > 0)
         {
-        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+        Instantiate(firePrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 1.25f, transform.position.y + 1.4f), Quaternion.Euler(new Vector3(0, 180, 0)));
         }
         else
         {
-        Instantiate(firePrefab, new Vector2(transform.position.x + playerData.faceDir * 1.25f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+        Instantiate(firePrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 1.25f, transform.position.y + 1.4f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
         }
-        yield return new WaitForSeconds(0.6f); //recovery
+
+        yield return new WaitForSeconds(0.2f); //recovery
+        if (playerData.faceDir != faceDirectionDuringCast)
+        {
+            playerData.faceDir = faceDirectionDuringCast;
+        }
         anims.AnimateAbility(4);
         playerData.currentState = PlayerDataScrObj.playerState.IDLE;
         yield return new WaitForSeconds(newAbilityCd);
