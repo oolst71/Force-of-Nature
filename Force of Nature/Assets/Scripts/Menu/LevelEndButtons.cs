@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 
 public class LevelEndButtons : MonoBehaviour
+
+    
 {
+
+    public PlayerDataScrObj playerData;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +24,13 @@ public class LevelEndButtons : MonoBehaviour
 
     private void OnContinue()
     {
-        SceneManager.LoadScene(4);
+        if (playerData.currentLevel == 2)
+        {
+            SceneManager.LoadScene(5);
+        } else if (playerData.currentLevel == 5)
+        {
+            SceneManager.LoadScene(4);
+        }
     }
 
     // Update is called once per frame

@@ -33,6 +33,8 @@ public class EntityTakeDamage : MonoBehaviour
     public float moveSpeedMulti;
     public Animator particle;
 
+    public GameObject DeadVFX;
+
     [SerializeField] private SimpleFlash flashEffect;
 
     
@@ -52,12 +54,15 @@ public class EntityTakeDamage : MonoBehaviour
         ice = false;
         fire = false;
         water = false;
+        //if(DeadVFX==null)
+        //{
+        //    DeadVFX=
+        //}
     }
 
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
     {
         Debug.Log("hit!");
-        flashEffect.Flash();
         AudioManager.instance.HitRandom();
         health -= dmg;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
@@ -77,6 +82,7 @@ public class EntityTakeDamage : MonoBehaviour
         }
         else
         {
+            flashEffect.Flash();
             Debug.Log("kb start");
             StartCoroutine("Knockback");
         }
@@ -508,6 +514,7 @@ public class EntityTakeDamage : MonoBehaviour
     {
         playerData.levelKills += 1;
         gameObject.SetActive(false);
+        Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
     }
     // Start is called before the first frame update
 

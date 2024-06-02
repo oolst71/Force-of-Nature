@@ -14,7 +14,9 @@ public class FireMonsterBehaviuor : MonoBehaviour
     //public GameObject Spit;
     [SerializeField] Vector2 moveDirection = new Vector2(1f, 0f);
     [SerializeField] GameObject rightCheck;
+    [SerializeField] GameObject groundCheck;
     [SerializeField] Vector2 rightCheckSize;
+    [SerializeField] Vector2 groundCheckSize;
     [SerializeField] LayerMask Wall;
     //[SerializeField] bool goingUp = true;
     public EnemyDataScrObj slimeData;
@@ -22,11 +24,13 @@ public class FireMonsterBehaviuor : MonoBehaviour
     private bool seeplayer;
     private Transform player;
     private bool isflipped;
-    private bool touchedGround, touchedRoof, touchedRight;
+    private bool touchedGround, touchedRight;
     private Rigidbody2D EnemyRB;
     private SpriteRenderer sp;
     private BoxCollider2D coll;
     [SerializeField] private GroundDetection groundDetector;
+    public BoxCollider2D GroundCollider;
+
     private LayerMask plyr;
     private EntityTakeDamage dmgScript;
     private bool storeFreeze;
@@ -146,6 +150,11 @@ public class FireMonsterBehaviuor : MonoBehaviour
     void HitLogic()
     {
         touchedRight = HitDetector(rightCheck, rightCheckSize, (Wall));
+        touchedGround = HitDetector(groundCheck, groundCheckSize, (Wall));
+        if(!touchedGround)
+        {
+            Flip();
+        }
         if (touchedRight)
         {
             Flip();
@@ -157,6 +166,13 @@ public class FireMonsterBehaviuor : MonoBehaviour
         return Physics2D.OverlapBox(gameObject.transform.position, size, 0f, layer);
     }
 
+    private void OnTriggerEnter2D(GroundDetection GD)
+    {
+        if(GD==null)
+        {
+            Flip();
+        }
+    }
 
 
     void Flip()
@@ -170,6 +186,9 @@ public class FireMonsterBehaviuor : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(rightCheck.transform.position, rightCheckSize);
         Gizmos.DrawWireSphere(transform.position, lineofsight);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(groundCheck.transform.position, groundCheckSize);
     }
     //void StartSpawn()
     //{
