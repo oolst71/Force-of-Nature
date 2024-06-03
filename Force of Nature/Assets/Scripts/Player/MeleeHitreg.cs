@@ -36,6 +36,7 @@ public class MeleeHitreg : MonoBehaviour
                 {
                     AudioManager.instance.PlayHeal();
                     playerData.health += 5;
+                    playerController.healParticle.GetComponent<Animator>().SetTrigger("HealAnim");
                     //make character blink green
                     if (playerData.health > playerData.maxHealth)
                     {

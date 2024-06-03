@@ -35,6 +35,8 @@ public class EntityTakeDamage : MonoBehaviour
     public GameObject hpBar;
     public Animator particle;
 
+    bool fresh;
+
     public GameObject DeadVFX;
 
     [SerializeField] private SimpleFlash flashEffect;
@@ -60,8 +62,15 @@ public class EntityTakeDamage : MonoBehaviour
         //{
         //    DeadVFX=
         //}
+        fresh = false;
     }
 
+    IEnumerator FixFireFreeze()
+    {
+        fresh = true;
+        yield return new WaitForSeconds(0.5f);
+        fresh = false;
+    }
     public void TakeDamage(int dmg, float dir, float atkTime, GameObject playerp, bool playerAtk)
     {
         Debug.Log("hit!");
@@ -319,7 +328,7 @@ public class EntityTakeDamage : MonoBehaviour
         dtb.dmg = "Stun";
         dtb.clr = new Color(0.8f, 0.8f, 0.8f, 1);
         act = activeEffect.STUN;
-        elementTime = 1f;
+        elementTime = 3f;
         //spr.color = new Color(0.8f, 0.8f, 0.8f, 1);
         particle.SetInteger("activeEffect", (int)act);
 
@@ -339,6 +348,7 @@ public class EntityTakeDamage : MonoBehaviour
         dt.dmg = "Melted";
         dt.clr = new Color(0.2f, 0.2f, 1, 1);
         act = activeEffect.WATER;
+        StartCoroutine("FixFireFreeze");
         //spr.color = Color.blue;
         elementTime = 2f;
         particle.SetInteger("activeEffect", (int)act);
@@ -348,7 +358,9 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyFreeze()
     {
         //apply ice
-        act = activeEffect.ICE;
+        if (!fresh)
+        {
+         act = activeEffect.ICE;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
         dtb.dmg = "Frozen";
@@ -357,6 +369,8 @@ public class EntityTakeDamage : MonoBehaviour
         frozen = true;
         elementTime = 8f;
         particle.SetInteger("activeEffect", (int)act);
+        }
+       
 
     }
 
