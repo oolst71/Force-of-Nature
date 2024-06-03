@@ -30,7 +30,7 @@ public class FlyingSpitBehaviour : MonoBehaviour
         {
             AudioManager.instance.PlaySFX("EggCrack");
             PlayerController pc = collision.GetComponent<PlayerController>();
-            pc.TakeDamage(15);
+            pc.TakeDamage(5);
         }
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetTrigger("Break");
