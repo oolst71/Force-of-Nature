@@ -72,6 +72,12 @@ TagManager:
   - name: ENEMIES
     uniqueID: 1412065779
     locked: 0
+  - name: Particles
+    uniqueID: 487124185
+    locked: 0
+  - name: DamageText
+    uniqueID: 1318340789
+    locked: 0
   - name: DeathBG
     uniqueID: 1309594491
     locked: 0
