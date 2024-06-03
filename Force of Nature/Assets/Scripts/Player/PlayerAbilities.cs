@@ -31,6 +31,15 @@ public class PlayerAbilities : MonoBehaviour
         newAbilityCd = playerData.abilityCd;
         playerData.equipped = 0;
         eq = PlayerDataScrObj.eqElement.BLIZZARD;
+        Debug.Log("EQUIPPED! " + eq);
+        StartCoroutine("lateStart");
+    }
+
+
+    private IEnumerator lateStart()
+    {
+        yield return new WaitForSeconds(0.2f);
+        SetColor();
     }
 
     private void OnAbility()
