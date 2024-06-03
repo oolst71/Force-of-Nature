@@ -32,7 +32,10 @@ public class PlayerAbilities : MonoBehaviour
         playerData.equipped = 0;
         eq = PlayerDataScrObj.eqElement.BLIZZARD;
         Debug.Log("EQUIPPED! " + eq);
-        StartCoroutine("lateStart");
+        if (SceneManager.GetActiveScene().buildIndex != 2)
+        {
+            StartCoroutine("lateStart");
+        }
     }
 
 

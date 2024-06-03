@@ -87,7 +87,10 @@ public class FireMonsterBehaviuor : MonoBehaviour
                 storeFreeze = dmgScript.frozen;
 
             }
+            if (touchedGround)
+            {
 
+            }
             if (moveDirection.x==-1.0f)
                 {
                     isflipped = true;
@@ -176,7 +179,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
     {
         touchedRight = HitDetector(rightCheck, rightCheckSize, (Wall));
         touchedGround = HitDetector(groundCheck, groundCheckSize, (Wall));
-        if(!touchedGround)
+        if(!touchedGround && dmgScript.act != EntityTakeDamage.activeEffect.WATER && !hurt)
         {
             Flip();
         }
