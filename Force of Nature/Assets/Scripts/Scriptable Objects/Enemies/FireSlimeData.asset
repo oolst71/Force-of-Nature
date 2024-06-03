@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speed: 0
-  maxHealth: 12
+  maxHealth: 900
   knockUp: 0
   attackCd: 0
   attackWindupTime: 0

@@ -34,7 +34,7 @@ public class IcicleBehaviour : MonoBehaviour
         else if (collision.gameObject.layer == 7 || collision.gameObject.layer == 10)
         {
             AudioManager.instance.PlaySFX("Ice");
-            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.icicleDmg, 1);
+            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(Random.Range(playerData.icicleDmg - 10, playerData.icicleDmg + 11), 1);
             Destroy(gameObject);
         }
     }

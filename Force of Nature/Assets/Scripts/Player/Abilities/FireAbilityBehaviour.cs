@@ -34,7 +34,7 @@ public class FireAbilityBehaviour : MonoBehaviour
     {
         if (collision.gameObject.layer == 7)
         {
-            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(playerData.fireDmg, 3);
+            collision.gameObject.GetComponent<EntityTakeDamage>().TakeAbilityDamage(Random.Range(playerData.fireDmg - 10, playerData.fireDmg + 11), 3);
         }
     }
 }

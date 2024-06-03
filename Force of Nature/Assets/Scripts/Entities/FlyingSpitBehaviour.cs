@@ -27,7 +27,7 @@ public class FlyingSpitBehaviour : MonoBehaviour
         {
             AudioManager.instance.PlaySFX("EggCrack");
             PlayerController pc = collision.GetComponent<PlayerController>();
-            pc.TakeDamage(damage);
+            pc.TakeDamage(15);
         }
         Destroy(gameObject);
     }
