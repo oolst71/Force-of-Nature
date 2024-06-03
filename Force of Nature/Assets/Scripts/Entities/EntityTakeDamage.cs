@@ -39,7 +39,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     [SerializeField] private SimpleFlash flashEffect;
 
-    
+
     bool ice;
     bool fire;
     bool water;
@@ -127,14 +127,14 @@ public class EntityTakeDamage : MonoBehaviour
                 StartCoroutine("EffectAbility");
             }
         }
-        
+
     }
     void Update()
     {
         if ((int)act > 0) //checks if an effect is active
         {
             elementTimer += Time.deltaTime;
-            if (elementTimer > elementTime )
+            if (elementTimer > elementTime)
             {
                 switch (act)
                 {
@@ -169,11 +169,10 @@ public class EntityTakeDamage : MonoBehaviour
                     burnTimer += Time.deltaTime;
                     if (burnTimer >= 0.7f)
                     {
-                        int damag = Random.Range(45, 56);
-                        health -= damag;
+                        health -= 1;
                         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
                         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-                        dtb.dmg = damag.ToString();
+                        dtb.dmg = "1";
                         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
                         Debug.Log("burning, " + health);
                         if (health <= 0)
@@ -189,7 +188,7 @@ public class EntityTakeDamage : MonoBehaviour
                 //only for certain effects, like fire, do the damage ticks here
             }
         }
-        
+
     }
     IEnumerator EffectAbility()
     {
@@ -220,7 +219,8 @@ public class EntityTakeDamage : MonoBehaviour
                 {
                     ApplyFreeze();
                     //ice on water
-                } else if (act == activeEffect.FIRE)
+                }
+                else if (act == activeEffect.FIRE)
                 {
                     //ice on fire
                     ApplyIceFire();
@@ -236,7 +236,8 @@ public class EntityTakeDamage : MonoBehaviour
                 {
                     ApplyStun();
                     //water on ice
-                } else if (act == activeEffect.FIRE)
+                }
+                else if (act == activeEffect.FIRE)
                 {
                     //water on fire
                     ApplyExtinguish();
@@ -251,7 +252,8 @@ public class EntityTakeDamage : MonoBehaviour
                 if (act == activeEffect.WATER)
                 {
                     ApplySteam();
-                } else if (act == activeEffect.ICE)
+                }
+                else if (act == activeEffect.ICE)
                 {
                     ApplyMelt();
                 }
@@ -327,13 +329,12 @@ public class EntityTakeDamage : MonoBehaviour
     {
         //deal extra damage
         //set state to wet
-        int damag = Random.Range(700, 801);
-        health -= damag;
+        health -= 7;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-        dtb.dmg = damag.ToString();
+        dtb.dmg = "7";
         dtb.clr = new Color(0.2f, 0.2f, 1, 1);
-        GameObject dText = Instantiate(dmgTextPrefab, new Vector3 (transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
         dt.dmg = "Melted";
         dt.clr = new Color(0.2f, 0.2f, 1, 1);
@@ -391,12 +392,10 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyMelt()
     {
         act = activeEffect.NONE;
-        int damag = Random.Range(800, 901);
-
-        health -= damag;
+        health -= 8;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-        dtb.dmg = damag.ToString();
+        dtb.dmg = "8";
         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
         GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
@@ -421,11 +420,13 @@ public class EntityTakeDamage : MonoBehaviour
                     kbTime = 0.001f;
                     rb.velocity = new Vector2(0, enemyData.knockUp);
                     transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
+                    posMod = new Vector2(3f * kbDir, 3f);
                     break;
                 case PlayerDataScrObj.AttackType.MELEE_NOBOOSTAIR:
                     teleport = false;
                     kbTime = 0.001f;
                     Debug.Log("hit no boost air");
+                    posMod = new Vector2(3f * kbDir, 3f);
                     break;
                 case PlayerDataScrObj.AttackType.MELEE_FORWARDBOOST:
                     teleport = true;
@@ -433,7 +434,7 @@ public class EntityTakeDamage : MonoBehaviour
                     kbTime = playerData.atkTimeForwardGround - kbTime;
                     transform.position = new Vector2(transform.position.x, transform.position.y + 0.3f);
                     kbPower = (new Vector2(kbDir, rb.velocity.y) * playerData.atkPower_ForwardGround) + new Vector2(0, 100);
-                    posMod = new Vector2(1.5f * kbDir, 3f);
+                    posMod = new Vector2(3f * kbDir, 3f);
                     break;
                 case PlayerDataScrObj.AttackType.MELEE_FORWARDAIRBOOST:
                     teleport = true;
@@ -467,7 +468,7 @@ public class EntityTakeDamage : MonoBehaviour
                     break;
             }
         }
-       
+
 
         //switch (playerData.atkType)
         //{
@@ -502,7 +503,7 @@ public class EntityTakeDamage : MonoBehaviour
         Debug.Log("time remaining: " + kbTime);
         rb.velocity = kbPower;
         float kbTimer = 0f;
-        while(kbTimer < kbTime)
+        while (kbTimer < kbTime)
         {
             yield return new WaitForFixedUpdate();
             Debug.Log(rb.velocity.x);
@@ -526,7 +527,7 @@ public class EntityTakeDamage : MonoBehaviour
             playerData.levelKills += 1;
         }
         gameObject.SetActive(false);
-        Instantiate(DeadVFX,this.transform.position, Quaternion.identity);
+        Instantiate(DeadVFX, this.transform.position, Quaternion.identity);
     }
     // Start is called before the first frame update
 

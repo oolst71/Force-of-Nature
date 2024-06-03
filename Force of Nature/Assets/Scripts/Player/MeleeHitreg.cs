@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class MeleeHitreg : MonoBehaviour
 {
-    [SerializeField]PlayerController playerController;
-    [SerializeField]PlayerMeleeAttacks attacks;
+    [SerializeField] PlayerController playerController;
+    [SerializeField] PlayerMeleeAttacks attacks;
     private BoxCollider2D coll;
     private float baseOffset;
-    [SerializeField]private PlayerDataScrObj playerData;
-    [SerializeField]private EnemyDataScrObj.DamageType damageType;
+    [SerializeField] private PlayerDataScrObj playerData;
+    [SerializeField] private EnemyDataScrObj.DamageType damageType;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class MeleeHitreg : MonoBehaviour
 
     private void FixedUpdate()
     {
-        coll.offset = new Vector2(playerController.faceDir * baseOffset,coll.offset.y);
+        coll.offset = new Vector2(playerController.faceDir * baseOffset, coll.offset.y);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
