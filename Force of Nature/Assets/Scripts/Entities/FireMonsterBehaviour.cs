@@ -71,7 +71,7 @@ public class FireMonsterBehaviuor : MonoBehaviour
         if (hurt)
         {
             hurtTime += Time.deltaTime;
-            if (hurtTime > 0.8f)
+            if (hurtTime > 0.6f)
             {
                 hurt = false;
                 hurtTime = 0f;
@@ -136,10 +136,16 @@ public class FireMonsterBehaviuor : MonoBehaviour
                 storeFreeze = dmgScript.frozen;
 
             }
-            EnemyRB.velocity = Vector2.zero;
         }
       
-        
+        if (dmgScript.frozen || dmgScript.act == EntityTakeDamage.activeEffect.STUN)
+        {
+            EnemyRB.velocity = Vector2.zero;
+
+        }
+        {
+
+        }
 
         //StartSpawn();
     }
