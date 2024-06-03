@@ -8,7 +8,8 @@ public class WaveHeadBehaviour : MonoBehaviour
 {
 
     [SerializeField] private float speed;
-    [SerializeField] private float dirX;
+    public float dirX;
+
     [SerializeField] private PlayerDataScrObj playerData;
     [SerializeField] private GameObject waveBodyPrefab;
     [SerializeField] private float travelTime;
@@ -28,7 +29,6 @@ public class WaveHeadBehaviour : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         coll.enabled = false;
         rb = GetComponent<Rigidbody2D>();
-        dirX = playerData.faceDir;
         xTime = coll.bounds.size.x / speed;
         travelTimer = 0f;
         xTimer = 100f;

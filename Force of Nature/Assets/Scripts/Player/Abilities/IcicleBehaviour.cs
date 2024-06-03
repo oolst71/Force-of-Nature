@@ -7,7 +7,7 @@ public class IcicleBehaviour : MonoBehaviour
 {
 
     [SerializeField] private float speed;
-    [SerializeField] private float dirX;
+    public float dirX;
     [SerializeField] private PlayerDataScrObj playerData;
     private Rigidbody2D rb;
     [SerializeField] private List<Sprite> icicleSprites;
@@ -20,7 +20,6 @@ public class IcicleBehaviour : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = icicleSprites[Random.Range(0, icicleSprites.Count)];
         rb = GetComponent<Rigidbody2D>();
-        dirX = playerData.faceDir;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -302,7 +302,6 @@ public class PlayerMeleeAttacks : MonoBehaviour
 
         activeBox.GetComponent<BoxCollider2D>().enabled = false;
 
-
         yield return new WaitForSeconds(playerData.atkRecoveryTime);
  
         Debug.Log(transform.position.x - logPos + " POS: " + transform.position.x + "atk complete at: " + (timer - logTimer));
