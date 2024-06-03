@@ -6,17 +6,20 @@ public class FlyingSpitBehaviour : MonoBehaviour
 {
 
     [SerializeField] int damage;
+    private Animator anim;
+    private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();    
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void EggBreak()
     {
-        
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +32,8 @@ public class FlyingSpitBehaviour : MonoBehaviour
             PlayerController pc = collision.GetComponent<PlayerController>();
             pc.TakeDamage(15);
         }
-        Destroy(gameObject);
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetTrigger("Break");
     }
 
 }
