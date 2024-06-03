@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerDataScrObj playerData;
-
+    public GameObject healParticle;
     private Rigidbody2D rb;
     private BoxCollider2D coll;
     private TrailRenderer trail;
