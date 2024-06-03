@@ -166,6 +166,18 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector2(deathPoint.x, deathPoint.y);
             rb.velocity = Vector2.zero;
         }
+        if ((playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.CASTING && playerData.currentState != PlayerDataScrObj.playerState.DASHING) && !dead)
+        {
+            if (faceDir > 0)
+            {
+                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+
+            }
+            else
+            {
+                spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+        }
     }
 
     private void OnOnboarding()
@@ -272,18 +284,18 @@ public class PlayerController : MonoBehaviour
         {
             faceDir = Mathf.Sign(aim.x);
             playerData.faceDir = faceDir;
-            if ((playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.CASTING && playerData.currentState != PlayerDataScrObj.playerState.DASHING))
-            {
-                if (faceDir > 0)
-                {
-                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            //if ((playerData.currentState != PlayerDataScrObj.playerState.ATTACKING && playerData.currentState != PlayerDataScrObj.playerState.CASTING && playerData.currentState != PlayerDataScrObj.playerState.DASHING))
+            //{
+            //    if (faceDir > 0)
+            //    {
+            //        spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
-                }
-                else
-                {
-                    spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
-                }
-            }
+            //    }
+            //    else
+            //    {
+            //        spriteHolder.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            //    }
+            //}
 
         }
     }
