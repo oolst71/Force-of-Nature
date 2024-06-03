@@ -67,7 +67,8 @@ public class PlayerAbilities : MonoBehaviour
 
     private void OnSwapAbilityLeft()
     {
-        newAbilityCd = playerData.abilityCd -= .15f;
+        float cd = playerData.abilityCd;
+        newAbilityCd = cd -= .15f;
 
         Debug.Log("eq " + eq);
         Debug.Log("equipped " + playerData.equipped);
@@ -95,7 +96,8 @@ public class PlayerAbilities : MonoBehaviour
     }
     private void OnSwapAbilityRight()
     {
-        newAbilityCd = playerData.abilityCd -= .15f;
+        float cd = playerData.abilityCd;
+        newAbilityCd = cd -= .15f;
 
         if (playerData.abilitiesUnlocked || SceneManager.GetActiveScene().buildIndex == 5)
         {
@@ -119,25 +121,27 @@ public class PlayerAbilities : MonoBehaviour
         anims.AnimateAbility(1);
 
         faceDirectionDuringCast = playerData.faceDir;
-        yield return new WaitForSeconds(0.1f); //windup
+        yield return new WaitForSeconds(0.2f); //windup
         //execute ability here
         //instantiate wave
         if (playerData.faceDir > 0)
         {
             AudioManager.instance.WaterAttackRandom();
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
+            GameObject wave = Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 180, 0)));
 
+            wave.GetComponentInChildren<WaveHeadBehaviour>().dirX = faceDirectionDuringCast;
         }
         else
         {
             AudioManager.instance.WaterAttackRandom();
 
             AudioManager.instance.PlaySFX("Tsunami");
-            Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
+            GameObject wave = Instantiate(waveHeadPrefab, new Vector2(transform.position.x + faceDirectionDuringCast * 2f, transform.position.y + 0.2f), Quaternion.Euler(new Vector3(0, 0, 0)));
 
+            wave.GetComponentInChildren<WaveHeadBehaviour>().dirX = faceDirectionDuringCast;
         }
-        yield return new WaitForSeconds(0.33f); //recovery
+        yield return new WaitForSeconds(0.2f); //recovery
         if (playerData.faceDir != faceDirectionDuringCast)
         {
             playerData.faceDir = faceDirectionDuringCast;
