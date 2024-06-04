@@ -178,10 +178,11 @@ public class EntityTakeDamage : MonoBehaviour
                     burnTimer += Time.deltaTime;
                     if (burnTimer >= 0.7f)
                     {
-                        health -= 1;
+                        int damag = Random.Range(45, 56);
+                        health -= damag;
                         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position, Quaternion.identity);
                         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-                        dtb.dmg = "1";
+                        dtb.dmg = damag.ToString();
                         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
                         Debug.Log("burning, " + health);
                         if (health <= 0)
@@ -338,10 +339,11 @@ public class EntityTakeDamage : MonoBehaviour
     {
         //deal extra damage
         //set state to wet
-        health -= 7;
+        int damag = Random.Range(700, 801);
+        health -= damag;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-        dtb.dmg = "7";
+        dtb.dmg = damag.ToString();
         dtb.clr = new Color(0.2f, 0.2f, 1, 1);
         GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
@@ -406,10 +408,11 @@ public class EntityTakeDamage : MonoBehaviour
     private void ApplyMelt()
     {
         act = activeEffect.NONE;
-        health -= 8;
+        int damag = Random.Range(800, 801);
+        health -= damag;
         GameObject dmgText = Instantiate(dmgTextPrefab, transform.position + new Vector3(0, -1, 0), Quaternion.identity);
         DamageTextBehaviour dtb = dmgText.GetComponent<DamageTextBehaviour>();
-        dtb.dmg = "8";
+        dtb.dmg = damag.ToString();
         dtb.clr = new Color(1, 0.3f, 0.01f, 1);
         GameObject dText = Instantiate(dmgTextPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         DamageTextBehaviour dt = dText.GetComponent<DamageTextBehaviour>();
