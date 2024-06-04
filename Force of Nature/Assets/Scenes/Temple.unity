@@ -454,6 +454,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1412065779
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4791,6 +4795,10 @@ PrefabInstance:
     - target: {fileID: 3533978009438656014, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_SortingLayerID
       value: 1412065779
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10746,6 +10754,10 @@ PrefabInstance:
     - target: {fileID: 3533978009438656014, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_SortingLayerID
       value: 1412065779
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.22
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20802,6 +20814,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1412065779
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24901,6 +24917,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1412065779
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.17
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -26845,6 +26865,10 @@ PrefabInstance:
     - target: {fileID: 3533978009438656014, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_SortingLayerID
       value: 1412065779
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30249,6 +30273,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1412065779
       objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30520,6 +30548,10 @@ PrefabInstance:
     - target: {fileID: 3533978009438656014, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
       propertyPath: m_SortingLayerID
       value: 1412065779
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086653621386245443, guid: baf582a5266f8b442b6f5d66a24a7f4d, type: 3}
+      propertyPath: chaseSpeed
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31176,6 +31208,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5218573957063137656, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 01b51dbf688399149b67694fe2dc8c56, type: 2}
     - target: {fileID: 9116542877783109631, guid: 9bf2261e12ec9334db1efa7cd78aefda, type: 3}
       propertyPath: m_LocalPosition.x
       value: -43.02
