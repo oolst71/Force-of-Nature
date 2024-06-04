@@ -41,7 +41,7 @@ public class EntityTakeDamage : MonoBehaviour
 
     [SerializeField] private SimpleFlash flashEffect;
 
-
+    bool waveKb;
     bool ice;
     bool fire;
     bool water;
@@ -63,6 +63,7 @@ public class EntityTakeDamage : MonoBehaviour
         //    DeadVFX=
         //}
         fresh = false;
+        waveKb = false;
     }
 
     IEnumerator FixFireFreeze()
@@ -116,7 +117,8 @@ public class EntityTakeDamage : MonoBehaviour
                 case 2: //wave
                     dtb.clr = new Color(0.2f, 0.2f, 1, 1);
                     rb.velocity = new Vector2(30 * playerData.faceDir, rb.velocity.y);
-
+                    waveKb = true;
+                    StartCoroutine("WaveKB");
                     break;
                 case 3: //fire
                     dtb.clr = new Color(1, 0.3f, 0.01f, 1);
@@ -138,6 +140,17 @@ public class EntityTakeDamage : MonoBehaviour
         }
 
     }
+
+
+    IEnumerator WaveKB()
+    {
+        waveKb = true;
+        yield return new WaitForSeconds(0.3f);
+        waveKb = false;
+        rb.velocity = Vector2.zero;
+    }
+    
+
     void Update()
     {
         if ((int)act > 0) //checks if an effect is active
